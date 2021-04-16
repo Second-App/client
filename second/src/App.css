@@ -1,11 +1,19 @@
 /** @format */
 
-.box-content {
-    background-image: radial-gradient(farthest-corner at 50% 50%, #eac7ff, #ffff);
-    border: 5px solid #7300fc;
+.product-content {
+    background-color: #e2703a;
 }
 
-.box-border {
+.box-content {
+    border: 3px solid #7300fc;
+    padding: 10px;
+}
+
+.heading {
+    border-left: 3px solid #ff8d2d;
+}
+
+.box-all {
     border: 5px solid #7300fc;
 }
 
@@ -17,12 +25,6 @@
     height: 40vmin;
     pointer-events: none;
 }
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
 
 .App-header {
     background-color: #282c34;
@@ -46,4 +48,33 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.profile-column {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.profile-container {
+    background-color: #fff;
+}
+
+.profile-card {
+    display: flex;
+}
+
+.chat-box {
+    min-height: 80vh;
+    border-right: 2px solid #eeebdd;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.participant-box {
+    min-height: 80vh;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }

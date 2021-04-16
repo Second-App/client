@@ -1,8 +1,9 @@
 import React from 'react'
+import {ProductForm} from './index'
 
 export default function Navbar() {
   return (
-    <nav className="navbar box-border" role="navigation" aria-label="main navigation">
+    <nav className="navbar box-content" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="">
           <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png"/>
@@ -57,6 +58,7 @@ export default function Navbar() {
                   <a className="button is-ghost" style={{color:'white', backgroundColor: '#ed7014'}}>
                     Log in
                   </a>
+                  <ProductForm/>
                 </div>
               </div>
             </div>
