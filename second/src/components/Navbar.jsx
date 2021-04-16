@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Navbar() {
   return (
-    <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-transparent box-content" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="">
           <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png"/>
