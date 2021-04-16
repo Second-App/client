@@ -3,16 +3,16 @@ import cincin from '../cincin.png'
 
 export default function Home() {
   const dummyCategories = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/1.jpeg`, name: 'Automotive' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/2.jpeg`, name: 'Property' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/3.jpeg`, name: 'Food & Beverages' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/4.jpeg`, name: 'Electronic & Gadgets' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/5.jpeg`, name: 'Hobbies & Sports' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/6.jpeg`, name: 'Household Needs' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/7.jpeg`, name: 'Self-Care' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/8.jpeg`, name: 'Kids' },
+    { url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/9.jpeg`, name: 'Office Needs' },
+    {url: `https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/10.jpeg`, name: 'Pets'}
   ]
   return (
     <>
@@ -28,8 +28,8 @@ export default function Home() {
         <div   style={
           {
             position: "relative",
-            top: -250,
-            marginBottom: "-250px",
+            top: -200,
+            marginBottom: "-200px",
             zIndex: 2,
             borderRadius: "20px"
           
@@ -46,15 +46,15 @@ export default function Home() {
               <div className="columns is-centered is-multiline">
                 {dummyCategories.map((e, i) => (
                   <div className="column is-one-fifth">
-                    <img className="image" src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg" alt="" srcset=""
+                    <img className="image" src={e.url} alt="" srcset=""
                       style={{
                         borderRadius: "20px",
-                        boxShadow: "0px 0px 7px rgb(211,211,211)",
+                        boxShadow: "0px 0px 7px #FF8D2D",
                         height: "250px",
                         width: "250px",
                       }} />
                       
-                    <p className="" style={{ textAlign: 'left' }}>henlo</p>
+                    <p className="" style={{ textAlign: 'left', marginTop: '15px' }}>{e.name}</p>
                   </div>
                 ))}
                 </div>
@@ -64,8 +64,8 @@ export default function Home() {
       </div>
 
       <div className="container mt-5">
-        <div className="columns is-centered">
-          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/banner.jpg"
+        <div className="columns is-left">
+          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m6.jpeg"
             alt="" srcset=""
             style={{
               borderRadius: "20px"
@@ -75,8 +75,8 @@ export default function Home() {
         <div   style={
           {
             position: "relative",
-            top: -250,
-            marginBottom: "-250px",
+            top: -150,
+            marginBottom: "-150px",
             zIndex: 2,
             borderRadius: "20px"
           
@@ -86,7 +86,7 @@ export default function Home() {
             textAlign: 'left',
               color: 'black'
             }}>
-            Jual-Beli
+            Dealing
           </button>
             <div className="column is-main-content">
               <div className="container is-widescreen">
@@ -96,7 +96,7 @@ export default function Home() {
                     <img className="image" src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg" alt="" srcset=""
                       style={{
                         borderRadius: "20px",
-                        boxShadow: "0px 0px 7px rgb(211,211,211)",
+                        boxShadow: "0px 0px 7px #FF8D2D",
                         height: "250px",
                         width: "250px",
                       }} />
@@ -110,8 +110,8 @@ export default function Home() {
         </div>
       </div>
       <div className="container mt-5">
-        <div className="columns is-centered">
-          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/banner.jpg"
+        <div className="columns level-right">
+          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m2.jpeg"
             alt="" srcset=""
             style={{
               borderRadius: "20px"
@@ -121,8 +121,8 @@ export default function Home() {
         <div   style={
           {
             position: "relative",
-            top: -250,
-            marginBottom: "-250px",
+            top: -150,
+            marginBottom: "-150px",
             zIndex: 2,
             borderRadius: "20px"
           
@@ -132,7 +132,7 @@ export default function Home() {
             textAlign: 'left',
               color: 'black'
             }}>
-            Lelang
+            Auction
           </button>
             <div className="column is-main-content">
               <div className="container is-widescreen">
@@ -142,7 +142,7 @@ export default function Home() {
                     <img className="image" src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg" alt="" srcset=""
                       style={{
                         borderRadius: "20px",
-                        boxShadow: "0px 0px 7px rgb(211,211,211)",
+                        boxShadow: "0px 0px 7px #FF8D2D",
                         height: "250px",
                         width: "250px",
                       }} />
@@ -156,8 +156,8 @@ export default function Home() {
         </div>
       </div>
       <div className="container mt-5">
-        <div className="columns is-centered">
-          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/banner.jpg"
+        <div className="columns is-left">
+          <img className="image" src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m7.jpeg"
             alt="" srcset=""
             style={{
               borderRadius: "20px"
@@ -167,8 +167,8 @@ export default function Home() {
         <div   style={
           {
             position: "relative",
-            top: -250,
-            marginBottom: "-250px",
+            top: -150,
+            marginBottom: "-150px",
             zIndex: 2,
             borderRadius: "20px"
           
@@ -178,7 +178,7 @@ export default function Home() {
             textAlign: 'left',
               color: 'black'
             }}>
-            Tukar-Tambah
+            Trade-in
           </button>
             <div className="column is-main-content">
               <div className="container is-widescreen">
@@ -188,7 +188,7 @@ export default function Home() {
                     <img className="image" src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg" alt="" srcset=""
                       style={{
                         borderRadius: "20px",
-                        boxShadow: "0px 0px 7px rgb(211,211,211)",
+                        boxShadow: "0px 0px 7px #FF8D2D",
                         height: "250px",
                         width: "250px",
                       }} />

@@ -34,23 +34,7 @@ export default function Navbar() {
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">Categories</a>
-
-            <div className="navbar-dropdown">
-              <NavLink to="/category/2" className="navbar-item">
-                Fashion
-              </NavLink>
-              <NavLink to="/category/3" className="navbar-item">
-                Technology
-              </NavLink>
-              <NavLink to="/category/4" className="navbar-item">
-                Contact
-              </NavLink>
-            </div>
-          </div>
-
-          <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">Types</a>
+            <a className="navbar-link">sort by type?</a>
 
             <div className="navbar-dropdown">
               <NavLink to="/type/1" className="navbar-item">
