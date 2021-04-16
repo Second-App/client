@@ -1,4 +1,5 @@
 import React from 'react'
+import {ProductForm} from './index'
 
 export default function Navbar() {
   return (
@@ -57,6 +58,7 @@ export default function Navbar() {
                   <a className="button is-ghost" style={{color:'white', backgroundColor: '#ed7014'}}>
                     Log in
                   </a>
+                  <ProductForm/>
                 </div>
               </div>
             </div>

@@ -5,6 +5,10 @@
     padding: 10px;
 }
 
+.heading {
+    border-left: 3px solid #FF8D2D;
+}
+
 .box-all {
     border: 5px solid #7300fc;
 }
@@ -56,4 +60,17 @@
 
 .profile-card {
   display: flex;
+}
+
+.chat-box {
+    min-height: 80vh;
+    border-right: 2px solid #eeebdd;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.participant-box {
+    min-height: 80vh;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
