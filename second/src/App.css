@@ -1,11 +1,11 @@
 /** @format */
 
 .box-content {
-    border: 3px solid #7300fc;
-    padding: 10px;
+    background-image: radial-gradient(farthest-corner at 50% 50%, #eac7ff, #ffff);
+    border: 5px solid #7300fc;
 }
 
-.box-all {
+.box-border {
     border: 5px solid #7300fc;
 }
 

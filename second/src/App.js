@@ -13,9 +13,9 @@ import './App.sass';
 
 function App() {
     return (
-        <div className='box' style={{ minHeight: '100vh', borderRadius: '0px' }}>
+        <div className='box box-border'>
             <Router className='App'>
-                <div className='box box-all' style={{ border: '', borderColor: '#7300FC' }}>
+                <div className='' style={{}}>
                     <Navbar />
 
                     <Switch>
