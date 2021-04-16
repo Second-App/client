@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+
+// Set your brand colors
+$purple: #7300FC;
+$orange: #FF8D2D;
+$black: #08090A;
+$beige-light: #FFB979;
+$beige-lighter: #FCF7BA;
+
+// Update Bulma's global variables
+$family-sans-serif: 'ABeeZee', sans-serif;
+$grey-dark: $black;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $orange;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+$box-background-color: $beige-lighter
+$navbar-background-color: $beige-lighter
+
+// Update some of Bulma's component variables
+$body-background-color: $purple;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// Import only what you need from Bulma
+@import "../node_modules/bulma/bulma.sass";
+@import '~bulma/sass/utilities/_all.sass'
