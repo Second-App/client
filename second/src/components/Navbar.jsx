@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ProductForm, AuthForm } from './index'
 
-export default function Navbar() {
+export default function Navbar({ setSearch }) {
   return (
     <nav
       className="navbar box-content"
@@ -11,10 +11,13 @@ export default function Navbar() {
     >
       <div className="navbar-brand">
         <NavLink className="navbar-item" to="/">
-          <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png" />
+          <img
+            src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png"
+            alt="home"
+          />
         </NavLink>
 
-        <a
+        <div
           role="button"
           className="navbar-burger"
           aria-label="menu"
@@ -24,33 +27,33 @@ export default function Navbar() {
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </div>
       </div>
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <NavLink exact to="/" className="navbar-item">
-            second.
+            Home
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">Categories</a>
+            <div className="navbar-link">Categories</div>
 
             <div className="navbar-dropdown">
-              <NavLink to="/category/2" className="navbar-item">
+              <NavLink to="/categories/1" className="navbar-item">
                 Fashion
               </NavLink>
-              <NavLink to="/category/3" className="navbar-item">
+              <NavLink to="/categories/2" className="navbar-item">
                 Technology
               </NavLink>
-              <NavLink to="/category/4" className="navbar-item">
-                Contact
+              <NavLink to="/categories/3" className="navbar-item">
+                Kecantikan
               </NavLink>
             </div>
           </div>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">Types</a>
+            <div className="navbar-link">Types</div>
 
             <div className="navbar-dropdown">
               <NavLink to="/type/1" className="navbar-item">
@@ -66,6 +69,14 @@ export default function Navbar() {
                 Community
               </NavLink>
             </div>
+          </div>
+          <div className="mt-2">
+            <input
+              className="input is-link is-rounded"
+              type="text"
+              onChange={setSearch}
+              placeholder="I'm looking for..."
+            />
           </div>
         </div>
 

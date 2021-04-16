@@ -1,5 +1,4 @@
 import React from 'react'
-import cincin from '../cincin.png'
 
 export default function Home() {
   const dummyCategories = [

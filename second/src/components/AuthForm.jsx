@@ -11,12 +11,13 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    width: "50rem",
   },
 }
 
 export default function AuthForm() {
   const [authForm, setAuthForm] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(localStorage.access_token)
 
   const openModal = () => {
     setAuthForm(true)
@@ -28,6 +29,7 @@ export default function AuthForm() {
 
   const handleLogout = () => {
     setIsLogin(false)
+    localStorage.clear()
   }
 
   const handleRegister = () => {

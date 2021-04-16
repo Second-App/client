@@ -16,8 +16,8 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 export default function ProductForm() {
-  var subtitle
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [isLogin, setLogin] = useState(localStorage.access_token)
 
   const openModal = () => {
     setIsOpen(true)
@@ -28,6 +28,9 @@ export default function ProductForm() {
   }
 
   return (
+    <>
+    {
+      isLogin ? 
     <div>
       <button className="button is-primary" onClick={openModal}>
         Add Product
@@ -78,6 +81,11 @@ export default function ProductForm() {
           </div>
         </div>
       </Modal>
-    </div>
+    </div> 
+    : 
+    ""
+    }
+    
+    </>
   )
 }

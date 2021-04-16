@@ -31,10 +31,10 @@ function App() {
                             <Route path='/profile/:id'>
                                 <Profile />
                             </Route>
-                            <Route path='/category/:id'>
+                            <Route path='/categories/:id'>
                                 <Category />
                             </Route>
-                            <Route path='/productDetail/:id'>
+                            <Route path='/products/:id'>
                                 <ProductDetail />
                             </Route>
                             <Route path='/chat'>
