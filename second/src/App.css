@@ -1,12 +1,16 @@
 /** @format */
 
+.product-content {
+    background-color: #e2703a;
+}
+
 .box-content {
     border: 3px solid #7300fc;
     padding: 10px;
 }
 
 .heading {
-    border-left: 3px solid #FF8D2D;
+    border-left: 3px solid #ff8d2d;
 }
 
 .box-all {
@@ -47,19 +51,19 @@
 }
 
 .profile-column {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .profile-container {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .profile-card {
-  display: flex;
+    display: flex;
 }
 
 .chat-box {
