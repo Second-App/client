@@ -30,7 +30,7 @@ export default function Navbar() {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <NavLink exact to="/" className="navbar-item">
-            Home
+            second.
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
@@ -53,14 +53,17 @@ export default function Navbar() {
             <a className="navbar-link">Types</a>
 
             <div className="navbar-dropdown">
+              <NavLink to="/type/1" className="navbar-item">
+                Jual-Beli
+              </NavLink>
               <NavLink to="/type/2" className="navbar-item">
                 Lelang
               </NavLink>
               <NavLink to="/type/3" className="navbar-item">
-                Jual-Beli
+                Tukar-Tambah
               </NavLink>
               <NavLink to="/type/4" className="navbar-item">
-                Gratis
+                Community
               </NavLink>
             </div>
           </div>
