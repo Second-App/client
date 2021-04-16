@@ -9,6 +9,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    zIndex: "1"
   },
 }
 
@@ -53,7 +54,6 @@ export default function ProductForm() {
               placeholder="Text input"
             />
           </div>
-          
         </div>
 
         <div className="field">
