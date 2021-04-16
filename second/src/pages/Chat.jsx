@@ -42,8 +42,9 @@ export default function Chat({ type }) {
             </div>
             <div className="column is-4 has-background-light participant-box is-flex is-justify-content-center is-flex-direction-column">
               <div class="field mt-2 p-1">
+                <label className="label"> Duit</label>
                 <div class="control">
-                  <input class="input is-primary " type="number" />
+                  <input class="input is-primary " type="number" min="1" />
                 </div>
               </div>
               <div className="columns px-4 mt-2">
@@ -73,10 +74,9 @@ export default function Chat({ type }) {
               </div>
             </div>
           </div>
-          <div className="columns mt-4">
+          <div className="columns mt-4 pb-2">
             <input
-              className="input is-info"
-              autoFocus={true}
+              className="input is-info is-focused"
               type="text"
               placeholder="Type a message"
             ></input>
