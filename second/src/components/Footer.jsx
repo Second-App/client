@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="column">
           <div className="content is-small mr-5" style={
             {
-              marginLeft: '-150px',
+              marginLeft: '-110px',
               marginTop: '50px',
               zIndex: 2
             }}>
