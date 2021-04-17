@@ -1,5 +1,9 @@
 /** @format */
 
+.be-radial {
+    background-image: radial-gradient(farthest-side at 60% 55%, #ff8d2d, #ffff);
+}
+
 .is-home {
     background-image: url('https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png');
 }

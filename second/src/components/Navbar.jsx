@@ -41,11 +41,13 @@ export default function Navbar({ setSearch }) {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <NavLink exact to="/" className="navbar-item mr-2">
-            Home
+            <span className='title is-3'>
+              second.
+            </span>
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <div className="navbar-link">Types</div>
+            <div className="navbar-link">sort by types ?</div>
             <div className="navbar-dropdown">
               {data.types.map((e) => (
                 <NavLink to={`/type/${e.id}`} className="navbar-item">
