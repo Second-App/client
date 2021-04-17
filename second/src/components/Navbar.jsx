@@ -55,6 +55,9 @@ export default function Navbar({ setSearch }) {
           <div className="navbar-item has-dropdown is-hoverable">
             <div className="navbar-link">Types</div>
 
+            <a className="navbar-link">sort by type?</a>
+
+
             <div className="navbar-dropdown">
               <NavLink to="/type/1" className="navbar-item">
                 Jual-Beli

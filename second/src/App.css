@@ -1,5 +1,12 @@
 /** @format */
 
+.the-footer {
+    background-image: url('https://secondh8.s3-ap-southeast-1.amazonaws.com/banner/purple/p1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+}
+
 .product-content {
     background-color: #e2703a;
 }
