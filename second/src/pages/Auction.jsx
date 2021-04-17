@@ -9,7 +9,7 @@ export default function Auction() {
       <div className="columns">
         <div className="column is-one-quarter my-4">
           <figure className="image is-square">
-            <img src="https://bulma.io/images/placeholders/128x128.png" />
+            <img src="https://bulma.io/images/placeholders/128x128.png" alt="giveaway"/>
           </figure>
           <div className="is-flex is-flex-direction-column is-justify-content-space-between">
             <div className="mt-4 title is-5">

@@ -11,7 +11,7 @@ export default function Profile() {
             <img
               className="is-rounded"
               src="https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg"
-              alt="Placeholder image"
+              alt="Placeholder"
             />
           </figure>
             <h1 className="title is-4">John Smith</h1>
@@ -27,7 +27,7 @@ export default function Profile() {
             {favourites.map((e, i) => (
               <div key={i} className="column is-3">
                 <figure className="image is-128x128">
-                  <img src="https://bulma.io/images/placeholders/256x256.png" />
+                  <img src="https://bulma.io/images/placeholders/256x256.png" alt="Favourites"/>
                 </figure>
               </div>
             ))}
