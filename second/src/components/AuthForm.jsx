@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify'
 
 Modal.setAppElement('#root')
 
 const customStyles = {
   content: {
-    top: '60%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '50rem',
+    width: '25rem',
     zIndex: 10,
   },
 }
@@ -52,7 +52,7 @@ export default function AuthForm({ isEdit }) {
 
   const handleInput = (e) => {
     let { name, value } = e.target
-    console.log(value);
+    console.log(value)
     setInput({
       ...input,
       [name]: value,
@@ -61,9 +61,9 @@ export default function AuthForm({ isEdit }) {
 
   const clearAll = () => {
     setInput({
-      name: "",
-      email: "",
-      password: ""
+      name: '',
+      email: '',
+      password: '',
     })
   }
 
@@ -72,33 +72,34 @@ export default function AuthForm({ isEdit }) {
 
     const errors = []
 
-    if(!input.name) errors.push('name is required')
-    if(!input.email) errors.push("email is required")
-    if(!input.password) errors.push("password is required")
-    
-    if(errors.length) return toast.warn(errorMessages(errors))
+    if (!input.name) errors.push('name is required')
+    if (!input.email) errors.push('email is required')
+    if (!input.password) errors.push('password is required')
+
+    if (errors.length) return toast.warn(errorMessages(errors))
   }
 
   const handleLogin = (e) => {
     e.preventDefault()
     const errors = []
 
-    if(!input.email) errors.push("email is required")
-    if(!input.password) errors.push("password is required")
-    
-    if(errors.length) return toast.warn(errorMessages(errors))
+    if (!input.email) errors.push('email is required')
+    if (!input.password) errors.push('password is required')
+
+    if (errors.length) return toast.warn(errorMessages(errors))
   }
 
   const errorMessages = (errors) => (
-    <ul> {errors.map(err => (<li>{err}</li>))} </ul>
+    <ul>
+      {' '}
+      {errors.map((err) => (
+        <li>{err}</li>
+      ))}{' '}
+    </ul>
   )
 
   return (
     <>
-    <ToastContainer 
-      position="top-center"
-      limit={1}
-    />
       {isLogin ? (
         <button className="button is-primary" onClick={handleLogout}>
           Logout
@@ -120,7 +121,9 @@ export default function AuthForm({ isEdit }) {
           </button>
         </>
       )}
+      
       {isRegistering ? (
+        
         <Modal
           isOpen={authForm}
           onRequestClose={closeModal}
@@ -128,6 +131,9 @@ export default function AuthForm({ isEdit }) {
           contentLabel="Example Modal"
           overlayClassName="Overlay"
         >
+          <ToastContainer position="top-center" limit={1} />
+          <div className="title is-3">Register</div>
+          <hr/>
           <div className="field">
             <label className="label">Name</label>
             <div className="control">
@@ -170,6 +176,8 @@ export default function AuthForm({ isEdit }) {
             </div>
           </div>
 
+          <hr/>
+
           <div className="field is-grouped">
             <div className="control">
               <button className="button is-link" onClick={handleRegister}>
@@ -191,6 +199,9 @@ export default function AuthForm({ isEdit }) {
           contentLabel="Example Modal"
           overlayClassName="Overlay"
         >
+          <ToastContainer position="top-center" limit={1} />
+          <div className="title is-3">Login</div>
+          <hr/>
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
@@ -218,10 +229,14 @@ export default function AuthForm({ isEdit }) {
               />
             </div>
           </div>
-
+          <hr/>
           <div className="field is-grouped">
             <div className="control">
-              <button onClick={handleLogin} type="submit" className="button is-link">
+              <button
+                onClick={handleLogin}
+                type="submit"
+                className="button is-link"
+              >
                 Login
               </button>
             </div>
