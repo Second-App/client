@@ -1,5 +1,9 @@
 /** @format */
 
+.is-home {
+    background-image: url('https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/second.png');
+}
+
 .the-footer {
     background-image: url('https://secondh8.s3-ap-southeast-1.amazonaws.com/banner/purple/p1.jpeg');
     background-repeat: no-repeat;
