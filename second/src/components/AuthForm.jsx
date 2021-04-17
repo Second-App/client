@@ -15,10 +15,10 @@ const customStyles = {
   },
 }
 
-export default function AuthForm() {
+export default function AuthForm({ isEdit }) {
   const [authForm, setAuthForm] = useState(false)
   const [isLogin, setIsLogin] = useState(localStorage.access_token)
-  const [isRegistering, setRegister] = useState(true)
+  const [isRegistering, setRegister] = useState(false)
 
   const openModal = () => {
     setAuthForm(true)
@@ -45,7 +45,11 @@ export default function AuthForm() {
         </button>
       ) : (
         <>
-          <button className="button" style={{color: 'white'}} onClick={openModal}>
+          <button
+            className="button"
+            style={{ color: 'white' }}
+            onClick={openModal}
+          >
             Login
           </button>
           <button className="button is-primary" onClick={openModal}>
