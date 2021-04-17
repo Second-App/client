@@ -27,7 +27,7 @@ export default function Home() {
             position: "relative",
             top: -300,
             marginBottom: "-200px",
-            zIndex: 2,
+            zIndex: 0,
           
             borderRadius: "20px"
           
@@ -48,7 +48,7 @@ export default function Home() {
             position: "relative",
             top: -200,
             marginBottom: '-200px',
-            zIndex: 2,
+            zIndex: 0,
           
             borderRadius: "20px"
           
@@ -124,7 +124,7 @@ export default function Home() {
             position: 'relative',
             top: -150,
             marginBottom: '-150px',
-            zIndex: 2,
+            zIndex: 0,
             borderRadius: '20px',
           }}
         >
@@ -187,7 +187,7 @@ export default function Home() {
             position: 'relative',
             top: -150,
             marginBottom: '-150px',
-            zIndex: 2,
+            zIndex: 0,
             borderRadius: '20px',
           }}
         >
@@ -254,7 +254,7 @@ export default function Home() {
             position: 'relative',
             top: -150,
             marginBottom: '-150px',
-            zIndex: 2,
+            zIndex: 0,
             borderRadius: '20px',
           }}
         >

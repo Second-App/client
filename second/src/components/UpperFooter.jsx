@@ -7,7 +7,7 @@ export default function UpperFooter() {
               textAlign: 'center',
               opacity: 0.9,
               marginTop: "50px",
-              marginBottom: "100px",
+              marginBottom: "70px",
               backgroundColor: "#FFB979",
               boxShadow: "0px 0px 7px #FF8D2D",
             }}
