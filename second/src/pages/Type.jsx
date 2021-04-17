@@ -1,22 +1,28 @@
-import { useQuery } from '@apollo/client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchProducts, getOneType } from '../store/actions'
 import { ProductList, Loading } from '../components'
-import { GET_ONE_TYPE, FETCH_ALL_PRODUCTS } from '../services'
 
 export default function Type() {
   const { id } = useParams()
-  const {data, error, loading, refetch} = useQuery(GET_ONE_TYPE, {
-    variables: {
-      id
-    }
-  })
-  const {data: productsData, error: productsError, loading: productsLoading} = useQuery(FETCH_ALL_PRODUCTS)
+  const dispatch = useDispatch()
+  const { singleType, loading, error } = useSelector(
+    (state) => state.transactionTypesReducer
+  )
+
+  const { products, loading: productsLoading, error: productsError } = useSelector(
+    (state) => state.productsReducer
+  )
   
-  if(loading || productsLoading) return <Loading/>
-  if(error || productsError) return <div>error</div>
+  useEffect(() => {
+    dispatch(getOneType(id))
+    dispatch(fetchProducts())
+  }, [id])
+ 
 
-  const typeName = data.oneTypes.name
+  if (loading || productsLoading) return <Loading />
+  if (error || productsError) return <div>error</div>
 
-  return <ProductList data={productsData.products} heading={typeName} />
+  return <ProductList data={products} heading={singleType?.name} />
 }

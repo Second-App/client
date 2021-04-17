@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useDispatch, useSelector } from 'react-redux'
 import { ProductForm, AuthForm } from './index'
-import { FETCH_ALL_TYPES } from '../services'
+import { fetchTypes } from '../store/actions'
 import { Loading } from './index'
 
 export default function Navbar({ setSearch }) {
-  const { data, error, loading, refetch } = useQuery(FETCH_ALL_TYPES)
+  const dispatch = useDispatch()
+  const {types, loading, error} = useSelector(state => state.transactionTypesReducer)
+
+  useEffect(() => {
+    dispatch(fetchTypes())
+  }, [])
 
   if (loading) return <Loading />
   if (error) return <div>error</div>
@@ -16,6 +21,7 @@ export default function Navbar({ setSearch }) {
       className="navbar box-content"
       role="navigation"
       aria-label="main navigation"
+      style={{zIndex: 0}}
     >
       <div className="navbar-brand">
         <NavLink className="navbar-item" to="/">
@@ -41,16 +47,14 @@ export default function Navbar({ setSearch }) {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <NavLink exact to="/" className="navbar-item mr-2">
-            <span className='title is-3'>
-              second.
-            </span>
+            <span className="title is-3">second.</span>
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
             <div className="navbar-link">sort by types ?</div>
             <div className="navbar-dropdown">
-              {data.types.map((e) => (
-                <NavLink to={`/type/${e.id}`} className="navbar-item">
+              {types.map((e) => (
+                <NavLink to={`/type/${e.id}`} className="navbar-item" key={e.id}>
                   {e.name}
                 </NavLink>
               ))}

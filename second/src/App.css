@@ -1,5 +1,14 @@
 /** @format */
 
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
 .be-radial {
     background-image: radial-gradient(farthest-side at 60% 55%, #ff8d2d, #ffff);
 }
