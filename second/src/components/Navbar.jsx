@@ -37,36 +37,18 @@ export default function Navbar({ setSearch }) {
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <div className="navbar-link">Categories</div>
-
-            <div className="navbar-dropdown">
-              <NavLink to="/categories/1" className="navbar-item">
-                Fashion
-              </NavLink>
-              <NavLink to="/categories/2" className="navbar-item">
-                Technology
-              </NavLink>
-              <NavLink to="/categories/3" className="navbar-item">
-                Kecantikan
-              </NavLink>
-            </div>
-          </div>
-
-          <div className="navbar-item has-dropdown is-hoverable">
-            <div className="navbar-link">Types</div>
-
             <a className="navbar-link">sort by type?</a>
 
 
             <div className="navbar-dropdown">
               <NavLink to="/type/1" className="navbar-item">
-                Jual-Beli
+                Dealing
               </NavLink>
               <NavLink to="/type/2" className="navbar-item">
-                Lelang
+                Auction
               </NavLink>
               <NavLink to="/type/3" className="navbar-item">
-                Tukar-Tambah
+                Trade-in
               </NavLink>
               <NavLink to="/type/4" className="navbar-item">
                 Community

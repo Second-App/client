@@ -45,7 +45,7 @@ export default function AuthForm() {
         </button>
       ) : (
         <>
-          <button className="button is-light" onClick={openModal}>
+          <button className="button" style={{color: 'white'}} onClick={openModal}>
             Login
           </button>
           <button className="button is-primary" onClick={openModal}>
