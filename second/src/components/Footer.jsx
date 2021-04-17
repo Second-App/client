@@ -32,7 +32,6 @@ export default function Footer() {
           </div>
         </div>
         <div className="column" style={{textAlign: "end", marginTop: "200px", color: "#FF8D2D"}}>
-          //created by : Nyoman (C), Joshua, Afif, Reza, and Roli
         </div>
       </div>
     </div>
