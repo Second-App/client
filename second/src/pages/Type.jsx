@@ -1,23 +1,22 @@
+import { useQuery } from '@apollo/client'
 import React from 'react'
 import { useParams } from 'react-router'
-import {ProductList} from '../components'
+import { ProductList, Loading } from '../components'
+import { GET_ONE_TYPE, FETCH_ALL_PRODUCTS } from '../services'
 
 export default function Type() {
   const { id } = useParams()
-  const dummyData = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    10,
-    11,
-    12,
-  ]
-  const dummyTypes = ["Jual-Beli", "Lelang", "Tukar-Tambah", "Community"]
-  return <ProductList data={dummyData} heading={dummyTypes[+id -1]} />
+  const {data, error, loading, refetch} = useQuery(GET_ONE_TYPE, {
+    variables: {
+      id
+    }
+  })
+  const {data: productsData, error: productsError, loading: productsLoading} = useQuery(FETCH_ALL_PRODUCTS)
+  
+  if(loading || productsLoading) return <Loading/>
+  if(error || productsError) return <div>error</div>
+
+  const typeName = data.oneTypes.name
+
+  return <ProductList data={productsData.products} heading={typeName} />
 }

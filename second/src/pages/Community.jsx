@@ -1,25 +1,17 @@
 import React from 'react'
-import {CategoryList, ProductList} from '../components'
+import { useQuery, useMutation } from '@apollo/client'
+import { CategoryList, ProductList, Loading } from '../components'
+import { FETCH_CATEGORIES } from '../services'
 
 export default function Community() {
-  const dummyCategories = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    10,
-    11,
-    12,
-  ]
+  const { data, error, loading, refetch } = useQuery(FETCH_CATEGORIES)
+  if(loading) return <Loading/>
+  if(error) return <div>error</div>
+  
   return (
     <>
-      <CategoryList data={dummyCategories} />
-      <ProductList data={dummyCategories} heading={"Giveaway"}/>
+      <CategoryList data={data.categories} />
+      <ProductList data={data.categories} heading={'Giveaway'} />
     </>
   )
 }

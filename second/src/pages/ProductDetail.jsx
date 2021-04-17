@@ -1,14 +1,30 @@
+import { useQuery } from '@apollo/client'
 import React from 'react'
+import { useParams } from 'react-router'
+import { GET_ONE_PRODUCT } from '../services'
+import {Loading} from '../components'
 
 export default function ProductDetail() {
+  const { id } = useParams()
+  const {data, error, loading, refetch} = useQuery(GET_ONE_PRODUCT, {
+    variables: {
+      id
+    }
+  })
+
+  if(error) return <div>error</div>
+  if(loading) return <Loading/>
+
+  const product = data.product
+
   return (
     <div className="box mt-5">
       <div className="columns">
         <div className="column">
-          <figure class="image is-4by3 mt-4">
+          <figure className="image is-4by3 mt-4">
             <img
-              src="https://bulma.io/images/placeholders/1280x960.png"
-              alt="Placeholder"
+              src={product.imageUrl}
+              alt="product"
             />
           </figure>
         </div>
@@ -18,10 +34,11 @@ export default function ProductDetail() {
               <h1 className="title is-4">Description</h1>
             </div>
             <div className="content mt-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              nec iaculis mauris.
+              {product.description}
             </div>
-            <button className="button is-primary is-rounded is-medium is-fullwidth is-flex is-justify-content-center">Action Type</button>
+            <button className="button is-primary is-rounded is-medium is-fullwidth is-flex is-justify-content-center">
+              Action Type
+            </button>
           </div>
         </div>
       </div>
