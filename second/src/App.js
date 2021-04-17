@@ -13,7 +13,7 @@ import {
   Auction,
 } from './pages/index.js'
 
-import { Navbar, Footer } from './components/index.js'
+import { Navbar, UpperFooter, Footer } from './components/index.js'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -63,6 +63,7 @@ function App() {
                 <Auction />
               </Route>
             </Switch>
+            <UpperFooter />
             <Footer />
           </div>
         </Router>

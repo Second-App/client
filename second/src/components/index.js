@@ -7,3 +7,4 @@ export { default as Footer } from './Footer.jsx'
 export { default as ProductForm } from './ProductForm.jsx'
 export { default as ProductCard } from './ProductCard.jsx'
 export { default as Loading } from './Loading.jsx'
+export { default as UpperFooter } from './UpperFooter.jsx';
