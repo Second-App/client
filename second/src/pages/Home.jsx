@@ -8,6 +8,28 @@ export default function Home() {
 
   return (
     <>
+      <div style={
+          {
+          position: "relative",
+            marginTop: "20px",
+            marginBottom: "-180px",
+            zIndex: 0,
+          
+            borderRadius: "20px"
+          
+          }}>
+          <span className="title is-4 box"
+            style={{
+              textAlign: 'center',
+              opacity: 1,
+              marginBottom: "200px",
+              backgroundColor: "#AA89D2",
+              boxShadow: "0px 0px 7px #AA89D2",
+            }}
+          >
+            Get your deal done in a second.
+          </span>
+        </div>
       <div className="container mt-5">
         <div className="columns is-centered">
           <img
@@ -21,27 +43,6 @@ export default function Home() {
               boxShadow: "5px 10px 7px #AA89D2",
             }}
           />
-        </div>
-        <div style={
-          {
-            position: "relative",
-            top: -300,
-            marginBottom: "-200px",
-            zIndex: 0,
-          
-            borderRadius: "20px"
-          
-          }}>
-          <span className="title is-4 box"
-            style={{
-              textAlign: 'center',
-              opacity: 1,
-              marginBottom: "200px",
-              backgroundColor: "#AA89D2"
-            }}
-          >
-            Get your deal done in a second.
-          </span>
         </div>
         <div   style={
           {
