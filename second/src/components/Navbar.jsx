@@ -41,7 +41,9 @@ export default function Navbar({ setSearch }) {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <NavLink exact to="/" className="navbar-item mr-2">
-            second.
+            <span className='title is-3'>
+              second.
+            </span>
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
