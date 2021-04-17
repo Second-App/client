@@ -23,8 +23,8 @@ export default function Footer() {
         <div className="column">
           <div className="content is-small mr-5" style={
             {
-              marginLeft: '-110px',
-              marginTop: '50px',
+              marginLeft: '0px',
+              marginTop: '30px',
               zIndex: 2
             }}>
             second. is an application to help people buy and sell used goods. Sometimes people have MANY goods that are no longer used, they may want to sell or trade these but often not sure of how to do it and where to do it. Now with second., everyone will have the opportunity to sell their used goods online. second. will accept a different transaction system, pay directly with full money, trade-in with other items, and put it in the auction system. second. also had a community of shared items, the shared items can be reused again by all the other members, if the user of the shared items finished using the item, the item can be put again in second. to be used by the other community member.
