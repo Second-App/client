@@ -1,25 +1,29 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import { ProductList } from '../components'
-import { useQuery, useMutation } from '@apollo/client'
+import { ProductList, Loading } from '../components'
+import { useQuery } from '@apollo/client'
+import { FETCH_SINGLE_CATEGORY, FETCH_ALL_PRODUCTS } from '../services'
 
 export default function Category() {
   const { id } = useParams()
-  // const { data, error, loading, refetch } = useQuery()
-  const dummyHeading = ['Fashion', 'Technology', 'Kecantikan']
-  const dummyCategories = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    10,
-    11,
-    12,
-  ]
-  return <ProductList data={dummyCategories} params={id} heading={dummyHeading[+id - 1]} />
+  const { data, error, loading, refetch } = useQuery(FETCH_SINGLE_CATEGORY, {
+    variables: {
+      id
+    }
+  })
+  const {data: productsData, error: productsError, loading: productsLoading} = useQuery(FETCH_ALL_PRODUCTS)
+  
+  if(loading || productsLoading) return <Loading/>
+  if(error || productsError) return <div>error</div>
+
+  const categoryName = data.category.name
+  const products = productsData.products
+  
+  return (
+    <ProductList
+      data={products}
+      params={id}
+      heading={categoryName}
+    />
+  )
 }

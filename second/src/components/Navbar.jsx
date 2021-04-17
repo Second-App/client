@@ -1,8 +1,16 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useQuery } from '@apollo/client'
 import { ProductForm, AuthForm } from './index'
+import { FETCH_ALL_TYPES } from '../services'
+import { Loading } from './index'
 
 export default function Navbar({ setSearch }) {
+  const { data, error, loading, refetch } = useQuery(FETCH_ALL_TYPES)
+
+  if (loading) return <Loading />
+  if (error) return <div>error</div>
+
   return (
     <nav
       className="navbar box-content"
@@ -32,45 +40,18 @@ export default function Navbar({ setSearch }) {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <NavLink exact to="/" className="navbar-item">
+          <NavLink exact to="/" className="navbar-item mr-2">
             Home
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <div className="navbar-link">Categories</div>
-
-            <div className="navbar-dropdown">
-              <NavLink to="/categories/1" className="navbar-item">
-                Fashion
-              </NavLink>
-              <NavLink to="/categories/2" className="navbar-item">
-                Technology
-              </NavLink>
-              <NavLink to="/categories/3" className="navbar-item">
-                Kecantikan
-              </NavLink>
-            </div>
-          </div>
-
-          <div className="navbar-item has-dropdown is-hoverable">
             <div className="navbar-link">Types</div>
-
-            <a className="navbar-link">sort by type?</a>
-
-
             <div className="navbar-dropdown">
-              <NavLink to="/type/1" className="navbar-item">
-                Jual-Beli
-              </NavLink>
-              <NavLink to="/type/2" className="navbar-item">
-                Lelang
-              </NavLink>
-              <NavLink to="/type/3" className="navbar-item">
-                Tukar-Tambah
-              </NavLink>
-              <NavLink to="/type/4" className="navbar-item">
-                Community
-              </NavLink>
+              {data.types.map((e) => (
+                <NavLink to={`/type/${e.id}`} className="navbar-item">
+                  {e.name}
+                </NavLink>
+              ))}
             </div>
           </div>
           <div className="mt-2">
