@@ -8,7 +8,7 @@ export const SET_LOGGED_USER = (payload) => {
 export const REMOVE_LOGGED_USER = (payload) => {
   return {
     type: 'remove/loggedUser',
-    payload
+    payload: false
   }
 }
 

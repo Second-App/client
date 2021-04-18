@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
+import { addProduct } from '../store/actions'
 
 const customStyles = {
   content: {
@@ -19,11 +20,11 @@ Modal.setAppElement('#root')
 
 export default function ProductForm() {
   const [modalIsOpen, setIsOpen] = useState(false)
-  const [isLogin, setLogin] = useState(true)
+  const { isLogin } = useSelector((state) => state.userReducer)
   const [input, setInput] = useState({
-    UserId: 0,
-    CategoryId: "",
-    TypeId: "",
+    UserId: +localStorage.id,
+    CategoryId: '',
+    TypeId: '',
     name: '',
     price: '',
     description: '',
@@ -39,6 +40,74 @@ export default function ProductForm() {
   const { types, loading: typeLoading, error: typeError } = useSelector(
     (state) => state.transactionTypesReducer
   )
+  
+  const dummyCategories = [
+    {
+      "id": 1,
+      "name": "Automotive",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/1.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "Property",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/2.jpeg"
+    },
+    {
+      "id": 3,
+      "name": "Food & Beverages",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/3.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "Electronic & Gadgets",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/4.jpeg"
+    },
+    {
+      "id": 5,
+      "name": "Hobbies & Sports",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/5.jpeg"
+    },
+    {
+      "id": 6,
+      "name": "Household Needs",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/6.jpeg"
+    },
+    {
+      "id": 7,
+      "name": "Self-Care",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/7.jpeg"
+    },
+    {
+      "id": 8,
+      "name": "Kids",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/8.jpeg"
+    },
+    {
+      "id": 9,
+      "name": "Office Needs",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/9.jpeg"
+    },
+    {
+      "id": 10,
+      "name": "Pets",
+      "url": "https://secondh8.s3-ap-southeast-1.amazonaws.com/products/categories/10.jpeg"
+    }
+  ]
+
+  const dummyTypes = [
+    {
+        "id": 1,
+        "name": "Full-Payment"
+    },
+    {
+        "id": 2,
+        "name": "Auction"
+    },
+    {
+        "id": 3,
+        "name": "Shared-goods"
+    }
+]
 
   const openModal = () => {
     setIsOpen(true)
@@ -50,7 +119,7 @@ export default function ProductForm() {
 
   const handleInput = (e) => {
     let { name, value } = e.target
-    console.log(value);
+    console.log(value)
     setInput({
       ...input,
       [name]: value,
@@ -59,6 +128,8 @@ export default function ProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('handle on sumbit');
+    dispatch(addProduct(input))
   }
 
   return (
@@ -110,7 +181,7 @@ export default function ProductForm() {
                 </div>
               </div>
             </div>
-            
+
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -128,13 +199,22 @@ export default function ProductForm() {
                     </span>
                   </p>
                 </div>
-                 <div className="field has-addons">
+                <div className="field has-addons">
                   <div className="control is-expanded">
                     <div className="select is-fullwidth ">
-                      <select name="CategoryId" className="input" onChange={handleInput} value={input.CategoryId}>
-                        <option value="" disabled>Choose Category</option>
-                        {categories?.map(category => (
-                          <option key={category.id} value={category.id} >{category.name}</option>
+                      <select
+                        name="CategoryId"
+                        className="input"
+                        onChange={handleInput}
+                        value={input.CategoryId}
+                      >
+                        <option value="" disabled>
+                          Choose Category
+                        </option>
+                        {dummyCategories.map((category) => (
+                          <option key={category.id} value={category.id}>
+                            {category.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -148,10 +228,19 @@ export default function ProductForm() {
                 <div className="field has-addons">
                   <div className="control is-expanded">
                     <div className="select is-fullwidth ">
-                      <select name="TypeId" className="input" onChange={handleInput} value={input.TypeId}>
-                        <option value="" disabled>Choose Types</option>
-                        {types?.map(type => (
-                          <option key={type.id} value={type.id}>{type.name}</option>
+                      <select
+                        name="TypeId"
+                        className="input"
+                        onChange={handleInput}
+                        value={input.TypeId}
+                      >
+                        <option value="" disabled>
+                          Choose Types
+                        </option>
+                        {dummyTypes.map((type) => (
+                          <option key={type.id} value={type.id}>
+                            {type.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -192,10 +281,6 @@ export default function ProductForm() {
               </div>
             </div>
 
-            
-
-            
-
             <div className="file is-info has-name">
               <label className="file-label">
                 <input className="file-input" type="file" name="imageUrl" />
@@ -207,7 +292,7 @@ export default function ProductForm() {
                 </span>
               </label>
             </div>
-            <hr/>
+            <hr />
             <div className="field is-grouped">
               <div className="control">
                 <button

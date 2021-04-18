@@ -2,6 +2,7 @@ import {
   SET_PRODUCTS,
   SET_ONE_PRODUCT,
   REMOVE_PRODUCT,
+  ADD_PRODUCT,
   SET_ERROR,
   SET_LOADING,
 } from '../types'
@@ -26,6 +27,9 @@ export default (state = initialState, { type, payload }) => {
         (product) => +product.id !== +payload.id
       )
       return { ...state, products: output }
+    
+    case ADD_PRODUCT().type:
+      return { ...state, products: [...state.products, payload] }
 
     case SET_LOADING().type:
       return { ...state, loading: payload }

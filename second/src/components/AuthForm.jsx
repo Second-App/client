@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { ToastContainer, toast } from 'react-toastify'
+import { userLogin, userRegister } from '../store/actions'
+import { REMOVE_LOGGED_USER } from '../store/types'
 
 Modal.setAppElement('#root')
 
@@ -18,7 +21,9 @@ const customStyles = {
 
 export default function AuthForm({ isEdit }) {
   const [authForm, setAuthForm] = useState(false)
-  const [isLogin, setIsLogin] = useState(localStorage.access_token)
+  const [isLogin, setIsLogin] = useState(
+    localStorage.access_token ? true : false
+  )
   const [isRegistering, setRegistering] = useState(false)
   const [isSigning, setSigning] = useState(false)
   const [input, setInput] = useState(
@@ -30,6 +35,8 @@ export default function AuthForm({ isEdit }) {
           password: '',
         }
   )
+
+  const dispatch = useDispatch()
 
   const openModal = (orientation) => {
     if (orientation === 'login') setSigning(true)
@@ -47,10 +54,12 @@ export default function AuthForm({ isEdit }) {
   const handleLogout = () => {
     setIsLogin(false)
     localStorage.clear()
+    dispatch(REMOVE_LOGGED_USER())
   }
 
   const handleInput = (e) => {
     let { name, value } = e.target
+    console.log(value)
     setInput({
       ...input,
       [name]: value,
@@ -75,6 +84,7 @@ export default function AuthForm({ isEdit }) {
     if (!input.password) errors.push('password is required')
 
     if (errors.length) return toast.warn(errorMessages(errors))
+    dispatch(userRegister(input, closeModal, openModal))
   }
 
   const handleLogin = (e) => {
@@ -85,6 +95,12 @@ export default function AuthForm({ isEdit }) {
     if (!input.password) errors.push('password is required')
 
     if (errors.length) return toast.warn(errorMessages(errors))
+
+    const payload = {
+      email: input.email,
+      password: input.password,
+    }
+    dispatch(userLogin(payload, closeModal, setIsLogin))
   }
 
   const errorMessages = (errors) => (
@@ -101,6 +117,7 @@ export default function AuthForm({ isEdit }) {
       {isLogin ? (
         <button className="button is-primary" onClick={handleLogout}>
           Logout
+          {console.log(isLogin)}
         </button>
       ) : (
         <>
@@ -224,8 +241,8 @@ export default function AuthForm({ isEdit }) {
               <input
                 value={input.password}
                 onChange={handleInput}
-                name="password is-medium"
-                className="input"
+                name="password"
+                className="input is-medium"
                 type="password"
                 placeholder="password"
               />
