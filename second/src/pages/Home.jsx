@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchCategories } from '../store/actions'
+import { fetchCategories, fetchTypes } from '../store/actions'
 import { Loading } from '../components'
 
 export default function Home() {
@@ -12,6 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchCategories())
+    // dispatch(fetchTypes())
   }, [])
 
   if(error) return <div>error</div>
@@ -24,8 +25,6 @@ export default function Home() {
           position: 'relative',
           marginTop: '20px',
           marginBottom: '-180px',
-          zIndex: 0,
-
           borderRadius: '20px',
         }}
       >
@@ -59,8 +58,6 @@ export default function Home() {
             position: 'relative',
             top: 0,
             marginBottom: '0px',
-            zIndex: 0,
-
             borderRadius: '20px',
           }}
         >
@@ -81,7 +78,7 @@ export default function Home() {
                     <Link to={`/categories/${e.id}`}>
                       <img
                         className="image"
-                        src={e.url}
+                        src={e.imageURL}
                         alt="categories"
                         style={{
                           borderRadius: '20px',
@@ -89,6 +86,7 @@ export default function Home() {
                           height: '250px',
                           width: '250px',
                           cursor: 'pointer',
+                          objectFit: 'cover',
                         }}
                       />
                     </Link>
@@ -140,8 +138,6 @@ export default function Home() {
             position: 'relative',
             top: 0,
             marginBottom: '0px',
-            zIndex: 0,
-            borderRadius: '20px',
           }}
         >
           <button
@@ -216,8 +212,6 @@ export default function Home() {
             position: 'relative',
             top: 0,
             marginBottom: '0px',
-            zIndex: 0,
-            borderRadius: '20px',
           }}
         >
           <button
