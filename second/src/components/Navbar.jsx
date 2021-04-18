@@ -8,7 +8,7 @@ import { Loading } from './index'
 export default function Navbar({ setSearch }) {
   const dispatch = useDispatch()
   const {types, loading, error} = useSelector(state => state.transactionTypesReducer)
-
+  
   useEffect(() => {
     dispatch(fetchTypes())
   }, [])
