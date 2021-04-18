@@ -46,10 +46,10 @@ export default function AuthForm() {
         </button>
       ) : (
         <>
-          <button className="button" style={{color: 'white'}} onClick={openModal}>
+          <button className="button title is-6" style={{backgroundColor: '##FFB979'}} onClick={openModal}>
             Login
           </button>
-          <button className="button is-primary" onClick={openModal}>
+          <button className="button title is-6" style={{backgroundColor: '#AA89D2'}} onClick={openModal}>
             Sign Up
           </button>
         </>
