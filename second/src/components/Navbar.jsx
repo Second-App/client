@@ -21,7 +21,6 @@ export default function Navbar({ setSearch }) {
       className="navbar box-content"
       role="navigation"
       aria-label="main navigation"
-      style={{zIndex: 0}}
     >
       <div className="navbar-brand">
         <NavLink className="navbar-item" to="/">

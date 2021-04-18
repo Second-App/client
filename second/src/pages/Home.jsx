@@ -77,13 +77,12 @@ export default function Home() {
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
                 {categories.map((e, i) => (
-                  <div className="column is-one-fifth">
+                  <div key={e.id} className="column is-one-fifth">
                     <Link to={`/categories/${e.id}`}>
                       <img
                         className="image"
                         src={e.url}
                         alt="categories"
-                        key={i}
                         style={{
                           borderRadius: '20px',
                           boxShadow: '0px 0px 7px #FF8D2D',
@@ -158,7 +157,7 @@ export default function Home() {
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
                 {categories.map((e, i) => (
-                  <div className="column is-one-fifth">
+                  <div key={e.id} className="column is-one-fifth">
                     <img
                       className="image is-48x48"
                       src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg"
@@ -234,7 +233,7 @@ export default function Home() {
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
                 {categories.map((e, i) => (
-                  <div className="column is-one-fifth">
+                  <div key={e.id} className="column is-one-fifth">
                     <img
                       className="image"
                       src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg"

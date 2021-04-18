@@ -13,7 +13,6 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '25rem',
-    zIndex: 10,
   },
 }
 
@@ -52,7 +51,6 @@ export default function AuthForm({ isEdit }) {
 
   const handleInput = (e) => {
     let { name, value } = e.target
-    console.log(value)
     setInput({
       ...input,
       [name]: value,
@@ -121,9 +119,8 @@ export default function AuthForm({ isEdit }) {
           </button>
         </>
       )}
-      
+
       {isRegistering ? (
-        
         <Modal
           isOpen={authForm}
           onRequestClose={closeModal}
@@ -132,51 +129,56 @@ export default function AuthForm({ isEdit }) {
           overlayClassName="Overlay"
         >
           <ToastContainer position="top-center" limit={1} />
-          <div className="title is-3">Register</div>
-          <hr/>
+          <div className="title is-4 ml-2">Register</div>
           <div className="field">
-            <label className="label">Name</label>
-            <div className="control">
+            <p class="control has-icons-left">
               <input
-                name="name"
                 value={input.name}
                 onChange={handleInput}
-                className="input"
+                name="name"
+                className="input is-medium"
                 type="text"
-                placeholder="Text input"
+                placeholder="name"
               />
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </p>
           </div>
 
           <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
+            <p class="control has-icons-left">
               <input
                 value={input.email}
                 onChange={handleInput}
                 name="email"
-                className="input"
+                className="input is-medium"
                 type="email"
-                placeholder="Email input"
+                placeholder="Email"
               />
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
           </div>
 
           <div className="field">
-            <label className="label">Password</label>
-            <div className="control">
+            <p class="control has-icons-left">
               <input
                 value={input.password}
                 onChange={handleInput}
                 name="password"
-                className="input"
+                className="input is-medium"
                 type="password"
-                placeholder="password input"
+                placeholder="password"
               />
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
           </div>
 
-          <hr/>
+          <hr />
 
           <div className="field is-grouped">
             <div className="control">
@@ -200,36 +202,39 @@ export default function AuthForm({ isEdit }) {
           overlayClassName="Overlay"
         >
           <ToastContainer position="top-center" limit={1} />
-          <div className="title is-3">Login</div>
-          <hr/>
+          <div className="title is-4 ml-2">Login</div>
           <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
+            <p class="control has-icons-left has-icons-right">
               <input
                 value={input.email}
                 onChange={handleInput}
                 name="email"
-                className="input"
+                className="input is-medium"
                 type="email"
-                placeholder="Email input"
+                placeholder="Email"
               />
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
           </div>
 
           <div className="field">
-            <label className="label">Password</label>
-            <div className="control">
+            <p class="control has-icons-left">
               <input
                 value={input.password}
                 onChange={handleInput}
-                name="password"
+                name="password is-medium"
                 className="input"
                 type="password"
-                placeholder="password input"
+                placeholder="password"
               />
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
           </div>
-          <hr/>
+          <hr />
           <div className="field is-grouped">
             <div className="control">
               <button

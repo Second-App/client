@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function ProductList({ data, params, heading }) {
-  console.log(heading);
   return (
     <div className="box mt-4">
       <div className="heading">

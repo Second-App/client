@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload }) => {
-  console.log(payload, 'reducerrrrrrrr')
   switch (type) {
 
   case SET_T_TYPES().type:
