@@ -10,15 +10,14 @@ export default function Type() {
   const { singleType, loading, error } = useSelector(
     (state) => state.transactionTypesReducer
   )
-    console.log(singleType,'single <<<<<<<<<')
+    
   const { products, loading: productsLoading, error: productsError } = useSelector(
     (state) => state.productsReducer
   )
   
   useEffect(() => {
     dispatch(getOneType(id))
-  }, [id])
- 
+  }, [id, products.length])
 
   if (!singleType.length) return <Loading />
   if (error) return <div>error</div>
