@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { SocketContext } from '../socket.io/socket.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchChatsUsers, fetchChatDetail } from '../store/actions';
+import {
+  fetchChatsUsers,
+  fetchChatDetail,
+  sendMessage,
+} from '../store/actions';
 import { Loading } from '../components';
 
 export default function Chat({ type }) {
+  const socket = useContext(SocketContext);
+
   const { chats, loading: chatsLoading, error: chatsError } = useSelector(
     (state) => state.chatReducer
   );
@@ -17,7 +24,8 @@ export default function Chat({ type }) {
 
   useEffect(() => {
     dispatch(fetchChatsUsers());
-  }, [chatsDetail]);
+    socket.on('getSendChat', (data) => dispatch(fetchChatDetail(data)));
+  }, []);
 
   let historyUsersChat;
 
@@ -53,6 +61,21 @@ export default function Chat({ type }) {
 
   const userChatOnClick = (SenderId) => {
     dispatch(fetchChatDetail(SenderId));
+    localStorage.SenderId = SenderId;
+  };
+
+  const handleSendMessage = async (event) => {
+    event.preventDefault();
+    await dispatch(
+      sendMessage({
+        SenderId: localStorage.id,
+        ReceiverId: localStorage.SenderId,
+        message: event.target.message.value,
+      })
+    );
+    event.target.message.value = '';
+    await dispatch(fetchChatDetail(localStorage.SenderId));
+    await socket.emit('sendChat', localStorage.id);
   };
 
   if (chatsError || chatsDetailError) return <div>error</div>;
@@ -60,6 +83,7 @@ export default function Chat({ type }) {
 
   return (
     <div className="box mt-5">
+      {console.log(chatsDetail.send)}
       <div className="columns">
         <div className="column is-one-quarter ">
           <div className="columns ml-2 mt-2">Chats</div>
@@ -114,11 +138,19 @@ export default function Chat({ type }) {
             </div>
           </div>
           <div className="columns mt-4 pb-2">
-            <input
-              className="input is-info is-focused"
-              type="text"
-              placeholder="Type a message"
-            ></input>
+            <form
+              onSubmit={(event) => {
+                handleSendMessage(event);
+              }}
+            >
+              <input
+                className="input is-info is-focused"
+                type="text"
+                name="message"
+                placeholder="Type a message"
+                style={{ width: '800px' }}
+              ></input>
+            </form>
           </div>
         </div>
       </div>
