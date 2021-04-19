@@ -135,7 +135,7 @@ export default function AuthForm({ isEdit }) {
           </Link>
 
           <Link to='/community'>
-          <button className="button" style={{marginRight: "50px", boxShadow: '5px 6px 5px #AA89D2'}}>
+          <button className="button" style={{marginRight: "20px", boxShadow: '5px 6px 5px #AA89D2'}}>
               <i class="fas fa-users"></i>
           </button>
           </Link>

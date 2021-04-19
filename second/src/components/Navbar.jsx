@@ -72,7 +72,7 @@ export default function Navbar({ setSearch }) {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <div className="mr-2">
+              <div className="">
                 <AuthForm />
               </div>
               <div className="mr-2">
