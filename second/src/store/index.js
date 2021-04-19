@@ -1,15 +1,23 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux'
-import thunk from 'redux-thunk'
-import {categoriesReducer, productsReducer, userReducer, transactionTypesReducer, wishlistReducer} from './reducers'
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import {
+  categoriesReducer,
+  productsReducer,
+  userReducer,
+  transactionTypesReducer,
+  wishlistReducer,
+  chatReducer,
+} from './reducers';
 
 const reducer = combineReducers({
   categoriesReducer,
   productsReducer,
   userReducer,
   transactionTypesReducer,
-  wishlists: wishlistReducer
-})
+  chatReducer,
+  wishlists: wishlistReducer,
+});
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(reducer, applyMiddleware(thunk));
 
-export default store
+export default store;
