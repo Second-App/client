@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProfileById } from '../store/actions'
+import { getProfileById, fetchWishlist, deleteWishlist } from '../store/actions'
 import { Loading } from '../components'
 
 export default function Profile() {
@@ -8,13 +8,20 @@ export default function Profile() {
   const id = localStorage.id
   const dispatch = useDispatch()
   const { userDetails } = useSelector((state) => state.userReducer)
+  const { data } = useSelector( state => state.wishlists)
 
   useEffect(() => {
     dispatch(getProfileById(id))
-  }, [])
+    dispatch(fetchWishlist())
+  }, [dispatch])
+
+  function handleDeleteWishlist(value) {
+    dispatch(deleteWishlist(value))
+    dispatch(fetchWishlist())
+  }
 
   if (!userDetails) return <Loading />
-
+  
   return (
     <div className="box mt-5">
       <div className="columns is-6">
@@ -34,13 +41,16 @@ export default function Profile() {
             <h1 className="title is-4 ml-3">Wishlist</h1>
           </div>
           <div className="columns mt-2 is-flex is-flex-wrap-wrap my-2">
-            {favourites.map((e, i) => (
-              <div key={i} className="column is-3">
+            {data?.map((wishlist, idx) => (
+              <div key={idx} className="column is-3" >
                 <figure className="image is-128x128">
                   <img
-                    src="https://bulma.io/images/placeholders/256x256.png"
+                    src={wishlist.Product.imageUrl}
                     alt="Favourites"
                   />
+                  <button onClick={() => handleDeleteWishlist(wishlist.id)} className="button is-small is-danger">
+                    Delete
+                  </button>
                 </figure>
               </div>
             ))}
