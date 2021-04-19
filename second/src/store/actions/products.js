@@ -1,5 +1,5 @@
-import axios from '../../axios'
-import { toast } from 'react-toastify'
+import axios from '../../axios';
+import { toast } from 'react-toastify';
 import {
   SET_PRODUCTS,
   SET_ONE_PRODUCT,
@@ -7,37 +7,37 @@ import {
   REMOVE_PRODUCT,
   SET_LOADING,
   SET_ERROR,
-} from '../types'
-import { getOneType, getOneCategory } from './index'
+} from '../types';
+import { getOneType, getOneCategory } from './index';
 
 export function fetchProducts() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('/products')
-      await dispatch(SET_PRODUCTS(data))
-      await dispatch(SET_LOADING(false))
+      const { data } = await axios.get('/products');
+      await dispatch(SET_PRODUCTS(data));
+      await dispatch(SET_LOADING(false));
     } catch (err) {
-      console.log(err)
-      dispatch(SET_ERROR(err))
+      console.log(err);
+      dispatch(SET_ERROR(err));
     }
-  }
+  };
 }
 
 export function getOneProduct(id) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('/products/' + id)
-      await dispatch(SET_ONE_PRODUCT(data))
-      await dispatch(SET_LOADING(false))
+      const { data } = await axios.get('/products/' + id);
+      await dispatch(SET_ONE_PRODUCT(data));
+      await dispatch(SET_LOADING(false));
     } catch (err) {
-      console.log(err)
-      dispatch(SET_ERROR(err))
+      console.log(err);
+      dispatch(SET_ERROR(err));
     }
-  }
+  };
 }
 
 export function addProduct(payload, closeModal, toast, clearAllInput) {
-  console.log('masuk gan')
+  console.log('masuk gan');
   return async (dispatch, getState) => {
     try {
       const { data } = await axios({
@@ -45,17 +45,17 @@ export function addProduct(payload, closeModal, toast, clearAllInput) {
         headers: { access_token: localStorage.access_token },
         data: payload,
         method: 'POST',
-      })
-      await dispatch(ADD_PRODUCT(data))
-      closeModal()
-      await getOneType(data.TypeId)
-      await getOneCategory(data.CategoryId)
-      clearAllInput()
-      toast.success('successfully added')
+      });
+      await dispatch(ADD_PRODUCT(data));
+      closeModal();
+      await getOneType(data.TypeId);
+      await getOneCategory(data.CategoryId);
+      clearAllInput();
+      toast.success('successfully added');
     } catch (err) {
-      dispatch(SET_ERROR(err))
+      dispatch(SET_ERROR(err));
     }
-  }
+  };
 }
 
 export function deleteProductById(id) {
@@ -63,11 +63,12 @@ export function deleteProductById(id) {
     try {
       await axios.delete('/products/' + id, {
         headers: { access_token: localStorage.access_token },
-      })
-      await dispatch(REMOVE_PRODUCT(id))
-      toast.success('product deleted')
+      });
+      await dispatch(REMOVE_PRODUCT(id));
+      await dispatch(fetchProducts());
+      toast.success('product deleted');
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 }
