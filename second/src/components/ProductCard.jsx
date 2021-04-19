@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
 import { deleteProductById, addToWishlist } from '../store/actions'
+import { Link } from 'react-router-dom'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function ProductCard({ data }) {
     }
   }, [])
   
+  const productRoute = `/products/${data.id}`
 
   return (
     <div
@@ -44,7 +46,7 @@ export default function ProductCard({ data }) {
     >
       <div className='card column' style={{}}>
         <span className="tag is-small is-link" style={{
-          marginLeft: '27px',
+          marginLeft: '17px',
           marginBottom: '3px'
         }}>
         <p style={{textAlign:'left'}}>
@@ -53,6 +55,7 @@ export default function ProductCard({ data }) {
         </span>
 
         <figure className="image" style={{ display: 'flex', justifyContent: 'center' }}>
+          <Link to={productRoute}>
           <div
             style={{
                 height: '250px',
@@ -66,12 +69,12 @@ export default function ProductCard({ data }) {
               style={{
                 borderRadius: '5px',
                 boxShadow: '0px 0px 7px #FF8D2D',
-                objectFit: 'cover',
-                cursor: 'pointer',
-                zIndex: 1
+                objectFit: 'cover'
               }}
-            />
+              />
           </div>
+          </Link>
+          
         </figure>
         <p className="subtitle"
           style={{ textAlign: 'right', marginTop: '12px', marginBottom: '0px', textAlign: 'center', color: 'grey', fontSize: '14px' }}

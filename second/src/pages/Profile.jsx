@@ -15,6 +15,10 @@ export default function Profile() {
     dispatch(fetchWishlist())
   }, [dispatch])
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [])
+  
   function handleDeleteWishlist(value) {
     dispatch(deleteWishlist(value))
     dispatch(fetchWishlist())

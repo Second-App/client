@@ -9,6 +9,12 @@
     background: rgba(0, 0, 0, 0.8);
 }
 
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .be-radial {
     background-image: radial-gradient(farthest-side at 60% 55%, #ff8d2d, #ffff);
 }

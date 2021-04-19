@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { userLogin, userRegister } from '../store/actions'
 import { REMOVE_LOGGED_USER } from '../store/types'
 import { logoutConfirmation, errorMessages } from '../helpers'
+import { Link } from 'react-router-dom'
 
 Modal.setAppElement('#root')
 
@@ -108,10 +109,42 @@ export default function AuthForm({ isEdit }) {
     <>
       <ToastContainer position="top-center" limit={1} autoClose={2000} />
       {isLogin ? (
-        <button className="button is-primary" onClick={() => logoutConfirmation(handleLogout)}>
-          Logout
-          {console.log(isLogin)}
-        </button>
+        <>
+          <Link to='/chat'>
+          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
+              <i class="fas fa-envelope"></i>
+          </button>
+          </Link>
+
+          <Link to='/notification'>
+          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
+              <i class="fas fa-bell"></i>
+          </button>
+          </Link>
+
+          <Link to='/wishlist'>
+          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
+              <i class="fas fa-heart"></i>
+          </button>
+          </Link>
+
+          <Link to='/profile'>
+          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
+              <i class="fas fa-user-circle"></i>
+          </button>
+          </Link>
+
+          <Link to='/community'>
+          <button className="button" style={{marginRight: "50px", boxShadow: '5px 6px 5px #AA89D2'}}>
+              <i class="fas fa-users"></i>
+          </button>
+          </Link>
+
+          <button className="button is-primary" onClick={() => logoutConfirmation(handleLogout)}>
+            Logout
+            {console.log(isLogin)}
+          </button>
+      </>
       ) : (
         <>
           <button

@@ -15,6 +15,10 @@ export default function Home() {
     dispatch(fetchCategories())
   }, [])
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [])
+  
   if(error) return <div>error</div>
   if(loading || !categories.length) return <Loading />
 
@@ -159,6 +163,7 @@ export default function Home() {
             marginBottom: '0px',
           }}
         >
+          <Link to='/type/1'>
           <button
             className="title is-4 mt-6 pl-2 heading"
             style={{
@@ -166,8 +171,9 @@ export default function Home() {
               color: 'black',
             }}
           >
-            Full-Payment
+              Full-Payment
           </button>
+          </Link>
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
@@ -212,6 +218,7 @@ export default function Home() {
             marginBottom: '0px',
           }}
         >
+          <Link to='/type/1'>
           <button
             className="title is-4 mt-4 pl-2 heading"
             style={{
@@ -219,8 +226,9 @@ export default function Home() {
               color: 'black',
             }}
           >
-            Auction
+              Auction
           </button>
+          </Link>
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
