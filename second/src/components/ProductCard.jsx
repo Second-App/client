@@ -1,17 +1,17 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist } from '../store/actions'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteProductConfirmation } from '../helpers';
+import { deleteProductById, addToWishlist } from '../store/actions';
 
 export default function ProductCard({ data }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDeleteProduct = () => {
-    dispatch(deleteProductById(data.id))
-  }
+    dispatch(deleteProductById(data.id));
+  };
   const handleAddToWishlist = (data) => {
-    dispatch(addToWishlist(data))
-  }
+    dispatch(addToWishlist(data));
+  };
 
   return (
     <div
@@ -38,11 +38,17 @@ export default function ProductCard({ data }) {
             }}
           />
           {+data?.UserId === +localStorage.id ? (
-            <button onClick={() => deleteProductConfirmation(handleDeleteProduct)} className="button is-danger">
+            <button
+              onClick={() => deleteProductConfirmation(handleDeleteProduct)}
+              className="button is-danger"
+            >
               Delete
             </button>
           ) : (
-            <button onClick={() => handleAddToWishlist(data) } className="button is-danger">
+            <button
+              onClick={() => handleAddToWishlist(data)}
+              className="button is-danger"
+            >
               Add to wishlist
             </button>
           )}
@@ -55,5 +61,5 @@ export default function ProductCard({ data }) {
         </p>
       </div>
     </div>
-  )
+  );
 }
