@@ -1,8 +1,10 @@
+
 import { fetchCategories, getOneCategory } from './categories'
 import { fetchProducts, getOneProduct, addProduct, deleteProductById } from './products'
 import { fetchTypes, getOneType } from './types'
 import { userLogin, userRegister, getProfileById, editProfile } from './users'
 import { fetchWishlist, addToWishlist, deleteWishlist} from './wishlists'
+import { fetchChatsUsers, fetchChatDetail, sendMessage } from './chats';
 
 export {
   fetchCategories,
@@ -20,4 +22,8 @@ export {
   fetchWishlist,
   addToWishlist,
   deleteWishlist,
-}
+  fetchChatsUsers,
+  fetchChatDetail,
+  sendMessage,
+};
+

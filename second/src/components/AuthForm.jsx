@@ -111,36 +111,42 @@ export default function AuthForm({ isEdit }) {
       {isLogin ? (
         <>
           <Link to='/chat'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
-              <i class="fas fa-envelope"></i>
+          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+              <i className="fas fa-envelope"></i>
           </button>
           </Link>
 
           <Link to='/notification'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
-              <i class="fas fa-bell"></i>
+          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+              <i className="fas fa-bell"></i>
           </button>
           </Link>
 
           <Link to='/wishlist'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
-              <i class="fas fa-heart"></i>
+          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+              <i className="fas fa-heart"></i>
           </button>
           </Link>
 
           <Link to='/profile'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '5px 6px 5px #AA89D2'}}>
-              <i class="fas fa-user-circle"></i>
+          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+              <i className="fas fa-user-circle"></i>
           </button>
           </Link>
 
           <Link to='/community'>
-          <button className="button" style={{marginRight: "20px", boxShadow: '5px 6px 5px #AA89D2'}}>
-              <i class="fas fa-users"></i>
+          <button className="button" style={{marginRight: "35px", boxShadow: '3px 4px 5px #AA89D2'}}>
+              <i className="fas fa-users"></i>
           </button>
           </Link>
 
-          <button className="button is-primary" onClick={() => logoutConfirmation(handleLogout)}>
+          <button className="button"
+            onClick={() => logoutConfirmation(handleLogout)}
+            style={{
+              backgroundColor: '#3D0085',
+              color: 'white'
+            }}
+          >
             Logout
             {console.log(isLogin)}
           </button>
