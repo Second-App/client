@@ -150,7 +150,9 @@ export default function ProductForm() {
     <>
       {isLogin ? (
         <div>
-          <button className="button is-primary" onClick={openModal}>
+          <button className="button is-primary" onClick={openModal}
+            style={{marginLeft: "20px", boxShadow: '0px 0px 14px #FF8D2D'}}
+          >
             Add Product
           </button>
           <Modal

@@ -19,6 +19,10 @@ export default function Type() {
     dispatch(getOneType(id))
   }, [id, products.length])
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [])
+  
   if (!singleType.length) return <Loading />
   if (error) return <div>error</div>
 

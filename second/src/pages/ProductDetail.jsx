@@ -19,6 +19,10 @@ export default function ProductDetail() {
     dispatch(getOneProduct(id));
   }, [id]);
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [])
+  
   if (productsError) return <div>error</div>;
   if (productsLoading) return <Loading />;
 
