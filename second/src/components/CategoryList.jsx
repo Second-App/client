@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CategoryList({ data }) {
   return (
@@ -10,13 +11,11 @@ export default function CategoryList({ data }) {
         <div className="columns is-flex is-flex-wrap-wrap my-2">
           {data.map((e, i) => (
             <div className="column is-2" key={i}>
-              <figure className="image is-128x128">
-                <img
-                  src="https://bulma.io/images/placeholders/128x128.png"
-                  alt="category"
-                />
-              </figure>
-            </div>
+            {e.name}
+            <figure className="image is-128x128">
+              <img src={e.imageURL} alt="category" />
+            </figure>
+          </div>
           ))}
         </div>
       </div>
