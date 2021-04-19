@@ -1,13 +1,16 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById } from '../store/actions'
+import { deleteProductById, addToWishlist } from '../store/actions'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch()
 
   const handleDeleteProduct = () => {
     dispatch(deleteProductById(data.id))
+  }
+  const handleAddToWishlist = (data) => {
+    dispatch(addToWishlist(data))
   }
 
   return (
@@ -34,12 +37,14 @@ export default function ProductCard({ data }) {
               cursor: 'pointer',
             }}
           />
-          {+data.UserId === +localStorage.id ? (
+          {+data?.UserId === +localStorage.id ? (
             <button onClick={() => deleteProductConfirmation(handleDeleteProduct)} className="button is-danger">
               Delete
             </button>
           ) : (
-            ''
+            <button onClick={() => handleAddToWishlist(data) } className="button is-danger">
+              Add to wishlist
+            </button>
           )}
         </figure>
         <p
