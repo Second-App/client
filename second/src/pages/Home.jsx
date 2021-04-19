@@ -79,9 +79,6 @@ export default function Home() {
         <div
           style={{
             position: 'relative',
-            top: 0,
-            marginBottom: '0px',
-            borderRadius: '20px',
           }}
         >
           <button
@@ -95,31 +92,36 @@ export default function Home() {
           </button>
           <div className="column is-main-content">
             <div className="container is-widescreen">
-              <div className="columns is-centered is-multiline">
+              <div className="columns is-centered is-multiline"
+                
+              >
                 {categories.map((e, i) => (
                   <div key={e.id} className="column is-one-fifth">
-                    <Link to={`/categories/${e.id}`}>
-                      <img
-                        className="image"
-                        src={e.imageURL}
-                        alt="categories"
-                        style={{
-                          borderRadius: '20px',
-                          boxShadow: '0px 0px 7px #FF8D2D',
-                          height: '250px',
-                          width: '250px',
-                          cursor: 'pointer',
-                          objectFit: 'cover',
-                        }}
-                      />
-                    </Link>
-
-                    <p
-                      className="subtitle"
-                      style={{ textAlign: 'left', marginTop: '15px' }}
+                    <div className="card column"
                     >
-                      {e.name}
-                    </p>
+                      <Link to={`/categories/${e.id}`}>
+                        <img
+                          className="image"
+                          src={e.imageURL}
+                          alt="categories"
+                          style={{
+                            borderRadius: '20px',
+                            boxShadow: '0px 0px 10px #FF8D2D',
+                            height: '250px',
+                            width: '250px',
+                            cursor: 'pointer',
+                            objectFit: 'cover',
+                          }}
+                        />
+                      </Link>
+
+                      <p
+                        className="subtitle"
+                        style={{ textAlign: 'center', marginTop: '15px' }}
+                      >
+                        {e.name}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -163,17 +165,6 @@ export default function Home() {
             marginBottom: '0px',
           }}
         >
-          <Link to='/type/1'>
-          <button
-            className="title is-4 mt-6 pl-2 heading"
-            style={{
-              textAlign: 'left',
-              color: 'black',
-            }}
-          >
-              Full-Payment
-          </button>
-          </Link>
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
@@ -218,17 +209,6 @@ export default function Home() {
             marginBottom: '0px',
           }}
         >
-          <Link to='/type/1'>
-          <button
-            className="title is-4 mt-4 pl-2 heading"
-            style={{
-              textAlign: 'left',
-              color: 'black',
-            }}
-          >
-              Auction
-          </button>
-          </Link>
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
