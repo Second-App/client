@@ -1,22 +1,38 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchCategories, fetchTypes } from '../store/actions'
+import { fetchCategories, fetchProducts } from '../store/actions'
 import { Loading } from '../components'
 
 export default function Home() {
   const { categories, loading, error } = useSelector(
     (state) => state.categoriesReducer
   )
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchCategories())
-    // dispatch(fetchTypes())
   }, [])
 
   if(error) return <div>error</div>
-  if(loading) return <Loading />
+  if(loading || !categories.length) return <Loading />
+
+  console.log(categories,'ini categories')
+
+  const fullPayment = []
+
+  // categories.forEach((cat, i) => {
+  //   const output = []
+  //   let index = Math.floor(Math.random() * cat.Products.length)
+  //   while (cat.Products[index].TypeId === 2) {
+  //     index = 
+      // output.push(cat.Products[index])
+  //     fullPayment.push(cat.Products[index])
+  //   }
+  // })
+
+  // console.log(fullPayment,'ini full payment<<<<<<<<<<<<')
 
   return (
     <>
