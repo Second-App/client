@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
 import { deleteProductById, addToWishlist } from '../store/actions'
 import { Link } from 'react-router-dom'
+import { ToastContainer,toast } from 'react-toastify'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function ProductCard({ data }) {
   };
   const handleAddToWishlist = (data) => {
     dispatch(addToWishlist(data));
+    toast.success(`${data.name} added to wishlist`)
   };
 
   const [productType, setproductType] = useState('Full-Payment')
