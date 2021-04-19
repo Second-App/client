@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
 import { addProduct } from '../store/actions'
 
 const customStyles = {
@@ -126,10 +127,23 @@ export default function ProductForm() {
     })
   }
 
+  const clearAllInput = () => {
+    setInput({
+      UserId: +localStorage.id,
+      CategoryId: '',
+      TypeId: '',
+      name: '',
+      price: '',
+      description: '',
+      imageUrl: '',
+      location: '',
+      condition: '',
+    })
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('handle on sumbit');
-    dispatch(addProduct(input))
+    dispatch(addProduct(input, closeModal, toast, clearAllInput))
   }
 
   return (

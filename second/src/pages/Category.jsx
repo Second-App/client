@@ -14,14 +14,14 @@ export default function Category() {
   const { products, loading: productsLoading, error: productsError } = useSelector(
     (state) => state.productsReducer
   )
-  
+
   useEffect(() => {
     dispatch(getOneCategory(id))
     dispatch(fetchProducts())
-  }, [id])
+  }, [id, products.length])
 
-  if (loading) return <Loading />
-  if (error) return <div>error</div>
+  if (loading || !singleCategory.length) return <Loading />
+  if (error)  return <div>error</div>
 
-  return <ProductList data={products} params={id} heading={singleCategory.name} />
+  return <ProductList data={singleCategory} params={id} heading={singleCategory[0].Category.name} />
 }

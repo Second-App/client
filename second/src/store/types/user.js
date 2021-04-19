@@ -5,6 +5,13 @@ export const SET_LOGGED_USER = (payload) => {
   }
 }
 
+export const GET_PROFILE_BY_ID = (payload) => {
+  return {
+    type: "getProfile/user",
+    payload
+  }
+}
+
 export const REMOVE_LOGGED_USER = (payload) => {
   return {
     type: 'remove/loggedUser',

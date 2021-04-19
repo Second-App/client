@@ -1,7 +1,7 @@
 import { fetchCategories, getOneCategory } from './categories'
-import { fetchProducts, getOneProduct, addProduct } from './products'
+import { fetchProducts, getOneProduct, addProduct, deleteProductById } from './products'
 import { fetchTypes, getOneType } from './types'
-import { userLogin, userRegister } from './users'
+import { userLogin, userRegister, getProfileById } from './users'
 
 export {
   fetchCategories,
@@ -12,5 +12,7 @@ export {
   getOneType,
   userLogin,
   userRegister,
-  addProduct
+  addProduct,
+  getProfileById,
+  deleteProductById
 }

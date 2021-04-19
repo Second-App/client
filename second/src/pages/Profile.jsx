@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProfileById } from '../store/actions'
+import { Loading } from '../components'
 
 export default function Profile() {
   const favourites = ['1', '2', '3', '4', 5, 6, 7, 8]
+  const id = localStorage.id
+  const dispatch = useDispatch()
+  const { userDetails } = useSelector((state) => state.userReducer)
+
+  useEffect(() => {
+    dispatch(getProfileById(id))
+  }, [])
+
+  if (!userDetails) return <Loading />
 
   return (
     <div className="box mt-5">
@@ -10,14 +22,12 @@ export default function Profile() {
           <figure className="image is-128x128">
             <img
               className="is-rounded"
-              src="https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg"
+              src={userDetails.imageUrl}
               alt="Placeholder"
             />
           </figure>
-            <h1 className="title is-4">John Smith</h1>
-          <button className="button is-light is-rounded">
-            Edit Profile
-          </button>
+          <h1 className="title is-4">{userDetails.name}</h1>
+          <button className="button is-light is-rounded">Edit Profile</button>
         </div>
         <div className="column is-flex is-6 mt-6 is-flex-direction-column">
           <div className="columns">
@@ -27,7 +37,10 @@ export default function Profile() {
             {favourites.map((e, i) => (
               <div key={i} className="column is-3">
                 <figure className="image is-128x128">
-                  <img src="https://bulma.io/images/placeholders/256x256.png" alt="Favourites"/>
+                  <img
+                    src="https://bulma.io/images/placeholders/256x256.png"
+                    alt="Favourites"
+                  />
                 </figure>
               </div>
             ))}

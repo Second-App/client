@@ -1,4 +1,5 @@
 import axios from '../../axios'
+import { toast } from 'react-toastify'
 import {
   SET_PRODUCTS,
   SET_ONE_PRODUCT,
@@ -7,7 +8,7 @@ import {
   SET_LOADING,
   SET_ERROR,
 } from '../types'
-import {getOneType} from './index'
+import { getOneType, getOneCategory } from './index'
 
 export function fetchProducts() {
   return async (dispatch) => {
@@ -35,23 +36,38 @@ export function getOneProduct(id) {
   }
 }
 
-export function addProduct(payload) {
+export function addProduct(payload, closeModal, toast, clearAllInput) {
   console.log('masuk gan')
   return async (dispatch, getState) => {
     try {
-      const {data} = await axios({
+      const { data } = await axios({
         url: '/products',
-        headers: {access_token: localStorage.access_token},
+        headers: { access_token: localStorage.access_token },
         data: payload,
-        method: "POST"
+        method: 'POST',
       })
       await dispatch(ADD_PRODUCT(data))
-      // const newProducts = getState().productsReducer.productsReducer
-      // dispatch(SET_PRODUCTS(newProducts))
-      getOneType(data.TypeId)
+      closeModal()
+      await getOneType(data.TypeId)
+      await getOneCategory(data.CategoryId)
+      clearAllInput()
+      toast.success('successfully added')
+    } catch (err) {
+      dispatch(SET_ERROR(err))
+    }
+  }
+}
+
+export function deleteProductById(id) {
+  return async (dispatch) => {
+    try {
+      await axios.delete('/products/' + id, {
+        headers: { access_token: localStorage.access_token },
+      })
+      await dispatch(REMOVE_PRODUCT(id))
+      toast.success('product deleted')
     } catch (err) {
       console.log(err)
-      dispatch(SET_ERROR(err))
     }
   }
 }
