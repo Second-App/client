@@ -4,14 +4,14 @@ import { deleteProductConfirmation } from '../helpers'
 import { deleteProductById, addToWishlist } from '../store/actions'
 
 export default function ProductCard({ data }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDeleteProduct = () => {
-    dispatch(deleteProductById(data.id))
-  }
+    dispatch(deleteProductById(data.id));
+  };
   const handleAddToWishlist = (data) => {
-    dispatch(addToWishlist(data))
-  }
+    dispatch(addToWishlist(data));
+  };
 
   const [productType, setproductType] = useState('Full-Payment')
   
@@ -147,5 +147,5 @@ export default function ProductCard({ data }) {
           )}
       </div>
     </div>
-  )
+  );
 }
