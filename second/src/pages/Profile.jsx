@@ -21,7 +21,7 @@ export default function Profile() {
   }
 
   if (!userDetails) return <Loading />
-  // console.log(data)
+  
   return (
     <div className="box mt-5">
       <div className="columns is-6">
