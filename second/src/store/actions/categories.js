@@ -21,7 +21,6 @@ export function getOneCategory(id) {
     return async (dispatch) => {
         try {
             const { data } = await axios.get('/categories/' + id);
-
             dispatch(SET_ONE_CATEGORY(data));
             dispatch(SET_LOADING(false));
         } catch (err) {

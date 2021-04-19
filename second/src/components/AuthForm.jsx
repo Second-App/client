@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { ToastContainer, toast } from 'react-toastify'
 import { userLogin, userRegister } from '../store/actions'
 import { REMOVE_LOGGED_USER } from '../store/types'
+import { logoutConfirmation, errorMessages } from '../helpers'
 
 Modal.setAppElement('#root')
 
@@ -84,7 +85,7 @@ export default function AuthForm({ isEdit }) {
     if (!input.password) errors.push('password is required')
 
     if (errors.length) return toast.warn(errorMessages(errors))
-    dispatch(userRegister(input, closeModal, openModal))
+    dispatch(userRegister(input, closeModal, openModal, toast))
   }
 
   const handleLogin = (e) => {
@@ -100,22 +101,14 @@ export default function AuthForm({ isEdit }) {
       email: input.email,
       password: input.password,
     }
-    dispatch(userLogin(payload, closeModal, setIsLogin))
+    dispatch(userLogin(payload, closeModal, setIsLogin, toast))
   }
-
-  const errorMessages = (errors) => (
-    <ul>
-      {' '}
-      {errors.map((err) => (
-        <li>{err}</li>
-      ))}{' '}
-    </ul>
-  )
 
   return (
     <>
+      <ToastContainer position="top-center" limit={1} autoClose={2000} />
       {isLogin ? (
-        <button className="button is-primary" onClick={handleLogout}>
+        <button className="button is-primary" onClick={() => logoutConfirmation(handleLogout)}>
           Logout
           {console.log(isLogin)}
         </button>
@@ -145,7 +138,6 @@ export default function AuthForm({ isEdit }) {
           contentLabel="Example Modal"
           overlayClassName="Overlay"
         >
-          <ToastContainer position="top-center" limit={1} />
           <div className="title is-4 ml-2">Register</div>
           <div className="field">
             <p class="control has-icons-left">
@@ -218,7 +210,7 @@ export default function AuthForm({ isEdit }) {
           contentLabel="Example Modal"
           overlayClassName="Overlay"
         >
-          <ToastContainer position="top-center" limit={1} />
+          {/* <ToastContainer position="top-center" limit={1} /> */}
           <div className="title is-4 ml-2">Login</div>
           <div className="field">
             <p class="control has-icons-left has-icons-right">

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Home, Profile, Category, ProductDetail, Chat, Community, Type, Auction } from './pages/index.js';
 
 import { Navbar, UpperFooter, Footer } from './components/index.js';
