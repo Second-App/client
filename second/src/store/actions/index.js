@@ -8,7 +8,7 @@ import {
 import { fetchTypes, getOneType } from './types';
 import { userLogin, userRegister, getProfileById } from './users';
 import { fetchWishlist, addToWishlist, deleteWishlist } from './wishlists';
-import { fetchChatsUsers, fetchChatDetail } from './chats';
+import { fetchChatsUsers, fetchChatDetail, sendMessage } from './chats';
 
 export {
   fetchCategories,
@@ -27,4 +27,5 @@ export {
   deleteWishlist,
   fetchChatsUsers,
   fetchChatDetail,
+  sendMessage,
 };
