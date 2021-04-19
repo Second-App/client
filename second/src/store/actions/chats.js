@@ -45,3 +45,26 @@ export function fetchChatDetail(targetId) {
     }
   };
 }
+
+export function sendMessage(payload) {
+  return async (dispatch) => {
+    try {
+      await axios({
+        url: '/chats',
+        method: 'POST',
+        headers: {
+          access_token: localStorage.access_token,
+        },
+        data: {
+          ReceiverId: payload.ReceiverId,
+          message: payload.message,
+        },
+      });
+      await fetchChatsUsers();
+      await fetchChatDetail(payload.SenderId);
+    } catch (err) {
+      console.log(err);
+      dispatch(SET_ERROR(err));
+    }
+  };
+}
