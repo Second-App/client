@@ -43,7 +43,7 @@ export default function ProductCard({ data }) {
       }}
     >
       <div className='card column' style={{}}>
-        <span class="tag is-small is-link" style={{
+        <span className="tag is-small is-link" style={{
           marginLeft: '27px',
           marginBottom: '3px'
         }}>
@@ -114,31 +114,31 @@ export default function ProductCard({ data }) {
             </div>
         }
         {+data?.UserId === +localStorage.id ? (
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item" onClick={() => handleAddToWishlist(data) } >
+        <footer className="card-footer">
+          <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
             <span className="icon is-small">
               <i className="fas fa-heart"></i>
             </span>
           </a>
-          <a href="#" class="card-footer-item">
+          <a href="#" className="card-footer-item">
             <span className="icon is-small">
               <i className="fas fa-cart-arrow-down"></i>
             </span>
           </a>
-          <a href="#" class="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
+          <a href="#" className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
             <span className="icon is-small">
               <i className="fas fa-cart-arrow-down"></i>
             </span>
           </a>
         </footer>
         ) : (
-          <footer class="card-footer">
-            <a href="#" class="card-footer-item" onClick={() => handleAddToWishlist(data) } >
+          <footer className="card-footer">
+            <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
               <span className="icon is-small">
                 <i className="fas fa-heart"></i>
               </span>
             </a>
-            <a href="#" class="card-footer-item">
+            <a href="#" className="card-footer-item">
               <span className="icon is-small">
                 <i className="fas fa-cart-arrow-down"></i>
               </span>

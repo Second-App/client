@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchCategories, fetchProducts } from '../store/actions'
-import { Loading } from '../components'
+import { Loading, ProductList } from '../components'
 
 export default function Home() {
   const { categories, loading, error } = useSelector(
@@ -18,21 +18,24 @@ export default function Home() {
   if(error) return <div>error</div>
   if(loading || !categories.length) return <Loading />
 
-  console.log(categories,'ini categories')
-
   const fullPayment = []
+  const auction = []
 
-  // categories.forEach((cat, i) => {
-  //   const output = []
-  //   let index = Math.floor(Math.random() * cat.Products.length)
-  //   while (cat.Products[index].TypeId === 2) {
-  //     index = 
-      // output.push(cat.Products[index])
-  //     fullPayment.push(cat.Products[index])
-  //   }
-  // })
-
-  // console.log(fullPayment,'ini full payment<<<<<<<<<<<<')
+  categories.forEach((cat, i) => {
+    let index = Math.floor(Math.random() * cat.Products.length)
+    while (+cat.Products[index].TypeId === 2 || +cat.Products[index].TypeId === 3) {
+      index = Math.floor(Math.random() * cat.Products.length)
+    }
+    
+    if (i < 8) fullPayment.push(cat.Products[index])
+  })
+  categories.forEach((cat, i) => {
+    let index = Math.floor(Math.random() * cat.Products.length)
+    while (+cat.Products[index].TypeId === 1 || +cat.Products[index].TypeId === 3) {
+      index = Math.floor(Math.random() * cat.Products.length)
+    }
+    if (i < 8) auction.push(cat.Products[index])
+  })
 
   return (
     <>
@@ -168,28 +171,7 @@ export default function Home() {
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
-                {categories.map((e, i) => (
-                  <div key={e.id} className="column is-one-fifth">
-                    <img
-                      className="image is-48x48"
-                      src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg"
-                      alt="banner"
-                      style={{
-                        borderRadius: '20px',
-                        boxShadow: '0px 0px 7px #FF8D2D',
-                        height: '250px',
-                        width: '250px',
-                      }}
-                    />
-
-                    <p
-                      className="subtitle"
-                      style={{ textAlign: 'left', marginTop: '15px' }}
-                    >
-                      henlo
-                    </p>
-                  </div>
-                ))}
+                <ProductList  data={fullPayment}/>
               </div>
             </div>
           </div>
@@ -242,28 +224,7 @@ export default function Home() {
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline">
-                {categories.map((e, i) => (
-                  <div key={e.id} className="column is-one-fifth">
-                    <img
-                      className="image"
-                      src="https://silverandgold.s3-ap-southeast-1.amazonaws.com/4.jpeg"
-                      alt="banner"
-                      style={{
-                        borderRadius: '20px',
-                        boxShadow: '0px 0px 7px #FF8D2D',
-                        height: '250px',
-                        width: '250px',
-                      }}
-                    />
-
-                    <p
-                      className="subtitle"
-                      style={{ textAlign: 'left', marginTop: '15px' }}
-                    >
-                      henlo
-                    </p>
-                  </div>
-                ))}
+              <ProductList  data={auction}/>
               </div>
             </div>
           </div>
