@@ -112,31 +112,31 @@ export default function AuthForm({ isEdit }) {
         <>
           <Link to='/chat'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
-              <i class="fas fa-envelope"></i>
+              <i className="fas fa-envelope"></i>
           </button>
           </Link>
 
           <Link to='/notification'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
-              <i class="fas fa-bell"></i>
+              <i className="fas fa-bell"></i>
           </button>
           </Link>
 
           <Link to='/wishlist'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
-              <i class="fas fa-heart"></i>
+              <i className="fas fa-heart"></i>
           </button>
           </Link>
 
           <Link to='/profile'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
-              <i class="fas fa-user-circle"></i>
+              <i className="fas fa-user-circle"></i>
           </button>
           </Link>
 
           <Link to='/community'>
           <button className="button" style={{marginRight: "35px", boxShadow: '3px 4px 5px #AA89D2'}}>
-              <i class="fas fa-users"></i>
+              <i className="fas fa-users"></i>
           </button>
           </Link>
 

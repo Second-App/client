@@ -23,6 +23,10 @@ export default function ProductDetail() {
   window.scrollTo(0, 0)
   }, [])
   
+  useEffect(() => {
+    //untuk get highest bidder dan juga get current bid
+  }, [])
+
   const [productType, setproductType] = useState('Full-Payment')
   
   useEffect(() => {
@@ -52,7 +56,7 @@ export default function ProductDetail() {
             <img src={singleProduct.imageUrl} alt="product"
               style={{
                 objectFit: 'cover',
-                boxShadow: '7px 10px 1px #AA89D2',
+                boxShadow: '0px 0px 4px #AA89D2',
               }}
             />
           </figure>
@@ -73,7 +77,12 @@ export default function ProductDetail() {
             <div className='subtitle'
               style={{marginTop: '10px',marginBottom:'10px'}}
             >
-              Rp. {Number(singleProduct.price).toLocaleString('id')},-
+              {
+                singleProduct.TypeId === 2 ? '' :
+                <>
+                  Rp. {Number(singleProduct.price).toLocaleString('id')},-
+                </>
+              }
             </div>
             <div className='subtitle' style={{fontSize:'17px'}}>
               {singleProduct.condition} / 5 <i className="far fa-star"></i>
@@ -81,7 +90,7 @@ export default function ProductDetail() {
             <div className='subtitle'>
               {singleProduct.location}
             </div>
-            <div className="mt-4">
+            <div className="">
               <h1 className="title is-4">Description</h1>
             </div>
             <div className="content mt-4">{singleProduct.description}</div>
@@ -96,6 +105,9 @@ export default function ProductDetail() {
                   className="button"
                   style={{marginLeft:'10px'}}
                 >
+                  <span style={{marginRight:'5px'}}>
+                    <i class="fas fa-comment-dots"></i>
+                  </span>
                   Chat The Seller
                 </button>
               </div>
@@ -104,30 +116,44 @@ export default function ProductDetail() {
                 {
                   singleProduct.TypeId === 2 ?
                     <div>
-                      <div className='box'>
+                      <div className='box'
+                        style={{
+                          border: '2px solid #FF8D2D'
+                        }}
+                      >
                         <div>
                           Current Bid :
                         </div>
                         <div>
                           Highest Bidder Id :
                         </div>
-                        <div className='input'>
-                          Bid
+                        <label className="label"
+                          style={{marginTop: '20px'}}
+                        >
+                          Your Bid
+                        </label>
+                        <div className="control">
+                          <input className="input" type="number" placeholder="Input Your Bid Here"/>
                         </div>
+                        <footer className="card-footer"
+                          style={{marginTop: '15px'}}
+                        >
+                          <button
+                            className="button"
+                          >
+                            Bid
+                          </button>
+                          <button
+                            className="button"
+                            style={{marginLeft:'10px'}}
+                          >
+                            <span style={{marginRight:'5px'}}>
+                              <i class="fas fa-comment-dots"></i>
+                            </span>
+                              Chat The Seller
+                          </button>
+                        </footer>
                       </div>
-                      <footer class="card-footer">
-                        <button
-                          className="button"
-                        >
-                          Bid
-                        </button>
-                        <button
-                          className="button"
-                          style={{marginLeft:'10px'}}
-                        >
-                            Chat The Seller
-                        </button>
-                      </footer>
                     </div>
                     :
                   <footer class="card-footer">
@@ -140,7 +166,10 @@ export default function ProductDetail() {
                       <button
                           className="button"
                           style={{marginLeft:'10px'}}
-                      >
+                        >
+                          <span style={{marginRight:'5px'}}>
+                            <i class="fas fa-comment-dots"></i>
+                          </span>
                           Chat The Owner
                       </button>
                     </div>

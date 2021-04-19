@@ -44,7 +44,10 @@ export default function ProductCard({ data }) {
         alignContent: 'center'
       }}
     >
-      <div className='card column' style={{}}>
+      
+      <div className='card column' style={{
+        border: '1px solid #7300FC'  
+      }}>
         <span className="tag is-small is-link" style={{
           marginLeft: '17px',
           marginBottom: '3px'
