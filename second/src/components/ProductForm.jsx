@@ -295,14 +295,19 @@ export default function ProductForm() {
               </div>
             </div>
 
-            <div className="file is-info has-name">
-              <label className="file-label">
-                <input className="file-input" type="file" name="imageUrl" />
-                <span className="file-cta">
-                  <span className="file-icon">
-                    <i className="fas fa-upload"></i>
+            <div id="file-js-example" class="file has-name">
+              <label class="file-label">
+                <input class="file-input" type="file" name="imageUrl"/>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
                   </span>
-                  <span className="file-label">Choose a file…</span>
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+                <span class="file-name">
+                  No file uploaded
                 </span>
               </label>
             </div>
@@ -310,7 +315,7 @@ export default function ProductForm() {
             <div className="field is-grouped">
               <div className="control">
                 <button
-                  className="button is-link is-medium"
+                  className="button is-link is-normal"
                   type="submit"
                   onClick={handleSubmit}
                 >
@@ -319,7 +324,7 @@ export default function ProductForm() {
               </div>
               <div className="control">
                 <button
-                  className="button is-light is-medium"
+                  className="button is-light is-normal"
                   onClick={closeModal}
                 >
                   Cancel
