@@ -37,7 +37,6 @@ export function getOneProduct(id) {
 }
 
 export function addProduct(payload, closeModal, toast, clearAllInput) {
-  console.log('masuk gan');
   return async (dispatch, getState) => {
     try {
       const { data } = await axios({
