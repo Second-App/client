@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { editProfile, getProfileById } from '../store/actions'
@@ -20,13 +20,16 @@ Modal.setAppElement('#root')
 
 export default function UserEditForm({ data, openModal, modal, setModal }) {
   const dispatch = useDispatch()
-  const [input, setInput] = useState({
-    name: data?.name,
-    email: data?.email,
-    ktpURL: '',
-    imageUrl: data?.imageUrl,
-    address: ''
-  })
+  const [input, setInput] = useState({})
+  useEffect(() => {
+    setInput({
+      name: data.name,
+      email: data.email,
+      ktpURL: '',
+      imageUrl: data.imageUrl,
+      address: ''
+    })
+  }, [data])
   // console.log(data, "ini ada", input, "<< ini input")
   const handleInput = (e) => {
     const { name, value } = e.target
@@ -100,7 +103,7 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
                 placeholder="KTP URL"
               />
               <span className="icon is-small is-left">
-                <i className="far fa-star"></i>
+                <i className="fas fa-id-card"></i>
               </span>
             </p>
           </div>
@@ -136,7 +139,7 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
                 placeholder="Address"
               />
               <span className="icon is-small is-left">
-                <i className="far fa-star"></i>
+                <i className="fas fa-house-user"></i>
               </span>
             </p>
           </div>

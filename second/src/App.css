@@ -108,3 +108,30 @@
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 }
+
+
+.image-container {
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.image-container:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    transition: 0.5s ease;
+    opacity: 0;
+    top: 0;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
