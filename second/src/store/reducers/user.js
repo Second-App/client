@@ -17,7 +17,7 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_LOGGED_USER().type:
       return { ...state, currentUser: payload, isLogin: true}
-
+    
     case REMOVE_LOGGED_USER().type:
       return {...state, currentUser: payload, isLogin: false}
     

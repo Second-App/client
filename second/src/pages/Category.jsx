@@ -20,9 +20,7 @@ export default function Category() {
     dispatch(fetchProducts())
   }, [id, products.length])
 
-  useEffect(() => {
-  window.scrollTo(0, 0)
-  }, [])
+  
   
   if (loading || !singleCategory.length) return <Loading />
   if (error)  return <div>error</div>
