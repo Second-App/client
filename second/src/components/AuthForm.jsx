@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { userLogin, userRegister } from '../store/actions'
 import { REMOVE_LOGGED_USER } from '../store/types'
 import { logoutConfirmation, errorMessages } from '../helpers'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 Modal.setAppElement('#root')
 
@@ -22,6 +22,7 @@ const customStyles = {
 }
 
 export default function AuthForm({ isEdit }) {
+  const history = useHistory()
   const [authForm, setAuthForm] = useState(false)
   const [isLogin, setIsLogin] = useState(
     localStorage.access_token ? true : false
@@ -57,11 +58,12 @@ export default function AuthForm({ isEdit }) {
     setIsLogin(false)
     localStorage.clear()
     dispatch(REMOVE_LOGGED_USER())
+    history.push('/')
   }
 
   const handleInput = (e) => {
     let { name, value } = e.target
-    console.log(value)
+    // console.log(value)
     setInput({
       ...input,
       [name]: value,

@@ -38,7 +38,7 @@ export function getProfileById(id) {
       const { data } = await axios.get('/users/' + id, {
         headers: {access_token: localStorage.access_token}
       })
-      console.log(data)
+      // console.log(data)
       await dispatch(GET_PROFILE_BY_ID(data))
     } catch (err) {
       console.log(err)

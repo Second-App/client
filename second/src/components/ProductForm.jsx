@@ -120,7 +120,7 @@ export default function ProductForm() {
 
   const handleInput = (e) => {
     let { name, value } = e.target
-    console.log(value)
+    // console.log(value)
     setInput({
       ...input,
       [name]: value,
@@ -143,7 +143,19 @@ export default function ProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addProduct(input, closeModal, toast, clearAllInput))
+    let isError
+    Object.values(input).forEach((value) => {
+      if (value === '' || !value) {
+        isError = true
+      } else {
+        isError = false
+      }
+    })
+    if (isError) {
+      toast.error('All field must be filled!')
+    } else {
+      dispatch(addProduct(input, closeModal, toast, clearAllInput))
+    }
   }
 
   return (
@@ -164,7 +176,7 @@ export default function ProductForm() {
             style={customStyles}
             contentLabel="Example Modal"
             overlayClassName="Overlay"
-          >
+            >
             <p className="title is-4">Add Product</p>
             <div className="field is-horizontal">
               <div className="field-body">

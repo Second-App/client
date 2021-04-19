@@ -11,3 +11,4 @@ export { default as UpperFooter } from './UpperFooter.jsx';
 export { default as ImageCard} from './ImageCard'
 export { default as PanelContent} from './PanelContent'
 export { default as UserEditForm} from './UserEditForm'
+export { default as EditProductFrom} from './EditProductForm'

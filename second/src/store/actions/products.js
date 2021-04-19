@@ -6,9 +6,10 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   SET_LOADING,
-  SET_ERROR,
+  SET_ERROR
 } from '../types';
 import { getOneType, getOneCategory } from './index';
+import { getProfileById } from './users';
 
 export function fetchProducts() {
   return async (dispatch) => {
@@ -57,13 +58,32 @@ export function addProduct(payload, closeModal, toast, clearAllInput) {
   };
 }
 
+export function editProduct(payload, id) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios({
+        url: `/products/${Number(id)}`,
+        method: 'put',
+        headers: {access_token: localStorage.access_token},
+        data: payload
+      })
+      console.log(payload, id, '<<ini di action')
+    } catch (err) {
+      
+    }
+  }
+}
+
 export function deleteProductById(id) {
   return async (dispatch) => {
     try {
-      await axios.delete('/products/' + id, {
+      console.log('masuk action')
+      const response = await axios.delete('/products/' + id, {
         headers: { access_token: localStorage.access_token },
       });
+      console.log(response, "<<ini response dari action")
       await dispatch(REMOVE_PRODUCT(id));
+      await dispatch(getProfileById(+localStorage.id))
       await dispatch(fetchProducts());
       toast.success('product deleted');
     } catch (err) {

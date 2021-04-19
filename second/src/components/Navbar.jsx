@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductForm, AuthForm } from './index'
 import { fetchTypes } from '../store/actions'
 import { Loading } from './index'
 
 export default function Navbar({ setSearch }) {
+  const history = useHistory()
   const dispatch = useDispatch()
   const {types, loading, error} = useSelector(state => state.transactionTypesReducer)
   
