@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct } from '../store/actions';
+import { getOneProduct, addToWishlist } from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
 import { sendMessage, fetchChatDetail } from '../store/actions';
+import { ToastContainer, toast } from 'react-toastify'
 
 export default function ProductDetail() {
   const history = useHistory();
 
   const { id } = useParams();
   const dispatch = useDispatch();
+
+  const handleAddToWishlist = (data) => {
+  dispatch(addToWishlist(data));
+  toast.success(`${data.name} added to wishlist`)
+  };
+  
   const {
     singleProduct,
     loading: productsLoading,
@@ -94,9 +101,26 @@ export default function ProductDetail() {
         <div className="column">
           <div className="container is-flex is-flex-direction-column is-justify-content-space-between">
             <div className="title is-2">{singleProduct.name}</div>
-            <div>
-              <span className="tag is-small is-link" style={{}}>
+            <div className='level'
+              style={{
+                marginBottom: '0px',
+                marginTop: '0px'
+              }}
+            >
+              <span className="tag is-small is-link level-left" style={{}}>
                 <p style={{ textAlign: 'left' }}>{productType}</p>
+              </span>
+              <span className='level-right'>
+                <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(singleProduct) } >
+                  <span className="icon is-small">
+                    <i className="fas fa-heart"></i>
+                  </span>
+                </a>
+                <a href="#" className="card-footer-item">
+                  <span className="icon is-small">
+                    <i className="fas fa-cart-arrow-down"></i>
+                  </span>
+                </a>
               </span>
             </div>
             <div
