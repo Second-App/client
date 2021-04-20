@@ -1,27 +1,27 @@
 export const SET_PRODUCTS = (payload) => {
   return {
     type: 'setproducts/setproducts',
-    payload
-  }
-}
+    payload,
+  };
+};
 
-export const SET_ONE_PRODUCT  = (payload) => {
+export const SET_ONE_PRODUCT = (payload) => {
   return {
     type: 'setOneProduct/setOneProduct',
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const ADD_PRODUCT = (payload) => {
   return {
     type: 'addProduct/product',
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const REMOVE_PRODUCT = (payload) => {
   return {
     type: 'removeProduct/removeProduct',
-    payload
-  }
-}
+    payload,
+  };
+};
