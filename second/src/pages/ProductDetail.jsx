@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { SocketContext } from '../socket.io/socket.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getOneProduct, addToWishlist, fetchCommunity } from '../store/actions';
@@ -9,9 +10,12 @@ import {
   fetchChatDetail,
   fetchChatsUsers,
 } from '../store/actions';
+import { ToastContainer, toast } from 'react-toastify';
+import { updateAuction } from '../store/actions/products';
 import { toast } from 'react-toastify';
 
 export default function ProductDetail() {
+  const socket = useContext(SocketContext);
   const history = useHistory();
 
   const { id } = useParams();
@@ -70,8 +74,23 @@ export default function ProductDetail() {
     history.push('/chat');
   };
 
+  const handleOnBidAuction = async (event) => {
+    event.preventDefault();
+    const currentBid = Number(event.target.bidInput.value);
+    await dispatch(
+      updateAuction({
+        id: singleProduct.id,
+        currentBid,
+        currentUserBidName: localStorage.name,
+      })
+    );
+    event.target.bidInput.value = '';
+    await socket.emit('updateAuction', singleProduct.id);
+  };
+
   useEffect(() => {
     dispatch(getOneProduct(id));
+    socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
   }, [id]);
 
   useEffect(() => {
@@ -141,14 +160,15 @@ export default function ProductDetail() {
                     <i className="fas fa-heart"></i>
                   </span>
                 </a>
-                {
-                  singleProduct.TypeId === 3 ? '' :
+                {singleProduct.TypeId === 3 ? (
+                  ''
+                ) : (
                   <a href="#" className="card-footer-item">
                     <span className="icon is-small">
                       <i className="fas fa-cart-arrow-down"></i>
                     </span>
                   </a>
-                }
+                )}
               </span>
             </div>
             <div
@@ -197,17 +217,25 @@ export default function ProductDetail() {
                         border: '2px solid #FF8D2D',
                       }}
                     >
-                      <div>Current Bid :</div>
-                      <div>Highest Bidder Id :</div>
+                      <div>Current Bid : {singleProduct.currentBid}</div>
+                      <div>
+                        Highest Bidder Name :{' '}
+                        {singleProduct.currentUserBidName
+                          ? singleProduct.currentUserBidName
+                          : 'No one has given a bid on this product. Be the first to Bid!'}
+                      </div>
                       <label className="label" style={{ marginTop: '20px' }}>
                         Your Bid
                       </label>
                       <div className="control">
-                        <input
-                          className="input"
-                          type="number"
-                          placeholder="Input Your Bid Here"
-                        />
+                        <form onSubmit={(event) => handleOnBidAuction(event)}>
+                          <input
+                            className="input"
+                            type="number"
+                            name="bidInput"
+                            placeholder="Input Your Bid Here"
+                          />
+                        </form>
                       </div>
                       <footer
                         className="card-footer"
