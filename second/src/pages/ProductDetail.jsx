@@ -25,6 +25,10 @@ export default function ProductDetail() {
 
   const { tokenMidtrans } = useSelector((state) => state.productsReducer);
 
+  const [win, setWin] = useState(false);
+  const [foundWinner, setFoundWinner] = useState(false);
+  const [winnerName, setWinnerName] = useState('');
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -132,7 +136,10 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(getOneProduct(id));
     socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
-  }, [id]);
+    socket.on('getAuctionWinner', () => {
+      setWin(true);
+    });
+  }, [id, win]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -263,42 +270,63 @@ export default function ProductDetail() {
                         border: '2px solid #FF8D2D',
                       }}
                     >
-                      <div>Current Bid : {singleProduct.currentBid}</div>
-                      <div>
-                        Highest Bidder Name :{' '}
-                        {singleProduct.currentUserBidName
-                          ? singleProduct.currentUserBidName
-                          : 'No one has given a bid on this product. Be the first to Bid!'}
-                      </div>
-                      <label className="label" style={{ marginTop: '20px' }}>
-                        Your Bid
-                      </label>
-                      <div className="control">
-                        <form onSubmit={(event) => handleOnBidAuction(event)}>
-                          <input
-                            className="input"
-                            type="number"
-                            name="bidInput"
-                            placeholder="Input Your Bid Here"
-                          />
-                        </form>
-                      </div>
-                      <footer
-                        className="card-footer"
-                        style={{ marginTop: '15px' }}
-                      >
-                        <button className="button">Bid</button>
-                        <button
-                          className="button"
-                          style={{ marginLeft: '10px' }}
-                          onClick={() => handleOnChatAuction(singleProduct)}
-                        >
-                          <span style={{ marginRight: '5px' }}>
-                            <i class="fas fa-comment-dots"></i>
-                          </span>
-                          Chat The Seller
-                        </button>
-                      </footer>
+                      {!win ? (
+                        <>
+                          <div>Current Bid : {singleProduct.currentBid}</div>
+                          <div>
+                            Highest Bidder Name :{' '}
+                            {singleProduct.currentUserBidName
+                              ? singleProduct.currentUserBidName
+                              : 'No one has given a bid on this product. Be the first to Bid!'}
+                          </div>
+                          <label
+                            className="label"
+                            style={{ marginTop: '20px' }}
+                          >
+                            Your Bid
+                          </label>
+                          <div className="control">
+                            <form
+                              onSubmit={async (event) => {
+                                await handleOnBidAuction(event);
+                                setTimeout(() => {
+                                  socket.emit('auctionWinner');
+                                }, 10000);
+                              }}
+                            >
+                              <input
+                                className="input"
+                                type="number"
+                                name="bidInput"
+                                placeholder="Input Your Bid Here"
+                              />
+                            </form>
+                          </div>
+                          <footer
+                            className="card-footer"
+                            style={{ marginTop: '15px' }}
+                          >
+                            <button className="button">Bid</button>
+                            <button
+                              className="button"
+                              style={{ marginLeft: '10px' }}
+                              onClick={() => handleOnChatAuction(singleProduct)}
+                            >
+                              <span style={{ marginRight: '5px' }}>
+                                <i class="fas fa-comment-dots"></i>
+                              </span>
+                              Chat The Seller
+                            </button>
+                          </footer>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            Winner of this auction is{' '}
+                            {singleProduct.currentUserBidName}
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 ) : (

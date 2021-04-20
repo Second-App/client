@@ -71,12 +71,10 @@ export function editProfile(payload, id) {
         headers: { access_token: localStorage.access_token },
         data: payload,
       });
-      // console.log(data[0])
-      if (data[0] !== 1)
-        dispatch(SET_ERROR(new Error('failed to update data')));
-      dispatch(SET_LOGGED_USER(payload));
+      
+      await dispatch(SET_LOGGED_USER(payload));
     } catch (err) {
-      dispatch(SET_ERROR(err));
+      await dispatch(SET_ERROR(err));
     }
   };
 }

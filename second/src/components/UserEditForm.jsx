@@ -25,9 +25,9 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
     setInput({
       name: data.name,
       email: data.email,
-      ktpURL: '',
+      ktpURL: data.ktpURL ? data.ktpURL : '',
       imageUrl: data.imageUrl,
-      address: ''
+      address: data.address ? data.address : ''
     })
   }, [data])
   // console.log(data, "ini ada", input, "<< ini input")
@@ -39,7 +39,7 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
   const handleSubmit = (e) => {
 
     e.preventDefault()
-    // console.log(input)
+    console.log(input)
     dispatch(editProfile(input, data.id))
     setModal(false)
     dispatch(getProfileById(data.id))
@@ -135,7 +135,7 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
                 onChange={handleInput}
                 name="address"
                 className="input "
-                type="address"
+                type="text"
                 placeholder="Address"
               />
               <span className="icon is-small is-left">
