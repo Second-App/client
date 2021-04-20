@@ -107,8 +107,28 @@ export function updateAuction(payload) {
         },
       });
       await dispatch(getOneProduct(payload.id));
+      toast.success(`Congratulation, you are the highest current bidder`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
-      console.log(err);
+      toast.error(
+        'Minimum amount to bid must be at least Rp. 10.000 higher than the current bid',
+        {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     }
   };
 }

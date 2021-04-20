@@ -13,8 +13,15 @@ export function userLogin(payload, closeModal, setIsLogin, toast) {
       closeModal();
       toast.success('success');
     } catch (err) {
-      console.log(err);
-      dispatch(SET_ERROR(err));
+      toast.error('Invalid Email or Password', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 }
@@ -27,8 +34,15 @@ export function userRegister(payload, closeModal, openLoginModal, toast) {
       openLoginModal('login');
       toast.success('Register success');
     } catch (err) {
-      console.log(err);
-      dispatch(SET_ERROR(err));
+      toast.error(`${err.response.data.msg}`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 }
