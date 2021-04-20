@@ -64,12 +64,14 @@ export function editProduct(payload, id) {
       const { data } = await axios({
         url: `/products/${Number(id)}`,
         method: 'put',
-        headers: { access_token: localStorage.access_token },
-        data: payload,
-      });
-      console.log(payload, id, '<<ini di action');
-    } catch (err) {}
-  };
+        headers: {access_token: localStorage.access_token},
+        data: payload
+      })
+      // console.log(payload, id, '<<ini di action')
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 export function deleteProductById(id) {
@@ -79,7 +81,7 @@ export function deleteProductById(id) {
       const response = await axios.delete('/products/' + id, {
         headers: { access_token: localStorage.access_token },
       });
-      console.log(response, '<<ini response dari action');
+      // console.log(response, "<<ini response dari action")
       await dispatch(REMOVE_PRODUCT(id));
       await dispatch(getProfileById(+localStorage.id));
       await dispatch(fetchProducts());

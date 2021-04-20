@@ -122,7 +122,7 @@
 
 .image-container:hover {
     cursor: pointer;
-    transform: scale(1.02);
+    transform: scale(1.25);
 }
 
 .image-container:hover .overlay {
@@ -140,3 +140,14 @@
     padding: 10px;
     text-align: center;
 }
+
+  .hide{
+    display: none;
+  }
+
+  .iconHover {
+    color: orange;
+  }
+  .iconHover:hover {
+    color: black
+  }

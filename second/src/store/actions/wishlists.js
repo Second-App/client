@@ -45,10 +45,9 @@ export function deleteWishlist(id) {
         }
       })
       
-      if (response.status === 200) dispatch(fetchWishlist())
+      if (response.status === 200) await dispatch(fetchWishlist())
     } catch (error) {
-      
-      dispatch(error)
+      dispatch(SET_ERROR(error))
     }
   }
 }

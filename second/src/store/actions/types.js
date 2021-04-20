@@ -21,6 +21,10 @@ export function getOneType(id) {
         try {
             const { data } = await axios.get('/types/' + id);
             await dispatch(SET_ONE_T_TYPE(data));
+<<<<<<< HEAD
+            // console.log(data, '<<< dataaaa');
+=======
+>>>>>>> 5d6b9dc7681fda8345ad34488db1bf0110857e4e
             await dispatch(SET_LOADING(false));
         } catch (err) {
             console.log(err);
