@@ -137,11 +137,6 @@ export default function ProductCard({ data }) {
                       <i className="fas fa-cart-arrow-down"></i>
                     </span>
                   </a>
-                  <a href="#" className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
-                    <span className="icon is-small">
-                      <i className="fas fa-trash"></i>
-                    </span>
-                  </a>
                   </footer>
                   :
                   <footer className="card-footer">
