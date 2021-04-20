@@ -25,6 +25,7 @@ export default function ImageCard({ data, handleDeleteWishlist, handleDeleteProd
               onClick={() => handleDeleteWishlist(data.id)}
               className="button-icon is-outlined"
               style={{
+                position: 'absolute',
                 top: "5px",
                 right: "5px",
               }}

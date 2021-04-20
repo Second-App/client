@@ -1,19 +1,40 @@
 import React, {useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux'
-import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist, asyncAddToCart, addCommunity } from '../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchWishlist, addToWishlist, deleteWishlist, asyncAddToCart, addCommunity } from '../store/actions'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
+  const [checkInWishlist, setWishlist] = useState(false)
+  const { data: wishlists } = useSelector((state) => state.wishlists)
 
-  const handleDeleteProduct = () => {
-    dispatch(deleteProductById(data.id));
-  };
-  const handleAddToWishlist = (data) => {
-    dispatch(addToWishlist(data));
-    toast.success(`${data.name} added to wishlist`)
+  const checkWishlistData = (product) => {
+    wishlists?.forEach(wishlist => {
+      if (+wishlist.ProductId === +product.id) {
+        
+        setWishlist(!checkInWishlist)
+      }
+    })
+  }
+  useEffect(() => {
+    dispatch(fetchWishlist())
+    checkWishlistData(data)
+  }, [dispatch])
+  
+  const handleWishlist = (data) => {
+    if (!checkInWishlist) {
+      setWishlist(!checkInWishlist)
+      dispatch(addToWishlist(data))
+      toast.success(`${data.name} added to wishlist`)
+    } else {
+      const wishlistData = wishlists.filter((product) => +product.ProductId === +data.id)
+      console.log(wishlistData, "<< masuk ke delete")
+      dispatch(deleteWishlist(wishlistData[0].id))
+      toast.success(`${data.name} deleted from wishlist`)
+    }
+    setWishlist(!checkInWishlist)
+    
   };
 
   const handleAddToCart = () => {
@@ -158,8 +179,12 @@ export default function ProductCard({ data }) {
                   </footer>
                   :
                   <footer className="card-footer">
-                    <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
-                      <span className="icon is-small">
+                    <a className="card-footer-item" onClick={() => handleWishlist(data)} >
+                      <span className="icon is-small"
+                      style={{
+                        color: checkInWishlist ? 'black' : '',
+                      }}
+                      >
                         <i className="fas fa-heart"></i>
                       </span>
                     </a>
@@ -182,8 +207,10 @@ export default function ProductCard({ data }) {
                 </footer>
                   :
                 <footer className="card-footer">
-                  <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
-                    <span className="icon is-small">
+                  <a className="card-footer-item" onClick={() => handleWishlist(data)} >
+                    <span className="icon is-small"style={{
+                      color: checkInWishlist ? 'black' : '',
+                    }}>
                       <i className="fas fa-heart"></i>
                     </span>
                   </a>
