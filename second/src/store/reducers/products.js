@@ -5,11 +5,13 @@ import {
   ADD_PRODUCT,
   SET_ERROR,
   SET_LOADING,
+  SET_TOKEN_MIDTRANS,
 } from '../types';
 
 const initialState = {
   products: [],
   singleProduct: {},
+  tokenMidtrans: '',
   loading: true,
   error: null,
 };
@@ -36,6 +38,9 @@ const productReducer = (state = initialState, { type, payload }) => {
 
     case SET_ERROR().type:
       return { ...state, error: payload };
+
+    case SET_TOKEN_MIDTRANS().type:
+      return { ...state, tokenMidtrans: payload };
 
     default:
       return state;

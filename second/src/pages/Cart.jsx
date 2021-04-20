@@ -1,24 +1,50 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchCart, deleteOneCart } from '../store/actions'
-import { Loading } from '../components'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCart, deleteOneCart, checkoutProduct } from '../store/actions';
+import { Loading } from '../components';
 
 export default function Cart() {
-  const { carts, error, loading } = useSelector((state) => state.cartReducer)
-  const dispatch = useDispatch()
+  const { carts, error, loading } = useSelector((state) => state.cartReducer);
+  const { tokenMidtrans } = useSelector((state) => state.productsReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [])
+    dispatch(fetchCart());
+  }, [tokenMidtrans]);
 
   const handleDeleteCart = (id) => {
-    dispatch(deleteOneCart(id))
-  }
+    dispatch(deleteOneCart(id));
+  };
 
-  if (error) return <div>error</div>
-  if (loading) return <Loading />
+  const snap = (token) => {
+    window.snap.pay(token, {
+      onSuccess: function (result) {
+        console.log('SUCCESS', result);
+        alert('Payment accepted');
+      },
+      onPending: function (result) {
+        console.log('Payment pending', result);
+        alert('Payment pending');
+      },
+      onError: function () {
+        console.log('Payment error');
+      },
+      onClose: function () {
+        /* You may add your own implementation here */
+        // alert("you closed the popup without finishing the payment");
+      },
+    });
+  };
 
-  console.log(carts)
+  const handleCheckout = async (id) => {
+    await dispatch(checkoutProduct(id, snap));
+    console.log(tokenMidtrans);
+    console.log('opening snap popup:');
+    // Open Snap popup with defined callbacks.
+  };
+
+  if (error) return <div>error</div>;
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -39,29 +65,35 @@ export default function Cart() {
                   <strong>Harusnya ini nama penjual?</strong>
                   <br />
                   {cart.Product.description}
+                  <br />
+                  price: {cart.Product.price}
                 </p>
               </div>
               <div className="columns">
-                    <div className="column is-6 mt-2">
-                    <button class="button is-primary is-rounded is-fullwidth is-flex is-justify-content-center">
-                        Checkout
-                      </button>
-                    </div>
-                    <div className="column is-flex is-flex-justify-content-start mt-1">
-                      <a className="level-item" aria-label="retweet" onClick={() => handleDeleteCart(cart.id)}>
-                        <span className="icon is-large">
-                          <i
-                            className="fas fa-lg fa-trash"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
+                <div className="column is-6 mt-2">
+                  <button
+                    class="button is-primary is-rounded is-fullwidth is-flex is-justify-content-center"
+                    onClick={() => handleCheckout(cart.Product.id)}
+                  >
+                    Checkout
+                  </button>
+                </div>
+                <div className="column is-flex is-flex-justify-content-start mt-1">
+                  <a
+                    className="level-item"
+                    aria-label="retweet"
+                    onClick={() => handleDeleteCart(cart.id)}
+                  >
+                    <span className="icon is-large">
+                      <i className="fas fa-lg fa-trash" aria-hidden="true"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       ))}
     </>
-  )
+  );
 }

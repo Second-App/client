@@ -9,7 +9,7 @@ export default function ProductList({
   setCollapsed,
   isCollapsed,
   categories,
-  setProductFilter
+  setProductFilter,
 }) {
   const getDropDown = (setCollapsed, isCollapsed) => {
     return (
