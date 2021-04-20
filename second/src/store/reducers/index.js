@@ -5,6 +5,7 @@ import transactionTypesReducer from './transactionsTypes';
 import wishlistReducer from './wishlist';
 import chatReducer from './chats';
 import cartReducer from './cart'
+import communityReducer from './community'
 
 export {
   categoriesReducer,
@@ -13,5 +14,6 @@ export {
   transactionTypesReducer,
   wishlistReducer,
   chatReducer,
-  cartReducer
+  cartReducer,
+  communityReducer
 };

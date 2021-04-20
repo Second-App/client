@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct, addToWishlist } from '../store/actions';
+import { getOneProduct, addToWishlist, fetchCommunity } from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
 import {
@@ -9,7 +9,7 @@ import {
   fetchChatDetail,
   fetchChatsUsers,
 } from '../store/actions';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export default function ProductDetail() {
   const history = useHistory();
