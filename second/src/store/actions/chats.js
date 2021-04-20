@@ -56,6 +56,7 @@ export function sendMessage(payload) {
           access_token: localStorage.access_token,
         },
         data: {
+          SenderId: payload.SenderId,
           ReceiverId: payload.ReceiverId,
           message: payload.message,
         },
