@@ -96,7 +96,7 @@ export default function Chat({ type }) {
           style={{
             height: '100vh',
             border: '2px solid #7300FC',
-            marginTop: 'px'
+            marginTop: '12px'
           }}
         >
           <div className="columns mt-2"
