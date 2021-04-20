@@ -4,8 +4,12 @@ import { useParams } from 'react-router';
 import { getOneProduct, addToWishlist } from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
-import { sendMessage, fetchChatDetail } from '../store/actions';
-import { ToastContainer, toast } from 'react-toastify'
+import {
+  sendMessage,
+  fetchChatDetail,
+  fetchChatsUsers,
+} from '../store/actions';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ProductDetail() {
   const history = useHistory();
@@ -14,10 +18,10 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
 
   const handleAddToWishlist = (data) => {
-  dispatch(addToWishlist(data));
-  toast.success(`${data.name} added to wishlist`)
+    dispatch(addToWishlist(data));
+    toast.success(`${data.name} added to wishlist`);
   };
-  
+
   const {
     singleProduct,
     loading: productsLoading,
@@ -29,16 +33,31 @@ export default function ProductDetail() {
   const handleOnChatNonAuction = async (singleProduct) => {
     await dispatch(
       sendMessage({
+        SenderId: singleProduct.UserId,
+        ReceiverId: localStorage.id,
+        message: `hello, how can I help?`,
+      })
+    );
+    await dispatch(
+      sendMessage({
         SenderId: localStorage.id,
         ReceiverId: singleProduct.UserId,
         message: `hello, I'm interested with ${singleProduct.name}`,
       })
     );
-    await dispatch(fetchChatDetail(localStorage.SenderId));
+    await dispatch(fetchChatsUsers());
+    await dispatch(fetchChatDetail(singleProduct.UserId));
     history.push('/chat');
   };
 
   const handleOnChatAuction = async (singleProduct) => {
+    await dispatch(
+      sendMessage({
+        SenderId: singleProduct.UserId,
+        ReceiverId: localStorage.id,
+        message: `hello, how can I help?`,
+      })
+    );
     await dispatch(
       sendMessage({
         SenderId: localStorage.id,
@@ -46,7 +65,8 @@ export default function ProductDetail() {
         message: `hello, There's something I want to ask on ${singleProduct.name} auction`,
       })
     );
-    await dispatch(fetchChatDetail(localStorage.SenderId));
+    await dispatch(fetchChatsUsers());
+    await dispatch(fetchChatDetail(singleProduct.UserId));
     history.push('/chat');
   };
 
@@ -101,26 +121,34 @@ export default function ProductDetail() {
         <div className="column">
           <div className="container is-flex is-flex-direction-column is-justify-content-space-between">
             <div className="title is-2">{singleProduct.name}</div>
-            <div className='level'
+            <div
+              className="level"
               style={{
                 marginBottom: '0px',
-                marginTop: '0px'
+                marginTop: '0px',
               }}
             >
               <span className="tag is-small is-link level-left" style={{}}>
                 <p style={{ textAlign: 'left' }}>{productType}</p>
               </span>
-              <span className='level-right'>
-                <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(singleProduct) } >
+              <span className="level-right">
+                <a
+                  href="#"
+                  className="card-footer-item"
+                  onClick={() => handleAddToWishlist(singleProduct)}
+                >
                   <span className="icon is-small">
                     <i className="fas fa-heart"></i>
                   </span>
                 </a>
-                <a href="#" className="card-footer-item">
-                  <span className="icon is-small">
-                    <i className="fas fa-cart-arrow-down"></i>
-                  </span>
-                </a>
+                {
+                  singleProduct.TypeId === 3 ? '' :
+                  <a href="#" className="card-footer-item">
+                    <span className="icon is-small">
+                      <i className="fas fa-cart-arrow-down"></i>
+                    </span>
+                  </a>
+                }
               </span>
             </div>
             <div
@@ -149,7 +177,9 @@ export default function ProductDetail() {
                 <button
                   className="button"
                   style={{ marginLeft: '10px' }}
-                  onClick={() => handleOnChatNonAuction(singleProduct)}
+                  onClick={() => {
+                    handleOnChatNonAuction(singleProduct);
+                  }}
                 >
                   <span style={{ marginRight: '5px' }}>
                     <i class="fas fa-comment-dots"></i>

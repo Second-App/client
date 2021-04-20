@@ -203,6 +203,7 @@ export default function ProductForm() {
                       name="price"
                       className="input "
                       type="number"
+                      min='0'
                       placeholder="Price"
                     />
                     <span className="icon is-small is-left">
@@ -223,6 +224,8 @@ export default function ProductForm() {
                       name="condition"
                       className="input "
                       type="number"
+                      min='1'
+                      max='5'
                       placeholder="Condition"
                     />
                     <span className="icon is-small is-left">

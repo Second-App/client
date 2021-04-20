@@ -1,5 +1,11 @@
 /** @format */
 
+.theChat {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .Overlay {
     position: fixed;
     top: 0;
@@ -108,7 +114,6 @@
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 }
-
 
 .image-container {
     position: relative;
