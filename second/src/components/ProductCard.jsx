@@ -16,7 +16,7 @@ export default function ProductCard({ data }) {
   };
   const checkWishlistData = (product) => {
     wishlists?.forEach(wishlist => {
-      if (+wishlist.UserId === +product.UserId) {
+      if (+wishlist.ProductId === +product.id) {
         
         setWishlist(!checkInWishlist)
       }
