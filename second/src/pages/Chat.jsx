@@ -88,13 +88,15 @@ export default function Chat({ type }) {
         style={{
           paddingTop: '20px',
           paddingBottom: '20px',
-          paddingLeft: '70px'
+          paddingLeft: '20px',
+          paddingRight: '20px'
         }}
       >
         <div className="column is-one-quarter theChat"
           style={{
             height: '100vh',
-            border: '2px solid #7300FC'
+            border: '2px solid #7300FC',
+            marginTop: '12px'
           }}
         >
           <div className="columns mt-2"
@@ -128,51 +130,57 @@ export default function Chat({ type }) {
               })
             : ''}
         </div>
-        <div className="column is-8 chat-box has-background-light ml-5 theChat"
+        <div className="column"
           style={{
-            height: '100vh',
-            border: '2px solid #7300FC'
+            marginTop: '0px'
           }}
         >
-              {fullChatsArray.length
-                ? fullChatsArray.map((chat) => {
-                    return (
-                      <div className="columns p-4 mt-1 mx-1"
-                        style={
-                            Number(chat.SenderId) === Number(localStorage.id)
-                            ? {border: '2px solid #FFB979'}
-                            : {border: '2px solid #AA89D2'}
-                          }
-                      >
-                        <div className="column"
+          <div className="theChat"
+            style={{
+              height: '100vh',
+              border: '2px solid #7300FC'
+            }}
+          >
+                {fullChatsArray.length
+                  ? fullChatsArray.map((chat) => {
+                      return (
+                        <div className="columns p-4 mt-1 mx-1"
+                          style={
+                              Number(chat.SenderId) === Number(localStorage.id)
+                              ? {border: '2px solid #FFB979'}
+                              : {border: '2px solid #AA89D2'}
+                            }
                         >
-                          <div
-                            className={
-                              Number(chat.SenderId) === Number(localStorage.id)
-                                ? 'is-flex is-justify-content-flex-end title is-6'
-                                : 'is-flex is-justify-content-flex-start title is-6'
-                            }
+                          <div className="column"
                           >
-                            <div className="title is-6">{chat.User.name}</div>
-                          </div>
-                          <div
-                            className={
-                              Number(chat.SenderId) === Number(localStorage.id)
-                                ? 'is-flex is-justify-content-flex-end'
-                                : 'is-flex is-justify-content-flex-start'
-                            }
-                          >
-                            <div className="columns content ml-1 mr-1"
-                            
+                            <div
+                              className={
+                                Number(chat.SenderId) === Number(localStorage.id)
+                                  ? 'is-flex is-justify-content-flex-end title is-6'
+                                  : 'is-flex is-justify-content-flex-start title is-6'
+                              }
                             >
-                              {chat.message}
+                              <div className="title is-6">{chat.User.name}</div>
+                            </div>
+                            <div
+                              className={
+                                Number(chat.SenderId) === Number(localStorage.id)
+                                  ? 'is-flex is-justify-content-flex-end'
+                                  : 'is-flex is-justify-content-flex-start'
+                              }
+                            >
+                              <div className="columns content ml-1 mr-1"
+                              
+                              >
+                                {chat.message}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })
-            : ''}
+                      );
+                    })
+              : ''}
+          </div>
           <div className="ml-1 mt-4 pb-2">
             <form
               onSubmit={(event) => {
@@ -188,8 +196,8 @@ export default function Chat({ type }) {
               ></input>
               <input className="button is-primary ml-5" type="submit" value="send"/>
             </form>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   );

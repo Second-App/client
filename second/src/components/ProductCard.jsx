@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist, deleteWishlist,fetchWishlist, asyncAddToCart } from '../store/actions'
+import { deleteProductById, addToWishlist, deleteWishlist,fetchWishlist, asyncAddToCart, addCommunity } from '../store/actions'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -45,6 +45,12 @@ export default function ProductCard({ data }) {
   };
   const handleAddToCart = () => {
     dispatch(asyncAddToCart({
+      ProductId: data.id
+    }))
+  }
+
+  const handleAddToCommunity = () => {
+    dispatch(addCommunity({
       ProductId: data.id
     }))
   }
@@ -138,21 +144,79 @@ export default function ProductCard({ data }) {
                     Rp. {Number(data.price).toLocaleString('id')},-
                   </p>
                   :
-                  <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
-                      <button>
-                        Join Auction
-                      </button>
-
-                  </div>
+                  <>
+                    {
+                      +data?.UserId === +localStorage.id ?
+                        ''
+                        :
+                      <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
+                          <button>
+                            Join Auction
+                          </button>
+                      </div>
+                    }
+                  </>
               }
             </>
             :
-            <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
-              <button className="">
-                  I Need This
-              </button>
-
-            </div>
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                  ''
+                  :
+                <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
+                  <button className="" onClick={handleAddToCommunity}>
+                      I Need This
+                  </button>
+                </div>
+              }
+            </>
+            
+        }
+        {
+          data.TypeId !== 3 ?
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                  <footer className="card-footer">
+                    <p className="tag">
+                      This is your own product
+                    </p>
+                  </footer>
+                  :
+                  <footer className="card-footer">
+                    <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
+                      <span className="icon is-small">
+                        <i className="fas fa-heart"></i>
+                      </span>
+                    </a>
+                    <a className="card-footer-item" onClick={handleAddToCart}>
+                      <span className="icon is-small">
+                        <i className="fas fa-cart-arrow-down"></i>
+                      </span>
+                    </a>
+                  </footer>
+              }
+            </>
+            :
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                <footer className="card-footer">
+                    <p className="tag">
+                      This is your own product
+                    </p>
+                </footer>
+                  :
+                <footer className="card-footer">
+                  <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
+                    <span className="icon is-small">
+                      <i className="fas fa-heart"></i>
+                    </span>
+                  </a>
+                </footer>
+              }
+            </>
         }
         {+data?.UserId === +localStorage.id ? (
         <footer className="card-footer">
