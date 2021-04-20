@@ -25,3 +25,10 @@ export const REMOVE_PRODUCT = (payload) => {
     payload,
   };
 };
+
+export const SET_TOKEN_MIDTRANS = (payload) => {
+  return {
+    type: 'tokenMidtrans/setTokenMidtrans',
+    payload,
+  };
+};

@@ -2,7 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SocketContext } from '../socket.io/socket.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct, addToWishlist, fetchCommunity } from '../store/actions';
+import {
+  getOneProduct,
+  addToWishlist,
+  fetchCommunity,
+  checkoutProduct,
+  asyncAddToCart,
+} from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
 import {
@@ -12,27 +18,21 @@ import {
 } from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateAuction } from '../store/actions/products';
-import { toast } from 'react-toastify';
 
 export default function ProductDetail() {
   const socket = useContext(SocketContext);
   const history = useHistory();
 
+  const { tokenMidtrans } = useSelector((state) => state.productsReducer);
+
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  const handleAddToWishlist = (data) => {
-    dispatch(addToWishlist(data));
-    toast.success(`${data.name} added to wishlist`);
-  };
 
   const {
     singleProduct,
     loading: productsLoading,
     error: productsError,
   } = useSelector((state) => state.productsReducer);
-
-  const handleOnBuy = () => {};
 
   const handleOnChatNonAuction = async (singleProduct) => {
     await dispatch(
@@ -86,6 +86,46 @@ export default function ProductDetail() {
     );
     event.target.bidInput.value = '';
     await socket.emit('updateAuction', singleProduct.id);
+  };
+
+  const snap = (token) => {
+    window.snap.pay(token, {
+      onSuccess: function (result) {
+        console.log('SUCCESS', result);
+        alert('Payment accepted');
+      },
+      onPending: function (result) {
+        console.log('Payment pending', result);
+        alert('Payment pending');
+      },
+      onError: function () {
+        console.log('Payment error');
+      },
+      onClose: function () {
+        /* You may add your own implementation here */
+        // alert("you closed the popup without finishing the payment");
+      },
+    });
+  };
+
+  const handleCheckout = async (id) => {
+    await dispatch(checkoutProduct(id, snap));
+    console.log(tokenMidtrans);
+    console.log('opening snap popup:');
+    // Open Snap popup with defined callbacks.
+  };
+
+  const handleAddToWishlist = (data) => {
+    dispatch(addToWishlist(data));
+    toast.success(`${data.name} added to wishlist`);
+  };
+
+  const handleAddToCart = (payload) => {
+    dispatch(
+      asyncAddToCart({
+        ProductId: payload,
+      })
+    );
   };
 
   useEffect(() => {
@@ -152,7 +192,6 @@ export default function ProductDetail() {
               </span>
               <span className="level-right">
                 <a
-                  href="#"
                   className="card-footer-item"
                   onClick={() => handleAddToWishlist(singleProduct)}
                 >
@@ -163,9 +202,12 @@ export default function ProductDetail() {
                 {singleProduct.TypeId === 3 ? (
                   ''
                 ) : (
-                  <a href="#" className="card-footer-item">
+                  <a className="card-footer-item">
                     <span className="icon is-small">
-                      <i className="fas fa-cart-arrow-down"></i>
+                      <i
+                        className="fas fa-cart-arrow-down"
+                        onClick={() => handleAddToCart(singleProduct.id)}
+                      ></i>
                     </span>
                   </a>
                 )}
@@ -191,8 +233,11 @@ export default function ProductDetail() {
             <div className="content mt-4">{singleProduct.description}</div>
             {singleProduct.TypeId === 1 ? (
               <div className="footer">
-                <button className="button" onClick={handleOnBuy}>
-                  Buy
+                <button
+                  className="button"
+                  onClick={() => handleCheckout(singleProduct.id)}
+                >
+                  Buy Now
                 </button>
                 <button
                   className="button"

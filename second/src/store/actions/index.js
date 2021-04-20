@@ -1,17 +1,18 @@
-import { fetchCategories, getOneCategory } from './categories'
+import { fetchCategories, getOneCategory } from './categories';
 import {
   fetchProducts,
   getOneProduct,
   addProduct,
   editProduct,
   deleteProductById,
-} from './products'
-import { fetchTypes, getOneType } from './types'
-import { userLogin, userRegister, getProfileById, editProfile } from './users'
-import { fetchWishlist, addToWishlist, deleteWishlist } from './wishlists'
-import { fetchChatsUsers, fetchChatDetail, sendMessage } from './chats'
-import { fetchCart, asyncAddToCart, deleteOneCart } from './cart'
-import {fetchCommunity, addCommunity, removeOneCommunity} from './community'
+  checkoutProduct,
+} from './products';
+import { fetchTypes, getOneType } from './types';
+import { userLogin, userRegister, getProfileById, editProfile } from './users';
+import { fetchWishlist, addToWishlist, deleteWishlist } from './wishlists';
+import { fetchChatsUsers, fetchChatDetail, sendMessage } from './chats';
+import { fetchCart, asyncAddToCart, deleteOneCart } from './cart';
+import { fetchCommunity, addCommunity, removeOneCommunity } from './community';
 
 export {
   fetchCategories,
@@ -38,5 +39,6 @@ export {
   deleteOneCart,
   fetchCommunity,
   addCommunity,
-  removeOneCommunity
-}
+  removeOneCommunity,
+  checkoutProduct,
+};

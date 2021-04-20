@@ -7,6 +7,7 @@ import {
   REMOVE_PRODUCT,
   SET_LOADING,
   SET_ERROR,
+  SET_TOKEN_MIDTRANS,
 } from '../types';
 import { getOneType, getOneCategory } from './index';
 import { getProfileById } from './users';
@@ -105,6 +106,22 @@ export function updateAuction(payload) {
         },
       });
       await dispatch(getOneProduct(payload.id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function checkoutProduct(id, snap) {
+  return async (dispatch) => {
+    try {
+      console.log('masuk action checkout Product');
+      const response = await axios.get('/products/checkout/' + id, {
+        headers: { access_token: localStorage.access_token },
+      });
+      // console.log(response.data.token, "<<ini response dari action");
+      await dispatch(SET_TOKEN_MIDTRANS(response.data.token));
+      snap(response.data.token);
     } catch (err) {
       console.log(err);
     }
