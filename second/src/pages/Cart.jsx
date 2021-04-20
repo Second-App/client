@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCart, deleteOneCart, checkoutProduct } from '../store/actions';
 import { Loading } from '../components';
+import { toast } from 'react-toastify';
 
 export default function Cart() {
   const { carts, error, loading } = useSelector((state) => state.cartReducer);
@@ -20,14 +21,14 @@ export default function Cart() {
     window.snap.pay(token, {
       onSuccess: function (result) {
         console.log('SUCCESS', result);
-        alert('Payment accepted');
+        toast.success(`your payment successfully accepted`);
       },
       onPending: function (result) {
         console.log('Payment pending', result);
-        alert('Payment pending');
+        toast.info(`complete your payment..`);
       },
       onError: function () {
-        console.log('Payment error');
+        toast.error(`your payment declined`);
       },
       onClose: function () {
         /* You may add your own implementation here */
