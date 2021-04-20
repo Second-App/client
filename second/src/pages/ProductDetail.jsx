@@ -45,7 +45,8 @@ export default function ProductDetail() {
         message: `hello, I'm interested with ${singleProduct.name}`,
       })
     );
-    await dispatch(fetchChatDetail(localStorage.SenderId));
+    await dispatch(fetchChatsUsers());
+    await dispatch(fetchChatDetail(singleProduct.UserId));
     history.push('/chat');
   };
 
@@ -64,7 +65,8 @@ export default function ProductDetail() {
         message: `hello, There's something I want to ask on ${singleProduct.name} auction`,
       })
     );
-    await dispatch(fetchChatDetail(localStorage.SenderId));
+    await dispatch(fetchChatsUsers());
+    await dispatch(fetchChatDetail(singleProduct.UserId));
     history.push('/chat');
   };
 
@@ -103,7 +105,6 @@ export default function ProductDetail() {
 
   return (
     <div className="box mt-5">
-      {console.log(singleProduct, '<<<<<< PRODUCYEUH')}
       <div className="columns">
         <div className="column">
           <figure className="image is-4by3 mt-4">
