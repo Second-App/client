@@ -6,7 +6,7 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   SET_LOADING,
-  SET_ERROR
+  SET_ERROR,
 } from '../types';
 import { getOneType, getOneCategory } from './index';
 import { getProfileById } from './users';
@@ -64,28 +64,47 @@ export function editProduct(payload, id) {
       const { data } = await axios({
         url: `/products/${Number(id)}`,
         method: 'put',
-        headers: {access_token: localStorage.access_token},
-        data: payload
-      })
-      console.log(payload, id, '<<ini di action')
-    } catch (err) {
-      
-    }
-  }
+        headers: { access_token: localStorage.access_token },
+        data: payload,
+      });
+      console.log(payload, id, '<<ini di action');
+    } catch (err) {}
+  };
 }
 
 export function deleteProductById(id) {
   return async (dispatch) => {
     try {
-      console.log('masuk action')
+      console.log('masuk action');
       const response = await axios.delete('/products/' + id, {
         headers: { access_token: localStorage.access_token },
       });
-      console.log(response, "<<ini response dari action")
+      console.log(response, '<<ini response dari action');
       await dispatch(REMOVE_PRODUCT(id));
-      await dispatch(getProfileById(+localStorage.id))
+      await dispatch(getProfileById(+localStorage.id));
       await dispatch(fetchProducts());
       toast.success('product deleted');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function updateAuction(payload) {
+  return async (dispatch) => {
+    try {
+      await axios({
+        url: `auction/${payload.id}`,
+        method: 'PUT',
+        headers: {
+          access_token: localStorage.access_token,
+        },
+        data: {
+          currentBid: payload.currentBid,
+          currentUserBidName: payload.currentUserBidName,
+        },
+      });
+      await dispatch(getOneProduct(payload.id));
     } catch (err) {
       console.log(err);
     }
