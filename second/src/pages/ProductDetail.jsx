@@ -45,7 +45,6 @@ export default function ProductDetail() {
         message: `hello, I'm interested with ${singleProduct.name}`,
       })
     );
-    await dispatch(fetchChatsUsers());
     await dispatch(fetchChatDetail(localStorage.SenderId));
     history.push('/chat');
   };
@@ -65,7 +64,6 @@ export default function ProductDetail() {
         message: `hello, There's something I want to ask on ${singleProduct.name} auction`,
       })
     );
-    await dispatch(fetchChatsUsers());
     await dispatch(fetchChatDetail(localStorage.SenderId));
     history.push('/chat');
   };
