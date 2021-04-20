@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist, deleteWishlist,fetchWishlist, asyncAddToCart, addCommunity } from '../store/actions'
+import { deleteProductById, addToWishlist, deleteWishlist,fetchWishlist,addCommunity, asyncAddToCart } from '../store/actions'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -185,9 +185,13 @@ export default function ProductCard({ data }) {
                   </footer>
                   :
                   <footer className="card-footer">
-                    <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
-                      <span className="icon is-small">
-                        <i className="fas fa-heart"></i>
+                    <a  className="card-footer-item" onClick={() => handleWishlist(data) } >
+                      <span className="icon is-small iconHover"
+                      style={{
+                        color: checkInWishlist ? 'black' : '',
+                      }}>
+                        <i className={checkInWishlist ? "fas fa-trash" : "fas fa-heart"}
+                        ></i>
                       </span>
                     </a>
                     <a className="card-footer-item" onClick={handleAddToCart}>
@@ -209,40 +213,19 @@ export default function ProductCard({ data }) {
                 </footer>
                   :
                 <footer className="card-footer">
-                  <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
-                    <span className="icon is-small">
-                      <i className="fas fa-heart"></i>
-                    </span>
-                  </a>
+                  <a  className="card-footer-item" onClick={() => handleWishlist(data) } >
+                      <span className="icon is-small iconHover"
+                      style={{
+                        color: checkInWishlist ? 'black' : '',
+                      }}>
+                        <i className={checkInWishlist ? "fas fa-trash" : "fas fa-heart"}
+                        ></i>
+                      </span>
+                    </a>
                 </footer>
               }
             </>
         }
-        {+data?.UserId === +localStorage.id ? (
-        <footer className="card-footer">
-          <a  className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
-            <span className="icon is-small iconHeartEmpty">
-              <i className="fas fa-trash" ></i>
-            </span>
-          </a>
-        </footer>
-        ) : (
-          <footer className="card-footer">
-            <a  className="card-footer-item" onClick={() => handleWishlist(data) } >
-              <span className="icon is-small iconHover" style={{
-                color: checkInWishlist ? 'black' : '',
-              }}>
-                <i className={checkInWishlist ? "fas fa-trash" : "fas fa-heart"}
-                ></i>
-              </span>
-            </a>
-            <a className="card-footer-item" onClick={handleAddToCart}>
-              <span className="icon is-small">
-                <i className="fas fa-cart-arrow-down"></i>
-              </span>
-            </a>
-          </footer>
-          )}
       </div>
     </div>
   );
