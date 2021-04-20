@@ -12,7 +12,6 @@ import {
 } from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateAuction } from '../store/actions/products';
-import { toast } from 'react-toastify';
 
 export default function ProductDetail() {
   const socket = useContext(SocketContext);
