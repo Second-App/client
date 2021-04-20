@@ -48,44 +48,39 @@ export default function Cart() {
 
   return (
     <>
-      <div className="columns mt-4">
-        <div className="column is-full title is-3">Your Cart</div>
+      <div className='columns mt-4'>
+        <div className='column is-full title is-3'>Your Cart</div>
       </div>
       {carts.map((cart) => (
-        <div className="box" key={cart.id}>
-          <article className="media">
-            <div className="media-left">
-              <figure className="image is-128x128">
-                <img src={cart.Product.imageUrl} alt="product-cart" />
+        <div className='box' key={cart.id}>
+          <article className='media'>
+            <div className='media-left'>
+              <figure className='image is-128x128'>
+                <img src={cart.Product.imageUrl} alt='product-cart' />
               </figure>
             </div>
-            <div className="media-content">
-              <div className="content">
+            <div className='media-content'>
+              <div className='content'>
                 <p>
-                  <strong>Harusnya ini nama penjual?</strong>
+                  <strong>{cart.Product.name}</strong>
                   <br />
-                  {cart.Product.description}
+                  description: {cart.Product.description}
                   <br />
-                  price: {cart.Product.price}
+                  location: {cart.Product.location}
+                  <br />
+                  invoice: Rp. {Number(cart.Product.price).toLocaleString('id')},-
                 </p>
               </div>
-              <div className="columns">
-                <div className="column is-6 mt-2">
-                  <button
-                    class="button is-primary is-rounded is-fullwidth is-flex is-justify-content-center"
-                    onClick={() => handleCheckout(cart.Product.id)}
-                  >
+              <div className='columns'>
+                <div className='column is-6 mt-2'>
+                  <button class='button is-primary is-rounded is-fullwidth is-flex is-justify-content-center' onClick={() => handleCheckout(cart.Product.id)}>
                     Checkout
                   </button>
                 </div>
-                <div className="column is-flex is-flex-justify-content-start mt-1">
-                  <a
-                    className="level-item"
-                    aria-label="retweet"
-                    onClick={() => handleDeleteCart(cart.id)}
-                  >
-                    <span className="icon is-large">
-                      <i className="fas fa-lg fa-trash" aria-hidden="true"></i>
+                <div className='column is-flex is-flex-justify-content-start mt-1'>
+                  <a className='level-item' aria-label='retweet' onClick={() => handleDeleteCart(cart.id)}>
+                    <span className='icon is-large'>
+                      <i className='fas fa-lg fa-trash' aria-hidden='true'></i>
                     </span>
                   </a>
                 </div>
