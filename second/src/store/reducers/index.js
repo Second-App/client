@@ -4,6 +4,7 @@ import userReducer from './user';
 import transactionTypesReducer from './transactionsTypes';
 import wishlistReducer from './wishlist';
 import chatReducer from './chats';
+import cartReducer from './cart'
 
 export {
   categoriesReducer,
@@ -12,4 +13,5 @@ export {
   transactionTypesReducer,
   wishlistReducer,
   chatReducer,
+  cartReducer
 };
