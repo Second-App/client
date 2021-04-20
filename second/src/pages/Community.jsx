@@ -33,14 +33,72 @@ export default function Community() {
   
   return (
     <>
-      <ProductList
-        categories={categories}
-        setProductFilter={setProductFilter}
-        data={typesProducts}
-        heading={'Share-Goods'}
-        setCollapsed={setCollapsed}
-        isCollapsed={isCollapsed}
-      />
+      <span
+          className="title is-4 box"
+          style={{
+            textAlign: 'center',
+            opacity: 1,
+            marginTop:'30px',
+            marginBottom: '30px',
+            backgroundColor: '#00E9B4',
+          }}
+        >
+          Together as a Community.
+        </span>
+      <div className="container mt-5">
+        
+
+        <div className="container mt-5">
+        <div className="columns is-centered">
+          <div className="column is-half level-rigth">
+            <img
+              className="image"
+              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/banner/com3Banner.jpg"
+              alt="banner"
+              style={{
+                borderRadius: '20px',
+                boxShadow: '5px 10px 7px #FF8D2D',
+              }}
+            />
+          </div>
+          <div className="column level-left">
+            <span
+              className="title is-4 box"
+              style={{
+                textAlign: 'center',
+                opacity: 0.8,
+                marginTop: '130px',
+                backgroundColor: '#FFB979',
+              }}
+            >
+              This Community shared the goods for the sake of all, you too can join the movement in a second.
+            </span>
+          </div>
+        </div>
+        <div
+          style={{
+            position: 'relative',
+            top: 0,
+            marginBottom: '0px',
+          }}
+        >
+          <div className="column is-main-content">
+            <div className="container is-widescreen">
+              <div className="columns is-centered is-multiline">
+                 <ProductList
+                  categories={categories}
+                  setProductFilter={setProductFilter}
+                  data={typesProducts}
+                  heading={'Shared-Goods'}
+                  setCollapsed={setCollapsed}
+                  isCollapsed={isCollapsed}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
     </>
   )
 }

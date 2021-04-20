@@ -124,7 +124,7 @@ export default function AuthForm({ isEdit }) {
           </button>
           </Link>
 
-          <Link to='/wishlist'>
+          <Link to='/profile'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
               <i className="fas fa-heart"></i>
           </button>
@@ -145,7 +145,8 @@ export default function AuthForm({ isEdit }) {
           <button className="button"
             onClick={() => logoutConfirmation(handleLogout)}
             style={{
-              backgroundColor: '#3D0085',
+              border: '3px solid #3D0085',
+              backgroundColor: '#7300FC',
               color: 'white'
             }}
           >
