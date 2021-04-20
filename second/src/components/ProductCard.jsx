@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProductConfirmation } from '../helpers'
 import {
   fetchWishlist,
   addToWishlist,
   deleteWishlist,
+  deleteProductById,
   asyncAddToCart,
-  addCommunity,
-} from '../store/actions';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+  addCommunity
+} from '../store/actions'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
@@ -44,18 +46,16 @@ export default function ProductCard({ data }) {
     }
     setWishlist(!checkInWishlist);
   };
+  
+  const handleAddToCommunity = () => {
+    dispatch(addCommunity({
+      ProductId: data.id
+    }))
+  }
 
   const handleAddToCart = () => {
     dispatch(
       asyncAddToCart({
-        ProductId: data.id,
-      })
-    );
-  };
-
-  const handleAddToCommunity = () => {
-    dispatch(
-      addCommunity({
         ProductId: data.id,
       })
     );
