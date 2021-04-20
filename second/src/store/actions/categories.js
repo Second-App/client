@@ -7,7 +7,7 @@ export function fetchCategories() {
     return async (dispatch) => {
         try {
             const { data } = await axios.get('/categories');
-            console.log(data);
+            // console.log(data);
             dispatch(SET_CATEGORIES(data));
             dispatch(SET_LOADING(false));
         } catch (err) {

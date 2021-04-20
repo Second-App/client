@@ -151,7 +151,7 @@ export default function AuthForm({ isEdit }) {
             }}
           >
             Logout
-            {console.log(isLogin)}
+            {/* {console.log(isLogin)} */}
           </button>
       </>
       ) : (

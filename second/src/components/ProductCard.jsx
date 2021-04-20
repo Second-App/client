@@ -1,21 +1,48 @@
 import React, {useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist, asyncAddToCart } from '../store/actions'
+import { deleteProductById, addToWishlist, deleteWishlist,fetchWishlist, asyncAddToCart } from '../store/actions'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
+  const [checkInWishlist, setWishlist] = useState(false)
+  const { data: wishlists } = useSelector((state) => state.wishlists)
+  
 
   const handleDeleteProduct = () => {
     dispatch(deleteProductById(data.id));
   };
-  const handleAddToWishlist = (data) => {
-    dispatch(addToWishlist(data));
-    toast.success(`${data.name} added to wishlist`)
-  };
+  const checkWishlistData = (product) => {
+    wishlists?.forEach(wishlist => {
+      if (+wishlist.UserId === +product.UserId) {
+        
+        setWishlist(!checkInWishlist)
+      }
+    })
+  }
+  
 
+  useEffect(() => {
+    dispatch(fetchWishlist())
+    checkWishlistData(data)
+  }, [dispatch])
+
+  const handleWishlist = (data) => {
+    if (!checkInWishlist) {
+      setWishlist(!checkInWishlist)
+      dispatch(addToWishlist(data))
+      toast.success(`${data.name} added to wishlist`)
+    } else {
+      const wishlistData = wishlists.filter((product) => +product.ProductId === +data.id)
+      console.log(wishlistData[0].id, "<< masuk ke delete")
+      dispatch(deleteWishlist(wishlistData[0].id))
+      toast.success(`${data.name} deleted from wishlist`)
+    }
+    setWishlist(!checkInWishlist)
+    
+  };
   const handleAddToCart = () => {
     dispatch(asyncAddToCart({
       ProductId: data.id
@@ -130,16 +157,19 @@ export default function ProductCard({ data }) {
         {+data?.UserId === +localStorage.id ? (
         <footer className="card-footer">
           <a  className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
-            <span className="icon is-small">
-              <i className="fas fa-trash"></i>
+            <span className="icon is-small iconHeartEmpty">
+              <i className="fas fa-trash" ></i>
             </span>
           </a>
         </footer>
         ) : (
           <footer className="card-footer">
-            <a  className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
-              <span className="icon is-small">
-                <i className="fas fa-heart"></i>
+            <a  className="card-footer-item" onClick={() => handleWishlist(data) } >
+              <span className="icon is-small iconHover" style={{
+                color: checkInWishlist ? 'black' : '',
+              }}>
+                <i className={checkInWishlist ? "fas fa-trash" : "fas fa-heart"}
+                ></i>
               </span>
             </a>
             <a className="card-footer-item" onClick={handleAddToCart}>

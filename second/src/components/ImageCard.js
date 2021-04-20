@@ -23,8 +23,9 @@ export default function ImageCard({ data, handleDeleteWishlist, handleDeleteProd
             isHovered && (
               <button
               onClick={() => handleDeleteWishlist(data.id)}
-              className="button-icon is-outlined"
+              className="button is-outlined"
               style={{
+                position: 'absolute',
                 top: "5px",
                 right: "5px",
               }}

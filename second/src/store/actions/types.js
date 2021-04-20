@@ -21,7 +21,7 @@ export function getOneType(id) {
         try {
             const { data } = await axios.get('/types/' + id);
             await dispatch(SET_ONE_T_TYPE(data));
-            console.log(data, '<<< dataaaa');
+            // console.log(data, '<<< dataaaa');
             await dispatch(SET_LOADING(false));
         } catch (err) {
             console.log(err);
