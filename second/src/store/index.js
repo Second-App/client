@@ -7,6 +7,7 @@ import {
   transactionTypesReducer,
   wishlistReducer,
   chatReducer,
+  cartReducer
 } from './reducers';
 
 const reducer = combineReducers({
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   transactionTypesReducer,
   chatReducer,
   wishlists: wishlistReducer,
+  cartReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
