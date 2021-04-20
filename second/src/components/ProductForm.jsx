@@ -117,14 +117,22 @@ export default function ProductForm() {
   const closeModal = () => {
     setIsOpen(false)
   }
-
+  
   const handleInput = (e) => {
-    let { name, value } = e.target
-    // console.log(value)
-    setInput({
-      ...input,
-      [name]: value,
-    })
+    let { name, value, files } = e.target
+    if (name !== 'imageUrl') {
+      
+      setInput({
+        ...input,
+        [name]: value,
+      })
+    } else {
+      
+      setInput({
+        ...input,
+        ['imageUrl']: files[0]
+      })
+    }
   }
 
   const clearAllInput = () => {
@@ -178,6 +186,7 @@ export default function ProductForm() {
             overlayClassName="Overlay"
             >
             <p className="title is-4">Add Product</p>
+            <form encType='multipart/form-data'>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -317,7 +326,9 @@ export default function ProductForm() {
 
             <div id="file-js-example" class="file has-name">
               <label class="file-label">
-                <input class="file-input" type="file" name="imageUrl"/>
+                <input class="file-input" type="file" name="imageUrl"
+                onChange={(e) => handleInput(e)}
+                />
                 <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>
@@ -351,6 +362,7 @@ export default function ProductForm() {
                 </button>
               </div>
             </div>
+            </form>
           </Modal>
         </div>
       ) : (
