@@ -82,6 +82,7 @@ export default function ProductDetail() {
         id: singleProduct.id,
         currentBid,
         currentUserBidName: localStorage.name,
+        currentUserBidId: localStorage.id,
       })
     );
     event.target.bidInput.value = '';
