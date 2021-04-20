@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist } from '../store/actions'
+import { deleteProductById, addToWishlist, asyncAddToCart } from '../store/actions'
 import { Link } from 'react-router-dom'
-import { ToastContainer,toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
@@ -15,6 +15,12 @@ export default function ProductCard({ data }) {
     dispatch(addToWishlist(data));
     toast.success(`${data.name} added to wishlist`)
   };
+
+  const handleAddToCart = () => {
+    dispatch(asyncAddToCart({
+      ProductId: data.id
+    }))
+  }
 
   const [productType, setproductType] = useState('Full-Payment')
   
@@ -127,16 +133,9 @@ export default function ProductCard({ data }) {
               {
                 +data?.UserId === +localStorage.id ?
                 <footer className="card-footer">
-                  <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
-                    <span className="icon is-small">
-                      <i className="fas fa-heart"></i>
-                    </span>
-                  </a>
-                  <a href="#" className="card-footer-item">
-                    <span className="icon is-small">
-                      <i className="fas fa-cart-arrow-down"></i>
-                    </span>
-                  </a>
+                    <p className="tag">
+                        This is your own product
+                    </p>
                   </footer>
                   :
                   <footer className="card-footer">
