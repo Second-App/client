@@ -124,7 +124,7 @@ export default function AuthForm({ isEdit }) {
           </button>
           </Link>
 
-          <Link to='/cart'>
+          <Link to='/carts'>
           <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
               <i className="fas fa-cart-arrow-down"></i>
           </button>
