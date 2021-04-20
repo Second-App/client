@@ -34,21 +34,18 @@ export default function Community() {
   return (
     <>
       <span
-          className="title is-4 box"
-          style={{
-            textAlign: 'center',
-            opacity: 1,
-            marginTop:'30px',
-            marginBottom: '30px',
-            backgroundColor: '#00E9B4',
-          }}
-        >
-          Together as a Community.
-        </span>
+        className="title is-4 box"
+        style={{
+          textAlign: 'center',
+          opacity: 1,
+          marginTop:'30px',
+          marginBottom: '30px',
+          backgroundColor: '#AA89D2',
+        }}
+      >
+        Together as a Community.
+      </span>
       <div className="container mt-5">
-        
-
-        <div className="container mt-5">
         <div className="columns is-centered">
           <div className="column is-half level-rigth">
             <img
@@ -75,30 +72,19 @@ export default function Community() {
             </span>
           </div>
         </div>
-        <div
-          style={{
-            position: 'relative',
-            top: 0,
-            marginBottom: '0px',
-          }}
-        >
-          <div className="column is-main-content">
-            <div className="container is-widescreen">
-              <div className="columns is-centered is-multiline">
-                 <ProductList
-                  categories={categories}
-                  setProductFilter={setProductFilter}
-                  data={typesProducts}
-                  heading={'Shared-Goods'}
-                  setCollapsed={setCollapsed}
-                  isCollapsed={isCollapsed}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div className="column is-main-content">
+        <div className="container is-widescreen">
+              <ProductList
+              categories={categories}
+              setProductFilter={setProductFilter}
+              data={typesProducts}
+              heading={'Shared-Goods'}
+              setCollapsed={setCollapsed}
+              isCollapsed={isCollapsed}
+              />
         </div>
-        </div>
+      </div>
     </>
   )
 }

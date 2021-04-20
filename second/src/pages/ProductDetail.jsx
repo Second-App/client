@@ -116,11 +116,14 @@ export default function ProductDetail() {
                     <i className="fas fa-heart"></i>
                   </span>
                 </a>
-                <a href="#" className="card-footer-item">
-                  <span className="icon is-small">
-                    <i className="fas fa-cart-arrow-down"></i>
-                  </span>
-                </a>
+                {
+                  singleProduct.TypeId === 3 ? '' :
+                  <a href="#" className="card-footer-item">
+                    <span className="icon is-small">
+                      <i className="fas fa-cart-arrow-down"></i>
+                    </span>
+                  </a>
+                }
               </span>
             </div>
             <div

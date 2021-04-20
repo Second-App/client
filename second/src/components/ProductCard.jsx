@@ -121,38 +121,52 @@ export default function ProductCard({ data }) {
 
             </div>
         }
-        {+data?.UserId === +localStorage.id ? (
-        <footer className="card-footer">
-          <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
-            <span className="icon is-small">
-              <i className="fas fa-heart"></i>
-            </span>
-          </a>
-          <a href="#" className="card-footer-item">
-            <span className="icon is-small">
-              <i className="fas fa-cart-arrow-down"></i>
-            </span>
-          </a>
-          <a href="#" className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
-            <span className="icon is-small">
-              <i className="fas fa-trash"></i>
-            </span>
-          </a>
-        </footer>
-        ) : (
-          <footer className="card-footer">
-            <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
-              <span className="icon is-small">
-                <i className="fas fa-heart"></i>
-              </span>
-            </a>
-            <a href="#" className="card-footer-item">
-              <span className="icon is-small">
-                <i className="fas fa-cart-arrow-down"></i>
-              </span>
-            </a>
-          </footer>
-          )}
+        {
+          data.TypeId !== 3 ? 
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                <footer className="card-footer">
+                  <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
+                    <span className="icon is-small">
+                      <i className="fas fa-heart"></i>
+                    </span>
+                  </a>
+                  <a href="#" className="card-footer-item">
+                    <span className="icon is-small">
+                      <i className="fas fa-cart-arrow-down"></i>
+                    </span>
+                  </a>
+                  <a href="#" className="card-footer-item" onClick={() => deleteProductConfirmation(handleDeleteProduct)}>
+                    <span className="icon is-small">
+                      <i className="fas fa-trash"></i>
+                    </span>
+                  </a>
+                  </footer>
+                  :
+                  <footer className="card-footer">
+                    <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
+                      <span className="icon is-small">
+                        <i className="fas fa-heart"></i>
+                      </span>
+                    </a>
+                    <a href="#" className="card-footer-item">
+                      <span className="icon is-small">
+                        <i className="fas fa-cart-arrow-down"></i>
+                      </span>
+                    </a>
+                  </footer>
+              }
+            </>
+            :
+            <footer className="card-footer">
+              <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
+                <span className="icon is-small">
+                  <i className="fas fa-heart"></i>
+                </span>
+              </a>
+            </footer>
+        }
       </div>
     </div>
   );
