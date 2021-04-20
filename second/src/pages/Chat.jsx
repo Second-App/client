@@ -84,32 +84,68 @@ export default function Chat({ type }) {
   return (
     <div className="box mt-5">
       {console.log(chatsDetail.send)}
-      <div className="columns">
-        <div className="column is-one-quarter ">
-          <div className="columns ml-2 mt-2">Chats</div>
+      <div className="columns"
+        style={{
+          paddingTop: '20px',
+          paddingBottom: '20px',
+          paddingLeft: '70px'
+        }}
+      >
+        <div className="column is-one-quarter theChat"
+          style={{
+            height: '100vh',
+            border: '2px solid #7300FC'
+          }}
+        >
+          <div className="columns mt-2"
+            style={{
+              borderBottom: '2px solid #7300FC'
+            }}
+          >
+            <span className="title is-4 ml-4 mb-4">
+              Chats
+            </span>
+          </div>
           {historyUsersChatArray
             ? historyUsersChatArray.map((user) => {
                 return (
                   <div
-                    className="columns has-background-light p-4 mt-1 mx-1"
+                    className="columns has-background-light mt-1 mx-1"
                     onClick={() => {
                       userChatOnClick(user[1]);
                     }}
                   >
-                    {user[0]}
+                    <div className='button column'
+                      style={{
+                        backgroundColor: 'white',
+                        border: '2px solid #7300FC'
+                      }}
+                    >
+                      {user[0]}
+                    </div>
                   </div>
                 );
               })
             : ''}
         </div>
-        <div className="column mt-5">
-          <div className="columns">
-            <div className="column is-8 chat-box has-background-light is-flex is-flex-direction-column">
+        <div className="column is-8 chat-box has-background-light ml-5 theChat"
+          style={{
+            height: '100vh',
+            border: '2px solid #7300FC'
+          }}
+        >
               {fullChatsArray.length
                 ? fullChatsArray.map((chat) => {
                     return (
-                      <div className="columns has-background-grey-light p-4 mt-1 mx-1">
-                        <div className="column">
+                      <div className="columns p-4 mt-1 mx-1"
+                        style={
+                            Number(chat.SenderId) === Number(localStorage.id)
+                            ? {border: '2px solid #FFB979'}
+                            : {border: '2px solid #AA89D2'}
+                          }
+                      >
+                        <div className="column"
+                        >
                           <div
                             className={
                               Number(chat.SenderId) === Number(localStorage.id)
@@ -126,7 +162,9 @@ export default function Chat({ type }) {
                                 : 'is-flex is-justify-content-flex-start'
                             }
                           >
-                            <div className="columns content">
+                            <div className="columns content ml-1 mr-1"
+                            
+                            >
                               {chat.message}
                             </div>
                           </div>
@@ -134,10 +172,8 @@ export default function Chat({ type }) {
                       </div>
                     );
                   })
-                : ''}
-            </div>
-          </div>
-          <div className="columns mt-4 pb-2">
+            : ''}
+          <div className="ml-1 mt-4 pb-2">
             <form
               onSubmit={(event) => {
                 handleSendMessage(event);
@@ -148,8 +184,9 @@ export default function Chat({ type }) {
                 type="text"
                 name="message"
                 placeholder="Type a message"
-                style={{ width: '800px' }}
+                style={{ width: '760px' }}
               ></input>
+              <input className="button is-primary ml-5" type="submit" value="send"/>
             </form>
           </div>
         </div>
