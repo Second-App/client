@@ -111,40 +111,53 @@ export default function ProductCard({ data }) {
                     Rp. {Number(data.price).toLocaleString('id')},-
                   </p>
                   :
-                  <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
-                      <button>
-                        Join Auction
-                      </button>
-
-                  </div>
+                  <>
+                    {
+                      +data?.UserId === +localStorage.id ?
+                        ''
+                        :
+                      <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
+                          <button>
+                            Join Auction
+                          </button>
+                      </div>
+                    }
+                  </>
               }
             </>
             :
-            <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
-              <button className="">
-                  I Need This
-              </button>
-
-            </div>
-        }
-        {
-          data.TypeId !== 3 ? 
             <>
               {
                 +data?.UserId === +localStorage.id ?
-                <footer className="card-footer">
+                  ''
+                  :
+                <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
+                  <button className="">
+                      I Need This
+                  </button>
+                </div>
+              }
+            </>
+            
+        }
+        {
+          data.TypeId !== 3 ?
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                  <footer className="card-footer">
                     <p className="tag">
-                        This is your own product
+                      This is your own product
                     </p>
                   </footer>
                   :
                   <footer className="card-footer">
-                    <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
+                    <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
                       <span className="icon is-small">
                         <i className="fas fa-heart"></i>
                       </span>
                     </a>
-                    <a href="#" className="card-footer-item">
+                    <a className="card-footer-item" onClick={handleAddToCart}>
                       <span className="icon is-small">
                         <i className="fas fa-cart-arrow-down"></i>
                       </span>
@@ -153,13 +166,24 @@ export default function ProductCard({ data }) {
               }
             </>
             :
-            <footer className="card-footer">
-              <a href="#" className="card-footer-item" onClick={() => handleAddToWishlist(data) } >
-                <span className="icon is-small">
-                  <i className="fas fa-heart"></i>
-                </span>
-              </a>
-            </footer>
+            <>
+              {
+                +data?.UserId === +localStorage.id ?
+                <footer className="card-footer">
+                    <p className="tag">
+                      This is your own product
+                    </p>
+                </footer>
+                  :
+                <footer className="card-footer">
+                  <a className="card-footer-item" onClick={() => handleAddToWishlist(data)} >
+                    <span className="icon is-small">
+                      <i className="fas fa-heart"></i>
+                    </span>
+                  </a>
+                </footer>
+              }
+            </>
         }
       </div>
     </div>
