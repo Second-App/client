@@ -103,6 +103,7 @@ export function updateAuction(payload) {
         data: {
           currentBid: payload.currentBid,
           currentUserBidName: payload.currentUserBidName,
+          currentUserBidId: payload.currentUserBidId,
         },
       });
       await dispatch(getOneProduct(payload.id));
