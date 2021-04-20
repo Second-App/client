@@ -1,26 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct, addToWishlist } from '../store/actions';
+import { getOneProduct, addToWishlist, fetchCommunity, changeOwner } from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
 import {
   sendMessage,
   fetchChatDetail,
   fetchChatsUsers,
+  addCommunity
 } from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function ProductDetail() {
+  const { community } = useSelector(state => state.communityReducer)
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
   const history = useHistory();
 
   const { id } = useParams();
   const dispatch = useDispatch();
 
+  const handleAddToCommunity = () => {
+    dispatch(addCommunity({
+      ProductId: singleProduct.id
+    }))
+    // history.push('/community')
+  }
+
   const handleAddToWishlist = (data) => {
     dispatch(addToWishlist(data));
     toast.success(`${data.name} added to wishlist`);
   };
+
+  useEffect(() => {
+    dispatch(fetchCommunity())
+  }, [])
+
+  const getDropDown = (setCollapsed, isCollapsed, filteredCommunityData) => {
+    // console.log(filteredCommunityData, 'ini kucing <<<')
+    return (
+      <div
+        className={'dropdown' + (!isCollapsed ? '' : ' is-active')}
+        tabIndex="0"
+      >
+        <div className="dropdown-trigger">
+          <button
+            className="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+            onClick={() => setCollapsed(!isCollapsed)}
+          >
+            <span>Choose one User</span>
+            <span className="icon is-small">
+              <i className="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          {filteredCommunityData?.map((com) => (
+            <div key={com.id} className="dropdown-content">
+              <a onClick={() => {
+                setCollapsed(!isCollapsed)
+                dispatch(changeOwner(com.User.id, com.Product.id,com.id, com.Product.name))
+              }} className="dropdown-item">
+                {com.User.name}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   const {
     singleProduct,
@@ -72,7 +123,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     dispatch(getOneProduct(id));
-  }, [id]);
+  }, [id,community.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -102,7 +153,15 @@ export default function ProductDetail() {
 
   if (productsError) return <div>error</div>;
   if (productsLoading) return <Loading />;
+  
+  console.log(community, 'hai ini <<<<<<<<< community')
+  console.log(localStorage.id, 'ini cintah <<<<<<<<<')
 
+  const filteredCommunityData = community?.filter(el => {
+    console.log(el, 'ini el<<<<<<<<<<<<<<<')
+    return (el.Product.UserId === +localStorage.id)
+  }) 
+    
   return (
     <div className="box mt-5">
       <div className="columns">
@@ -155,11 +214,11 @@ export default function ProductDetail() {
               className="subtitle"
               style={{ marginTop: '10px', marginBottom: '10px' }}
             >
-              {singleProduct.TypeId === 2 ? (
-                ''
-              ) : (
+              {
+                singleProduct.TypeId === 1 ? (
                 <>Rp. {Number(singleProduct.price).toLocaleString('id')},-</>
-              )}
+                ) : ''
+              }
             </div>
             <div className="subtitle" style={{ fontSize: '17px' }}>
               {singleProduct.condition} / 5 <i className="far fa-star"></i>
@@ -227,22 +286,44 @@ export default function ProductDetail() {
                       </footer>
                     </div>
                   </div>
-                ) : (
-                  <footer class="card-footer">
-                    <button className="button">I Need This</button>
-                    <div>
-                      <button
-                        className="button"
-                        style={{ marginLeft: '10px' }}
-                        onClick={() => handleOnChatNonAuction(singleProduct)}
-                      >
-                        <span style={{ marginRight: '5px' }}>
-                          <i class="fas fa-comment-dots"></i>
-                        </span>
-                        Chat The Owner
-                      </button>
+                  ) : (
+                  <>
+                    {
+                          singleProduct.UserId === +localStorage.id ?  
+                          <span className="tag">
+                            This is your own product  
+                          </span>
+                          :
+                            <>
+                      <footer class="card-footer">
+                        
+                          <button className="button" onClick={handleAddToCommunity}>
+                            I Need This
+                          </button>
+                            
+                      </footer>
+                        <div>
+                          <button
+                            className="button"
+                            style={{ marginTop: '10px' }}
+                            onClick={() => handleOnChatNonAuction(singleProduct)}
+                          >
+                            <span style={{ marginRight: '5px' }}>
+                              <i class="fas fa-comment-dots"></i>
+                            </span>
+                              
+                            Chat The Owner
+                          </button>
+                              </div>
+                              </>
+                    }
+                    <div className="mt-2">
+                        {
+                          !filteredCommunityData.length ? '' :
+                          getDropDown(setIsCollapsed, isCollapsed,filteredCommunityData) 
+                        }
                     </div>
-                  </footer>
+                  </>
                 )}
               </>
             )}

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteProductConfirmation } from '../helpers'
-import { deleteProductById, addToWishlist, asyncAddToCart } from '../store/actions'
+import {
+  deleteProductById, addToWishlist, asyncAddToCart, addCommunity
+} from '../store/actions'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -15,6 +17,12 @@ export default function ProductCard({ data }) {
     dispatch(addToWishlist(data));
     toast.success(`${data.name} added to wishlist`)
   };
+  
+  const handleAddToCommunity = () => {
+    dispatch(addCommunity({
+      ProductId: data.id
+    }))
+  }
 
   const handleAddToCart = () => {
     dispatch(asyncAddToCart({
@@ -132,7 +140,7 @@ export default function ProductCard({ data }) {
                   ''
                   :
                 <div style={{display: 'flex', justifyContent:'center', marginBottom:'15px'}}>
-                  <button className="">
+                  <button className="" onClick={handleAddToCommunity}>
                       I Need This
                   </button>
                 </div>
