@@ -11,6 +11,7 @@ import { userLogin, userRegister, getProfileById, editProfile } from './users'
 import { fetchWishlist, addToWishlist, deleteWishlist } from './wishlists'
 import { fetchChatsUsers, fetchChatDetail, sendMessage } from './chats'
 import { fetchCart, asyncAddToCart, deleteOneCart } from './cart'
+import {fetchCommunity, addCommunity, removeOneCommunity} from './community'
 
 export {
   fetchCategories,
@@ -34,5 +35,8 @@ export {
   sendMessage,
   fetchCart,
   asyncAddToCart,
-  deleteOneCart
+  deleteOneCart,
+  fetchCommunity,
+  addCommunity,
+  removeOneCommunity
 }

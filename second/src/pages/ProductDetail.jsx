@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SocketContext } from '../socket.io/socket.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct, addToWishlist } from '../store/actions';
+import { getOneProduct, addToWishlist, fetchCommunity } from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
 import {
@@ -12,6 +12,7 @@ import {
 } from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateAuction } from '../store/actions/products';
+import { toast } from 'react-toastify';
 
 export default function ProductDetail() {
   const socket = useContext(SocketContext);

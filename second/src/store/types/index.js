@@ -12,10 +12,11 @@ import {
   ADD_USER_WISHLIST,
   REMOVE_USER_WISHLIST,
   GET_PROFILE_BY_ID,
-} from './user';
-import { SET_WISHLIST, ADD_WISHLIST, REMOVE_WISHLIST } from './wishlists';
-import { SET_CHATS_USERS, SET_CHATS_DETAIL } from './chats.js';
-import { SET_CART, ADD_CART, REMOVE_CART } from './cart';
+} from './user'
+import { SET_WISHLIST, ADD_WISHLIST, REMOVE_WISHLIST } from './wishlists'
+import { SET_CHATS_USERS, SET_CHATS_DETAIL } from './chats.js'
+import { SET_CART, ADD_CART, REMOVE_CART } from './cart'
+import {SET_COMMUNITY, ADD_COMMUNITY, REMOVE_ONE_COMMUNITY} from './community'
 
 const SET_LOADING = (payload) => {
   return {
@@ -55,4 +56,7 @@ export {
   SET_CART,
   REMOVE_CART,
   ADD_CART,
-};
+  SET_COMMUNITY,
+  ADD_COMMUNITY,
+  REMOVE_ONE_COMMUNITY
+}
