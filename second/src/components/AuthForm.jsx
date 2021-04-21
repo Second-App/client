@@ -113,41 +113,40 @@ export default function AuthForm({ isEdit }) {
       {isLogin ? (
         <>
           <Link to='/chat'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
               <i className="fas fa-envelope"></i>
           </button>
           </Link>
 
           <Link to='/notification'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
               <i className="fas fa-bell"></i>
           </button>
           </Link>
 
           <Link to='/carts'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
               <i className="fas fa-cart-arrow-down"></i>
           </button>
           </Link>
 
           <Link to='/profile'>
-          <button className="button" style={{marginRight: "10px", boxShadow: '3px 4px 5px #AA89D2'}}>
+          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
               <i className="fas fa-user-circle"></i>
           </button>
           </Link>
 
           <Link to='/community'>
-          <button className="button" style={{marginRight: "35px", boxShadow: '3px 4px 5px #AA89D2'}}>
+          <button className="button is-white" style={{marginRight: "35px", boxShadow: '0px 0px 5px #AA89D2'}}>
               <i className="fas fa-users"></i>
           </button>
           </Link>
 
-          <button className="button"
+          <button className="button is-white"
             onClick={() => logoutConfirmation(handleLogout)}
             style={{
-              border: '3px solid #3D0085',
-              backgroundColor: '#7300FC',
-              color: 'white'
+              border: '2px solid #3D0085',
+              color: '#3D0085'
             }}
           >
             Logout

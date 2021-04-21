@@ -170,8 +170,8 @@ export default function ProductForm() {
     <>
       {isLogin ? (
         <div>
-          <button className="button" onClick={openModal}
-            style={{marginLeft: "10px", border: '3px solid #CC5D00', color: 'white',}}
+          <button className="button is-white" onClick={openModal}
+            style={{marginLeft: "10px", border: '2px solid', color: '#CC5D00',}}
           >
             <i class="fas fa-plus-square"></i>
             <span className="ml-2">
