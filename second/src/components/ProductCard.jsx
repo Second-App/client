@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteProductConfirmation } from '../helpers'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProductConfirmation } from '../helpers';
 import {
   fetchWishlist,
   addToWishlist,
   deleteWishlist,
   deleteProductById,
   asyncAddToCart,
-  addCommunity
-} from '../store/actions'
-import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
+  addCommunity,
+} from '../store/actions';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function ProductCard({ data }) {
   const dispatch = useDispatch();
@@ -46,12 +46,14 @@ export default function ProductCard({ data }) {
     }
     setWishlist(!checkInWishlist);
   };
-  
+
   const handleAddToCommunity = () => {
-    dispatch(addCommunity({
-      ProductId: data.id
-    }))
-  }
+    dispatch(
+      addCommunity({
+        ProductId: data.id,
+      })
+    );
+  };
 
   const handleAddToCart = () => {
     dispatch(
@@ -91,11 +93,7 @@ export default function ProductCard({ data }) {
         alignContent: 'center',
       }}
     >
-      <div
-        className="card column"
-        style={{
-        }}
-      >
+      <div className="card column" style={{}}>
         <span
           className="tag is-small is-link"
           style={{
@@ -229,11 +227,15 @@ export default function ProductCard({ data }) {
                     <i className="fas fa-heart"></i>
                   </span>
                 </a>
-                <a className="card-footer-item" onClick={handleAddToCart}>
-                  <span className="icon is-small">
-                    <i className="fas fa-cart-arrow-down"></i>
-                  </span>
-                </a>
+                {data.TypeId === 1 ? (
+                  <a className="card-footer-item" onClick={handleAddToCart}>
+                    <span className="icon is-small">
+                      <i className="fas fa-cart-arrow-down"></i>
+                    </span>
+                  </a>
+                ) : (
+                  ''
+                )}
               </footer>
             )}
           </>
