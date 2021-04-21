@@ -8,6 +8,7 @@ import {
   SET_LOADING,
   SET_ERROR,
   SET_TOKEN_MIDTRANS,
+  SET_AUCTION_START,
 } from '../types';
 import { getOneType, getOneCategory } from './index';
 import { getProfileById } from './users';
@@ -42,16 +43,15 @@ export function addProduct(payload, closeModal, toast, clearAllInput) {
   return async (dispatch, getState) => {
     try {
       var bodyFormData = new FormData();
-      Object.keys(payload).map(index => {
-        
-        bodyFormData.append(index, payload[index])
-      })
-      
+      Object.keys(payload).map((index) => {
+        bodyFormData.append(index, payload[index]);
+      });
+
       const { data } = await axios({
         url: '/products',
-        headers: { 
+        headers: {
           access_token: localStorage.access_token,
-          "Content-Type": "multipart/form-data" 
+          'Content-Type': 'multipart/form-data',
         },
         data: bodyFormData,
         method: 'POST',
@@ -115,16 +115,8 @@ export function updateAuction(payload) {
           currentUserBidId: payload.currentUserBidId,
         },
       });
+      await dispatch(SET_AUCTION_START(true));
       await dispatch(getOneProduct(payload.id));
-      toast.success(`Congratulation, you are the highest current bidder`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     } catch (err) {
       toast.error(
         'Minimum amount to bid must be at least Rp. 10.000 higher than the current bid',

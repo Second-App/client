@@ -32,3 +32,10 @@ export const SET_TOKEN_MIDTRANS = (payload) => {
     payload,
   };
 };
+
+export const SET_AUCTION_START = (payload) => {
+  return {
+    type: 'auctionStart/setAuctionStart',
+    payload,
+  };
+};

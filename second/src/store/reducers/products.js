@@ -6,12 +6,14 @@ import {
   SET_ERROR,
   SET_LOADING,
   SET_TOKEN_MIDTRANS,
+  SET_AUCTION_START,
 } from '../types';
 
 const initialState = {
   products: [],
   singleProduct: {},
   tokenMidtrans: '',
+  auctionStart: false,
   loading: true,
   error: null,
 };
@@ -41,6 +43,9 @@ const productReducer = (state = initialState, { type, payload }) => {
 
     case SET_TOKEN_MIDTRANS().type:
       return { ...state, tokenMidtrans: payload };
+
+    case SET_AUCTION_START().type:
+      return { ...state, auctionStart: payload };
 
     default:
       return state;
