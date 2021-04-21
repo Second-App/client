@@ -120,8 +120,9 @@ export default function UserEditForm({ data, openModal, modal, setModal }) {
                     Choose a file…
                   </span>
                 </span>
-                <span class="file-name">
-                  No file uploaded
+                <span class="file-name">{
+                  input.imageUrl?.name ? input.imageUrl?.name : "No file uploaded"
+                }
                 </span>
               </div>
             </div>

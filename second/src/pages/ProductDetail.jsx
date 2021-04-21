@@ -206,9 +206,17 @@ export default function ProductDetail() {
       })
     );
   };
+  const checkIsUserProduct = () => {
+    if (+singleProduct.UserId === +localStorage.id) {
+      return true;
+    }
+    return false;
+  };
+  // console.log(checkIsUserProduct(), "<<<<<INFOOOOOOOOOOO")
 
   useEffect(() => {
     dispatch(getOneProduct(id));
+    checkIsUserProduct();
     socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
     socket.on('getAuctionWinnerToSelf', () => {
       setWin(true);
@@ -297,6 +305,10 @@ export default function ProductDetail() {
                 <a
                   className="card-footer-item"
                   onClick={() => handleAddToWishlist(singleProduct)}
+                  style={{
+                    pointerEvents: checkIsUserProduct() ? 'none' : '',
+                    cursor: checkIsUserProduct() ? 'default' : '',
+                  }}
                 >
                   <span className="icon is-small">
                     <i className="fas fa-heart"></i>
@@ -305,7 +317,13 @@ export default function ProductDetail() {
                 {singleProduct.TypeId === 3 ? (
                   ''
                 ) : (
-                  <a className="card-footer-item">
+                  <a
+                    className="card-footer-item"
+                    style={{
+                      pointerEvents: checkIsUserProduct() ? 'none' : '',
+                      cursor: checkIsUserProduct() ? 'default' : '',
+                    }}
+                  >
                     <span className="icon is-small">
                       <i
                         className="fas fa-cart-arrow-down"
@@ -339,10 +357,12 @@ export default function ProductDetail() {
                 <button
                   className="button"
                   onClick={() => handleCheckout(singleProduct.id)}
+                  disabled={checkIsUserProduct()}
                 >
                   Buy Now
                 </button>
                 <button
+                  disabled={checkIsUserProduct()}
                   className="button"
                   style={{ marginLeft: '10px' }}
                   onClick={() => {
