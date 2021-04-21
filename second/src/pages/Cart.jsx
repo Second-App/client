@@ -52,136 +52,189 @@ export default function Cart() {
   if (loading || !carts.length) return <Loading />;
 
   return (
-    <>
-      <div className='columns mt-4'>
-        <div className='column is-full title is-3'>Your Cart</div>
+    <div
+      className='columns is-centered is-multiline'
+      style={{
+        marginTop: '20px',
+      }}>
+      <div
+        className='box theChat mt-0'
+        style={{
+          height: '100vh',
+          padding: '15px',
+        }}>
+        <div
+          className='box '
+          style={{
+            border: '1px solid #7300FC',
+            marginTop: '20px',
+          }}>
+          <div className='title mr-2 is-3'>Your Cart</div>
+        </div>
+        {carts.map((cart) =>
+          cart.Product.sold === false && cart.Product.available === true ? (
+            <div
+              className='box'
+              key={cart.id}
+              style={{
+                border: '1px solid #7300FC',
+              }}>
+              <article className='media' style={{}}>
+                <div
+                  className='media-left'
+                  style={{
+                    height: '250px',
+                    width: '250px',
+                    display: 'flex',
+                  }}>
+                  <figure
+                    className='image'
+                    style={{
+                      objectFit: 'cover',
+                    }}>
+                    <img src={cart.Product.imageUrl} alt='product-cart' />
+                  </figure>
+                </div>
+                <div className='media-content'>
+                  <div className='content box' style={{}}>
+                    <p>
+                      <strong className='title is-4'>{cart.Product.name}</strong>
+                      <br />
+                      <br />
+                      <i class='fas fa-map-marked-alt'></i>
+                      <span className='ml-2'>{cart.Product.location}</span>
+                      <br />
+                      <i class='fas fa-money-bill-wave'></i>
+                      <span className='ml-2'>Rp. {Number(cart.Product.price).toLocaleString('id')},-</span>
+                    </p>
+                    <div className='columns'>
+                      <div className='column is-6 mt-2'>
+                        <button class='button is-primary is-rounded is-fullwidth is-flex is-justify-content-center' onClick={() => handleCheckout(cart.Product.id)}>
+                          Checkout
+                        </button>
+                      </div>
+                      <div className='column is-flex is-flex-justify-content-start mt-1'>
+                        <a className='level-item' aria-label='retweet' onClick={() => handleDeleteCart(cart.id)}>
+                          <span className='icon is-large'>
+                            <i className='fas fa-lg fa-trash' aria-hidden='true'></i>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ) : (
+            ''
+          )
+        )}
+        {carts.map((cart) =>
+          cart.Product.sold === true && cart.Product.available === true ? (
+            <div
+              className='box'
+              key={cart.id}
+              style={{
+                border: '1px solid #7300FC',
+              }}>
+              <article className='media' style={{}}>
+                <div
+                  className='media-left'
+                  style={{
+                    height: '250px',
+                    width: '250px',
+                    display: 'flex',
+                  }}>
+                  <figure
+                    className='image'
+                    style={{
+                      objectFit: 'cover',
+                    }}>
+                    <img src={cart.Product.imageUrl} alt='product-cart' />
+                  </figure>
+                </div>
+                <div className='media-content'>
+                  <div className='content box' style={{}}>
+                    <p>
+                      <strong className='title is-4'>{cart.Product.name}</strong>
+                      <br />
+                      <br />
+                      <i class='fas fa-map-marked-alt'></i>
+                      <span className='ml-2'>{cart.Product.location}</span>
+                      <br />
+                      <i class='fas fa-money-bill-wave'></i>
+                      <span className='ml-2'>Rp. {Number(cart.Product.price).toLocaleString('id')},-</span>
+                    </p>
+                    <div className='columns'>
+                      <div className='column is-6 mt-2'>
+                        <button
+                          class='button is-warning is-rounded is-fullwidth is-flex is-justify-content-center'
+                          onClick={() => handleSoldConfirmed({ price: Number(cart.Product.price), UserId: cart.Product.UserId, ProductId: cart.Product.id })}>
+                          Confirm Accepted
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ) : (
+            ''
+          )
+        )}
+        <div
+          className='box '
+          style={{
+            border: '1px solid #7300FC',
+            marginTop: '20px',
+          }}>
+          <div className='title mr-2 is-3'>Your Purched History</div>
+        </div>
+        {carts.map((cart) =>
+          cart.Product.sold === true && cart.Product.available === false ? (
+            <div
+              className='box'
+              key={cart.id}
+              style={{
+                border: '1px solid #7300FC',
+              }}>
+              <article className='media' style={{}}>
+                <div
+                  className='media-left'
+                  style={{
+                    height: '250px',
+                    width: '250px',
+                    display: 'flex',
+                  }}>
+                  <figure
+                    className='image'
+                    style={{
+                      objectFit: 'cover',
+                    }}>
+                    <img src={cart.Product.imageUrl} alt='product-cart' />
+                  </figure>
+                </div>
+                <div className='media-content'>
+                  <div className='content box' style={{}}>
+                    <p>
+                      <strong className='title is-4'>{cart.Product.name}</strong>
+                      <br />
+                      <br />
+                      <i class='fas fa-map-marked-alt'></i>
+                      <span className='ml-2'>{cart.Product.location}</span>
+                      <br />
+                      <i class='fas fa-money-bill-wave'></i>
+                      <span className='ml-2'>Rp. {Number(cart.Product.price).toLocaleString('id')},-</span>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ) : (
+            ''
+          )
+        )}
       </div>
-
-      {carts.map((cart) =>
-        cart.Product.sold === false && cart.Product.available === true ? (
-          <div className='box' key={cart.id}>
-            <article className='media'>
-              <div className='media-left'>
-                <figure className='image is-128x128'>
-                  <img src={cart.Product.imageUrl} alt='product-cart' />
-                </figure>
-              </div>
-              <div className='media-content'>
-                <div className='content'>
-                  <p>
-                    <strong>{cart.Product.name}</strong>
-                    <br />
-                    description: {cart.Product.description}
-                    <br />
-                    location: {cart.Product.location}
-                    <br />
-                    invoice: Rp. {Number(cart.Product.price).toLocaleString('id')},-
-                    <br />
-                    ID seller: {cart.Product.UserId}
-                  </p>
-                </div>
-                <div className='columns'>
-                  <div className='column is-6 mt-2'>
-                    <button class='button is-primary is-rounded is-fullwidth is-flex is-justify-content-center' onClick={() => handleCheckout(cart.Product.id)}>
-                      Checkout
-                    </button>
-                  </div>
-
-                  <div className='column is-flex is-flex-justify-content-start mt-1'>
-                    <a className='level-item' aria-label='retweet' onClick={() => handleDeleteCart(cart.id)}>
-                      <span className='icon is-large'>
-                        <i className='fas fa-lg fa-trash' aria-hidden='true'></i>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        ) : (
-          ''
-        )
-      )}
-      {carts.map((cart) =>
-        cart.Product.sold === true && cart.Product.available === true ? (
-          <div className='box' key={cart.id}>
-            <article className='media'>
-              <div className='media-left'>
-                <figure className='image is-128x128'>
-                  <img src={cart.Product.imageUrl} alt='product-cart' />
-                </figure>
-              </div>
-              <div className='media-content'>
-                <div className='content'>
-                  <p>
-                    <strong>{cart.Product.name}</strong>
-                    <br />
-                    description: {cart.Product.description}
-                    <br />
-                    location: {cart.Product.location}
-                    <br />
-                    invoice: Rp. {Number(cart.Product.price).toLocaleString('id')},-
-                    <br />
-                    ID seller: {cart.Product.UserId}
-                  </p>
-                </div>
-                <div className='columns'>
-                  <div className='column is-6 mt-2'>
-                    <button
-                      class='button is-warning is-rounded is-fullwidth is-flex is-justify-content-center'
-                      onClick={() => handleSoldConfirmed({ price: Number(cart.Product.price), UserId: cart.Product.UserId, ProductId: cart.Product.id })}>
-                      Confirm Accepted
-                    </button>
-                  </div>
-
-                  <div className='column is-flex is-flex-justify-content-start mt-1'>
-                    <a className='level-item' aria-label='retweet' onClick={() => handleDeleteCart(cart.id)}>
-                      <span className='icon is-large'>
-                        <i className='fas fa-lg fa-trash' aria-hidden='true'></i>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        ) : (
-          ''
-        )
-      )}
-      <div className='columns mt-4'>
-        <div className='column is-full title is-3'>Your History Purcashed</div>
-      </div>
-      {carts.map((cart) =>
-        cart.Product.sold === true && cart.Product.available === false ? (
-          <div className='box' key={cart.id}>
-            <article className='media'>
-              <div className='media-left'>
-                <figure className='image is-128x128'>
-                  <img src={cart.Product.imageUrl} alt='product-cart' />
-                </figure>
-              </div>
-              <div className='media-content'>
-                <div className='content'>
-                  <p>
-                    <strong>{cart.Product.name}</strong>
-                    <br />
-                    description: {cart.Product.description}
-                    <br />
-                    location: {cart.Product.location}
-                    <br />
-                    invoice: Rp. {Number(cart.Product.price).toLocaleString('id')},-
-                    <br />
-                    ID seller: {cart.Product.UserId}
-                  </p>
-                </div>
-              </div>
-            </article>
-          </div>
-        ) : (
-          ''
-        )
-      )}
-    </>
+    </div>
   );
 }

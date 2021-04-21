@@ -4,7 +4,7 @@ import React from 'react';
 import { SocketContext, socket } from './socket.io/socket.js';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Home, Profile, Category, ProductDetail, Chat, Community, Type, Auction,  Cart} from './pages/index.js';
+import { Home, Profile, Category, ProductDetail, Chat, Community, Type, Auction, Cart } from './pages/index.js';
 
 import { Navbar, UpperFooter, Footer } from './components/index.js';
 
@@ -24,7 +24,7 @@ function App() {
                         borderRadius: '0px',
                     }}>
                     <Router className='App'>
-                        <div className='box box-all' style={{ border: '', borderColor: '#7300FC' }}>
+                        <div className='box box-all' style={{ border: '5px solid #7300FC' }}>
                             <Navbar />
 
                             <Switch>

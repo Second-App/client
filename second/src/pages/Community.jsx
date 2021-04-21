@@ -33,18 +33,31 @@ export default function Community() {
   
   return (
     <>
-      <span
-        className="title is-4 box"
+      <div
         style={{
-          textAlign: 'center',
-          opacity: 1,
-          marginTop:'30px',
-          marginBottom: '30px',
-          backgroundColor: '#AA89D2',
+          position: 'relative',
+          marginTop: '20px',
+          marginBottom: '-180px',
+          borderRadius: '20px',
+          display: 'flex',
+          justifyContent : 'center'
         }}
       >
-        Together as a Community.
-      </span>
+        <span
+          className="title is-4 box"
+          style={{
+            textAlign: 'center',
+            opacity: 1,
+            marginBottom: '200px',
+            backgroundColor: '',
+            boxShadow: '0px 0px 0px',
+            borderBottom: '3px solid #7300FC ',
+            paddingBottom: '1px'
+          }}
+          >
+            Together as a Community.
+        </span>
+      </div>
       <div className="container mt-5">
         <div className="columns is-centered">
           <div className="column is-half level-rigth">
@@ -54,18 +67,20 @@ export default function Community() {
               alt="banner"
               style={{
                 borderRadius: '20px',
-                boxShadow: '5px 10px 7px #FF8D2D',
+                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
           <div className="column level-left">
             <span
-              className="title is-4 box"
+              className="subtitle is-4 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
                 marginTop: '130px',
-                backgroundColor: '#FFB979',
+                boxShadow: '0px 0px 0px',
+                borderBottom: '5px solid #FF8D2D',
+                paddingBottom: '5px'
               }}
             >
               This Community shared the goods for the sake of all, you too can join the movement in a second.

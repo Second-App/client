@@ -33,10 +33,19 @@ export function getOneProduct(id) {
 export function addProduct(payload, closeModal, toast, clearAllInput) {
   return async (dispatch, getState) => {
     try {
+      var bodyFormData = new FormData();
+      Object.keys(payload).map(index => {
+        
+        bodyFormData.append(index, payload[index])
+      })
+      
       const { data } = await axios({
         url: '/products',
-        headers: { access_token: localStorage.access_token },
-        data: payload,
+        headers: { 
+          access_token: localStorage.access_token,
+          "Content-Type": "multipart/form-data" 
+        },
+        data: bodyFormData,
         method: 'POST',
       });
       await dispatch(ADD_PRODUCT(data));
