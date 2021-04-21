@@ -82,26 +82,30 @@ export default function Chat({ type }) {
   if (chatsLoading || chatsDetailLoading) return <Loading />;
 
   return (
-    <div className="box mt-5">
+    <div className="box"
+      style={{
+        boxShadow: '0px 0px 0px'
+      }}
+    >
       {console.log(chatsDetail.send)}
       <div className="columns"
         style={{
           paddingTop: '20px',
           paddingBottom: '20px',
           paddingLeft: '20px',
-          paddingRight: '20px'
+          paddingRight: '20px',
         }}
       >
         <div className="column is-one-quarter theChat"
           style={{
-            height: '100vh',
+            height: '80vh',
             border: '2px solid #7300FC',
-            marginTop: '12px'
+            marginTop: '12px',
           }}
         >
           <div className="columns mt-2"
             style={{
-              borderBottom: '2px solid #7300FC'
+              borderBottom: '2px solid #7300FC',
             }}
           >
             <span className="title is-4 ml-4 mb-4">
@@ -132,12 +136,12 @@ export default function Chat({ type }) {
         </div>
         <div className="column"
           style={{
-            marginTop: '0px'
+            marginTop: '0px',
           }}
         >
           <div className="theChat"
             style={{
-              height: '100vh',
+              height: '80vh',
               border: '2px solid #7300FC'
             }}
           >

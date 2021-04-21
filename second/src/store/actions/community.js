@@ -64,7 +64,7 @@ export function addCommunity(payload) {
             });
             console.log(data);
             await dispatch(ADD_COMMUNITY(data));
-            toast.success(`Added to the Owner's List`);
+            toast.success(`Successfully requested the item`);
         } catch (err) {
             console.log(err);
         }

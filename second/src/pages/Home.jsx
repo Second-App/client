@@ -49,6 +49,7 @@ export default function Home() {
               textAlign: 'center',
               opacity: 1,
               borderRadius: '0px',
+              marginTop: '80px',
               backgroundColor: '',
               boxShadow: '0px 0px 0px',
             }}
@@ -59,19 +60,22 @@ export default function Home() {
         style={{
           position: 'relative',
           marginTop: '-30px',
-          marginBottom: '-180px',
+          marginBottom: '-150px',
           borderRadius: '0px',
           display: 'flex',
           justifyContent : 'center'
         }}
       >
-        <div className='columns is-centered'>
+        <div className='columns is-centered'
+          style={{
+            marginBottom: '220px',
+          }}
+        >
           <span
             className="subtitle is-4 box"
             style={{
               textAlign: 'center',
               opacity: 1,
-              marginBottom: '200px',
               borderRadius: '0px',
               backgroundColor: '',
               boxShadow: '0px 0px 0px',
@@ -243,6 +247,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div className='columns is-centered'
+        style={{
+            textAlign: 'center',
+            opacity: 1,
+            marginTop: '100px',
+            marginBottom: '10px',
+            borderRadius: '0px',
+            backgroundColor: '',
+            boxShadow: '0px 0px 0px',
+      }}>
+        <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Community.gif" alt=""/>
       </div>
     </>
   )
