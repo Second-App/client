@@ -32,7 +32,7 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
       name: data.name,
       price: data.price,
       description: data.description,
-      imageUrl: '',
+      imageUrl: data.imageUrl,
       location: data.location,
       condition: data.condition,
     })
