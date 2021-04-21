@@ -32,3 +32,10 @@ export const SET_TOKEN_MIDTRANS = (payload) => {
     payload,
   };
 };
+
+export const SET_SOLD_PRODUCT = (payload) => {
+  return {
+    type: 'soldProduct/setSoldProduct',
+    payload,
+  };
+};
