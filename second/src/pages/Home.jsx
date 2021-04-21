@@ -49,6 +49,8 @@ export default function Home() {
           marginTop: '20px',
           marginBottom: '-180px',
           borderRadius: '20px',
+          display: 'flex',
+          justifyContent : 'center'
         }}
       >
         <span
@@ -57,47 +59,47 @@ export default function Home() {
             textAlign: 'center',
             opacity: 1,
             marginBottom: '200px',
-            backgroundColor: '#AA89D2',
+            backgroundColor: '',
+            boxShadow: '0px 0px 0px',
+            borderBottom: '3px solid #7300FC ',
+            paddingBottom: '1px'
           }}
         >
           Get your deal done in a second.
         </span>
       </div>
-      <div className="container mt-5">
+      <div className="container">
         <div className="columns is-centered">
-          <img
-            className="image"
-            src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/banner.jpg"
-            alt="banner"
-            style={{
-              marginTop: '10px',
-              borderRadius: '20px',
-              boxShadow: '5px 10px 7px #AA89D2',
-            }}
-          />
+          <span>
+
+          </span>
         </div>
         <div
           style={{
             position: 'relative',
           }}
         >
-          <button
-            className="title is-4 mt-6 pl-2 heading"
+          <p
+            className="title is-4 pl-2 heading"
             style={{
               textAlign: 'left',
               color: 'black',
             }}
           >
             Categories
-          </button>
+          </p>
           <div className="column is-main-content">
             <div className="container is-widescreen">
               <div className="columns is-centered is-multiline"
                 
               >
                 {categories.map((e, i) => (
-                  <div key={e.id} className="column is-one-fifth">
+                  <div key={e.id} className="column is-one-fifth"
+                  >
                     <div className="card column"
+                      style={{
+                        boxShadow: '0px 0px 0px',
+                      }}
                     >
                       <Link to={`/categories/${e.id}`}>
                         <img
@@ -106,11 +108,12 @@ export default function Home() {
                           alt="categories"
                           style={{
                             borderRadius: '20px',
-                            boxShadow: '0px 0px 10px #FF8D2D',
+                            boxShadow: '0px 0px 0px',
                             height: '250px',
                             width: '250px',
                             cursor: 'pointer',
                             objectFit: 'cover',
+                            border: '3px solid #FF8D2D'
                           }}
                         />
                       </Link>
@@ -139,18 +142,20 @@ export default function Home() {
               alt="banner"
               style={{
                 borderRadius: '20px',
-                boxShadow: '5px 10px 7px #FF8D2D',
+                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
           <div className="column level-left">
             <span
-              className="title is-4 box"
+              className="subtitle is-4 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
                 marginTop: '200px',
-                backgroundColor: '#FFB979',
+                boxShadow: '0px 0px 0px',
+                borderBottom: '5px solid #FF8D2D',
+                paddingBottom: '5px'
               }}
             >
               Full-Payment helps you find a product of your choice and get your
@@ -178,12 +183,14 @@ export default function Home() {
         <div className="columns is-centered">
           <div className="column">
             <span
-              className="title is-4 box"
+              className="subtitle is-4 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
                 marginTop: '170px',
-                backgroundColor: '#FFB979',
+                boxShadow: '0px 0px 0px',
+                borderBottom: '5px solid #FF8D2D',
+                paddingBottom: '5px'
               }}
             >
               Auction helps you find a product of your choice to bid in a
@@ -197,7 +204,7 @@ export default function Home() {
               alt="banner"
               style={{
                 borderRadius: '20px',
-                boxShadow: '5px 10px 7px #FF8D2D',
+                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>

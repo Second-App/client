@@ -19,7 +19,7 @@ export default function ProductList({
       >
         <div className="dropdown-trigger">
           <button
-            className="button"
+            className="button is-white"
             aria-haspopup="true"
             aria-controls="dropdown-menu"
             onClick={() => setCollapsed(!isCollapsed)}
@@ -76,9 +76,10 @@ export default function ProductList({
 
   return (
     <div className="box mt-2"
+      style={{boxShadow: '0px 0px 0px'}}
     >
       <div className="level">
-        <button
+        <div
           className="heading title is-4 mt-4 pl-2 mb-4 level-left"
         >
           <Link to={typeRoute}>
@@ -86,7 +87,7 @@ export default function ProductList({
               {heading ? heading : theType}
             </p>
           </Link>
-        </button>
+        </div>
         <div className="level-right">
           {setCollapsed ? getDropDown(setCollapsed, isCollapsed) : ''}
         </div>

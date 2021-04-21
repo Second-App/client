@@ -142,8 +142,13 @@ export function checkoutProduct(id, snap) {
         headers: { access_token: localStorage.access_token },
       });
       // console.log(response.data.token, "<<ini response dari action");
+      const payload = {
+        token: response.data.token,
+        productId: id,
+      };
       await dispatch(SET_TOKEN_MIDTRANS(response.data.token));
-      snap(response.data.token);
+      console.log(payload);
+      snap(payload);
     } catch (err) {
       console.log(err);
     }

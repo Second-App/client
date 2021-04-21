@@ -39,3 +39,10 @@ export const SET_AUCTION_START = (payload) => {
     payload,
   };
 };
+
+export const SET_SOLD_PRODUCT = (payload) => {
+  return {
+    type: 'soldProduct/setSoldProduct',
+    payload,
+  };
+};
