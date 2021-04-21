@@ -2,17 +2,29 @@ import React from 'react'
 
 export default function UpperFooter() {
   return (
-    <span className="title is-4 box"
-            style={{
-              textAlign: 'center',
-              opacity: 0.9,
-              marginTop: "50px",
-              marginBottom: "70px",
-              backgroundColor: "#FFB979",
-              boxShadow: "0px 0px 7px #FF8D2D",
-            }}
-          >
-          We are in this "box" together
-    </span>
+    <div
+    style={{
+      position: 'relative',
+      marginTop: '20px',
+      borderRadius: '20px',
+      display: 'flex',
+      justifyContent : 'center'
+    }}
+    >
+      <span className="title is-4 box"
+        style={{
+          textAlign: 'center',
+          opacity: 0.9,
+          marginTop: "50px",
+          marginBottom: "70px",
+          paddingBottom: '1px',
+          // boxShadow: "0px 0px 7px #FF8D2D",
+          borderBottom: '5px solid #FF8D2D',
+          boxShadow: '0px 0px 0px',
+        }}
+      >
+        We are in this "box" together
+      </span>
+    </div>
   )
 }

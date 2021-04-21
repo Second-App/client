@@ -6,7 +6,9 @@ export default function Footer() {
       className="container the-footer is-fluid"
       style={{
         minHeight: '250px',
-        border: '4px solid #7300FC'
+        borderTop: '3px double #7300FC',
+        marginLeft: '0px',
+        marginRight: '0px'
       }}
     >
       <div className="columns">

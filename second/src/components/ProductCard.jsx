@@ -94,7 +94,6 @@ export default function ProductCard({ data }) {
       <div
         className="card column"
         style={{
-          border: '1px solid #7300FC',
         }}
       >
         <span
