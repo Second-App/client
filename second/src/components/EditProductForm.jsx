@@ -32,7 +32,7 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
       name: data.name,
       price: data.price,
       description: data.description,
-      imageUrl: data.imageUrl,
+      imageUrl: '',
       location: data.location,
       condition: data.condition,
     })
@@ -106,14 +106,20 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
     }
 ]
 
-  const handleInput = (e) => {
-    let { name, value } = e.target
-    console.log(value)
+const handleInput = (e) => {
+  let { name, value, files } = e.target
+  if (name !== 'imageUrl') {
     setInput({
       ...input,
       [name]: value,
     })
+  } else {
+    setInput({
+      ...input,
+      ['imageUrl']: files[0]
+    })
   }
+}
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -132,6 +138,7 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
         overlayClassName="Overlay"
       >
         <p className="title is-4">Edit Product</p>
+        <form encType='multipart/form-data'>
         <div className="field is-horizontal">
           <div className="field-body">
             <div className="field">
@@ -268,7 +275,9 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
 
         <div id="file-js-example" class="file has-name">
           <label class="file-label">
-            <input class="file-input" type="file" name="imageUrl"/>
+            <input class="file-input" type="file" name="imageUrl"
+            onChange={e => handleInput(e)}
+            />
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
@@ -302,6 +311,7 @@ export default function EditProductForm({ data, modalEditForm, setModalEditForm}
             </button>
           </div>
         </div>
+        </form>
       </Modal>
   )
 }

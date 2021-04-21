@@ -71,14 +71,20 @@ export function addProduct(payload, closeModal, toast, clearAllInput) {
 export function editProduct(payload, id) {
   return async (dispatch) => {
     try {
+      var bodyFormData = new FormData();
+      Object.keys(payload).map((index) => {
+        bodyFormData.append(index, payload[index]);
+      });
       const { data } = await axios({
         url: `/products/${Number(id)}`,
         method: 'put',
         headers: { access_token: localStorage.access_token },
-        data: payload,
+        data: bodyFormData,
       });
       console.log(payload, id, '<<ini di action');
-    } catch (err) {}
+    } catch (err) {
+      dispatch(SET_ERROR(err))
+    }
   };
 }
 
