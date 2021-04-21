@@ -1,14 +1,6 @@
 import axios from '../../axios';
 import { toast } from 'react-toastify';
-import {
-  SET_PRODUCTS,
-  SET_ONE_PRODUCT,
-  ADD_PRODUCT,
-  REMOVE_PRODUCT,
-  SET_LOADING,
-  SET_ERROR,
-  SET_TOKEN_MIDTRANS,
-} from '../types';
+import { SET_PRODUCTS, SET_ONE_PRODUCT, ADD_PRODUCT, REMOVE_PRODUCT, SET_LOADING, SET_ERROR, SET_TOKEN_MIDTRANS } from '../types';
 import { getOneType, getOneCategory } from './index';
 import { getProfileById } from './users';
 
@@ -126,18 +118,15 @@ export function updateAuction(payload) {
         progress: undefined,
       });
     } catch (err) {
-      toast.error(
-        'Minimum amount to bid must be at least Rp. 10.000 higher than the current bid',
-        {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
-      );
+      toast.error('Minimum amount to bid must be at least Rp. 10.000 higher than the current bid', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 }
@@ -150,8 +139,13 @@ export function checkoutProduct(id, snap) {
         headers: { access_token: localStorage.access_token },
       });
       // console.log(response.data.token, "<<ini response dari action");
+      const payload = {
+        token: response.data.token,
+        productId: id,
+      };
       await dispatch(SET_TOKEN_MIDTRANS(response.data.token));
-      snap(response.data.token);
+      console.log(payload);
+      snap(payload);
     } catch (err) {
       console.log(err);
     }
