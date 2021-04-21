@@ -38,31 +38,60 @@ export default function Profile() {
   if (!userDetails) return <Loading />;
 
   return (
-    <div className='box'>
+    <div className='box'
+      style={{
+          boxShadow: '0px 0px 0px',
+          marginTop: '30px',
+        }}
+    >
       <UserEditForm modal={modal} setModal={setModal} data={userDetails} />
       <EditProductFrom data={productData} modalEditForm={editProductModal} setModalEditForm={setEditProductModal} />
-      <div className='columns'>
-        <div className='column is-flex is-4 is-flex-direction-column is-justify-content-start is-align-items-center'>
-          <div className='card card-shadow is-flex is-flex-direction-column is-justify-content-center is-align-items-center' style={{ width: 300, height: 360 }}>
-            <figure className='image is-128x128'>
-              <img className='is-rounded' src={userDetails.imageUrl} alt='Placeholder' />
+      <div className='columns'
+        style={{
+          border: '2px solid #7300FC',
+          boxShadow: '0px 0px 0px',
+        }}
+      >
+        <div className='column'
+          style={{
+            borderRight: '1px solid #7300FC'
+          }}
+        >
+          <div className='box'
+            style={{
+              marginTop: '60px',
+              textAlign: 'center',
+              boxShadow: '0px 0px 0px',
+          }}
+          >
+            <figure className='image'>
+              <img className='' src={userDetails.imageUrl} alt='Placeholder'
+                style={{
+                  boxShadow: '0px 0px 5px #7300FC',
+                  objectFit: 'cover',
+                  height: '150px',
+                  width: '150px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              />
             </figure>
             {/* <h1 className="title is-4">{userDetails.name}</h1> */}
-            <p>{userDetails.name}</p>
-            <p>{userDetails.email}</p>
-            <p>{userDetails.address}</p>
-            <p>Balance : Rp. {Number(userDetails.balance).toLocaleString('id')},-</p>
-            <button className='button is-rounded ' onClick={() => setModal(true)}>
+            <p className="title is-5" style={{marginTop:'15px'}}>{userDetails.name}</p>
+            <p className="subtitle is-6" style={{marginTop:'0px'}}>{userDetails.email}</p>
+            <p className="subtitle is-6" style={{marginTop:'-16px'}}>{userDetails.address}</p>
+            <p className="subtitle is-6" style={{marginTop:'-16px', marginBottom: '20px'}}> Rp. {Number(userDetails.balance).toLocaleString('id')},-</p>
+            <button className='button ' onClick={() => setModal(true)}>
               <p style={{ color: 'white' }}>Edit Profile</p>
             </button>
           </div>
         </div>
-        <div className='column is-flex is-8 is-flex-direction-column'>
+        <div className='column is-flex mt-3 is-8 is-flex-direction-column'>
           <div>
-            <h1 className='title is-4 ml-3'>User Items</h1>
+            <h1 className='title is-4 mb-4'>Dashboards</h1>
           </div>
           <div>
-            <Tabs forceRenderTabPanel defaultIndex={1}>
+            <Tabs forceRenderTabPanel defaultIndex={0}>
               <TabList>
                 <Tab>My Wishlists</Tab>
                 <Tab>My Products</Tab>
