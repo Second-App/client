@@ -22,6 +22,8 @@ export default function Navbar({ setSearch }) {
       className="navbar box-content"
       role="navigation"
       aria-label="main navigation"
+      style={{
+      }}
     >
       <div className="navbar-brand">
         <NavLink className="navbar-item" to="/">
@@ -62,10 +64,13 @@ export default function Navbar({ setSearch }) {
           </div>
           <div className="mt-2">
             <input
-              className="input is-link is-rounded"
+              className="input is-link"
               type="text"
               onChange={setSearch}
               placeholder="I'm looking for..."
+              style={{
+                boxShadow: '2px 2px 2px #FF8D2D'
+              }}
             />
           </div>
         </div>

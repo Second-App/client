@@ -48,24 +48,25 @@ export default function Home() {
           position: 'relative',
           marginTop: '20px',
           marginBottom: '-180px',
-          borderRadius: '20px',
+          borderRadius: '0px',
           display: 'flex',
           justifyContent : 'center'
         }}
       >
         <span
-          className="title is-4 box"
+          className="subtitle is-4 box"
           style={{
             textAlign: 'center',
             opacity: 1,
             marginBottom: '200px',
+            borderRadius: '0px',
             backgroundColor: '',
             boxShadow: '0px 0px 0px',
             borderBottom: '3px solid #7300FC ',
             paddingBottom: '1px'
           }}
         >
-          Get your deal done in a second.
+          Get your <b>deal</b> done in a <i> second.</i>
         </span>
       </div>
       <div className="container">
@@ -107,7 +108,7 @@ export default function Home() {
                           src={e.imageURL}
                           alt="categories"
                           style={{
-                            borderRadius: '20px',
+                            borderRadius: '0px',
                             boxShadow: '0px 0px 0px',
                             height: '250px',
                             width: '250px',
@@ -141,25 +142,26 @@ export default function Home() {
               src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m6.jpeg"
               alt="banner"
               style={{
-                borderRadius: '20px',
+                borderRadius: '0px',
                 boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
           <div className="column level-left">
             <span
-              className="subtitle is-4 box"
+              className="subtitle is-3 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
-                marginTop: '200px',
+                marginTop: '150px',
                 boxShadow: '0px 0px 0px',
+                borderRadius: '0px',
                 borderBottom: '5px solid #FF8D2D',
                 paddingBottom: '5px'
               }}
             >
               Full-Payment helps you find a product of your choice and get your
-              deal done in a second.
+               <b> deal</b> done in a <i> second.</i>
             </span>
           </div>
         </div>
@@ -183,18 +185,19 @@ export default function Home() {
         <div className="columns is-centered">
           <div className="column">
             <span
-              className="subtitle is-4 box"
+              className="subtitle is-3 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
-                marginTop: '170px',
+                marginTop: '150px',
                 boxShadow: '0px 0px 0px',
                 borderBottom: '5px solid #FF8D2D',
-                paddingBottom: '5px'
+                paddingBottom: '5px',
+                borderRadius: '0px'
               }}
             >
-              Auction helps you find a product of your choice to bid in a
-              second.
+              Auction helps you find a product of your choice to <b>bid</b> in a
+              <i> second.</i>
             </span>
           </div>
           <div className="column is-half">
@@ -203,7 +206,7 @@ export default function Home() {
               src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m2.jpeg"
               alt="banner"
               style={{
-                borderRadius: '20px',
+                borderRadius: '0px',
                 boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />

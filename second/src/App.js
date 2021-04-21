@@ -24,7 +24,7 @@ function App() {
                         borderRadius: '0px',
                     }}>
                     <Router className='App'>
-                        <div className='box box-all' style={{ border: '5px solid #7300FC' }}>
+                        <div className='box box-all' style={{ border: '5px solid #7300FC', borderRadius: '0px' }}>
                             <Navbar />
 
                             <Switch>

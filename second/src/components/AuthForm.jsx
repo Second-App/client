@@ -162,8 +162,9 @@ export default function AuthForm({ isEdit }) {
       ) : (
         <>
           <button
-            className="button"
-            style={{ color: 'white' }}
+            className="button is-white"
+            style={{
+            marginRight: "10px", border: '2px solid #3D0085'}}
             onClick={() => openModal('login')}
           >
             Login
