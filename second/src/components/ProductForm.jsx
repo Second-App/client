@@ -120,14 +120,13 @@ export default function ProductForm() {
   
   const handleInput = (e) => {
     let { name, value, files } = e.target
+    console.log(files)
     if (name !== 'imageUrl') {
-      
       setInput({
         ...input,
         [name]: value,
       })
     } else {
-      
       setInput({
         ...input,
         ['imageUrl']: files[0]
