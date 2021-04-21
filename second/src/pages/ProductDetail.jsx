@@ -173,9 +173,18 @@ export default function ProductDetail() {
       })
     );
   };
+  const checkIsUserProduct = () => {
+    if (+singleProduct.UserId === +localStorage.id) {
+      
+      return true
+    }
+    return false
+  }
+  // console.log(checkIsUserProduct(), "<<<<<INFOOOOOOOOOOO")
 
   useEffect(() => {
     dispatch(getOneProduct(id));
+    checkIsUserProduct()
     socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
     socket.on('getAuctionWinner', (data) => {
       setWin(true);
@@ -254,7 +263,12 @@ export default function ProductDetail() {
                 <p style={{ textAlign: 'left' }}>{productType}</p>
               </span>
               <span className='level-right'>
-                <a className='card-footer-item' onClick={() => handleAddToWishlist(singleProduct)}>
+                <a className='card-footer-item' onClick={() => handleAddToWishlist(singleProduct)}
+                style={{ 
+                  pointerEvents: checkIsUserProduct() ? 'none' : '',
+                  cursor: checkIsUserProduct() ? 'default' : ''
+                }}
+                >
                   <span className='icon is-small'>
                     <i className='fas fa-heart'></i>
                   </span>
@@ -262,9 +276,15 @@ export default function ProductDetail() {
                 {singleProduct.TypeId === 3 ? (
                   ''
                 ) : (
-                  <a className='card-footer-item'>
+                  <a className='card-footer-item'
+                  style={{ 
+                    pointerEvents: checkIsUserProduct() ? 'none' : '',
+                    cursor: checkIsUserProduct() ? 'default' : ''
+                  }}
+                  >
                     <span className='icon is-small'>
-                      <i className='fas fa-cart-arrow-down' onClick={() => handleAddToCart(singleProduct.id)}></i>
+                      <i className='fas fa-cart-arrow-down' onClick={() => handleAddToCart(singleProduct.id)}
+                      ></i>
                     </span>
                   </a>
                 )}
@@ -283,10 +303,13 @@ export default function ProductDetail() {
             <div className='content mt-4'>{singleProduct.description}</div>
             {singleProduct.TypeId === 1 ? (
               <div className='footer'>
-                <button className='button' onClick={() => handleCheckout(singleProduct.id)}>
+                <button className='button' onClick={() => handleCheckout(singleProduct.id)}
+                disabled={checkIsUserProduct()}
+                >
                   Buy Now
                 </button>
                 <button
+                  disabled={checkIsUserProduct()}
                   className='button'
                   style={{ marginLeft: '10px' }}
                   onClick={() => {
