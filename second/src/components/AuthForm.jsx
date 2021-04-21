@@ -113,31 +113,37 @@ export default function AuthForm({ isEdit }) {
       {isLogin ? (
         <>
           <Link to='/chat'>
-          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
+          <button className="button is-white" style={{
+            marginRight: "10px", border: '2px solid #AA89D2'}}>
               <i className="fas fa-envelope"></i>
           </button>
           </Link>
 
           <Link to='/notification'>
-          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
+          <button className="button is-white" style={{
+            marginRight: "10px", border: '2px solid #AA89D2'}}>
               <i className="fas fa-bell"></i>
           </button>
           </Link>
 
           <Link to='/carts'>
-          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
+          <button className="button is-white" style={{
+            marginRight: "10px", border: '2px solid #AA89D2'}}>
               <i className="fas fa-cart-arrow-down"></i>
           </button>
           </Link>
 
           <Link to='/profile'>
-          <button className="button is-white" style={{marginRight: "10px", boxShadow: '0px 0px 5px #AA89D2'}}>
+          <button className="button is-white" style={{
+            marginRight: "10px", border: '2px solid #AA89D2'}}>
               <i className="fas fa-user-circle"></i>
           </button>
           </Link>
 
           <Link to='/community'>
-          <button className="button is-white" style={{marginRight: "35px", boxShadow: '0px 0px 5px #AA89D2'}}>
+            <button className="button is-white" style={{
+              marginRight: "35px", border: '2px solid #AA89D2'
+            }}>
               <i className="fas fa-users"></i>
           </button>
           </Link>
