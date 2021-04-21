@@ -2,10 +2,23 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SocketContext } from '../socket.io/socket.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneProduct, addToWishlist, fetchCommunity, changeOwner, checkoutProduct, asyncAddToCart, updateSoldProduct } from '../store/actions';
+import {
+  getOneProduct,
+  addToWishlist,
+  fetchCommunity,
+  changeOwner,
+  checkoutProduct,
+  asyncAddToCart,
+  updateSoldProduct,
+} from '../store/actions';
 import { Loading } from '../components';
 import { useHistory } from 'react-router-dom';
-import { sendMessage, fetchChatDetail, fetchChatsUsers, addCommunity } from '../store/actions';
+import {
+  sendMessage,
+  fetchChatDetail,
+  fetchChatsUsers,
+  addCommunity,
+} from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateAuction } from '../store/actions/products';
 
@@ -50,24 +63,40 @@ export default function ProductDetail() {
   const getDropDown = (setCollapsed, isCollapsed, filteredCommunityData) => {
     // console.log(filteredCommunityData, 'ini kucing <<<')
     return (
-      <div className={'dropdown' + (!isCollapsed ? '' : ' is-active')} tabIndex='0'>
-        <div className='dropdown-trigger'>
-          <button className='button' aria-haspopup='true' aria-controls='dropdown-menu' onClick={() => setCollapsed(!isCollapsed)}>
+      <div
+        className={'dropdown' + (!isCollapsed ? '' : ' is-active')}
+        tabIndex="0"
+      >
+        <div className="dropdown-trigger">
+          <button
+            className="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+            onClick={() => setCollapsed(!isCollapsed)}
+          >
             <span>Choose one User</span>
-            <span className='icon is-small'>
-              <i className='fas fa-angle-down' aria-hidden='true'></i>
+            <span className="icon is-small">
+              <i className="fas fa-angle-down" aria-hidden="true"></i>
             </span>
           </button>
         </div>
-        <div className='dropdown-menu' id='dropdown-menu' role='menu'>
+        <div className="dropdown-menu" id="dropdown-menu" role="menu">
           {filteredCommunityData?.map((com) => (
-            <div key={com.id} className='dropdown-content'>
+            <div key={com.id} className="dropdown-content">
               <a
                 onClick={() => {
                   setCollapsed(!isCollapsed);
-                  dispatch(changeOwner(com.User.id, com.Product.id, com.id, com.Product.name));
+                  dispatch(
+                    changeOwner(
+                      com.User.id,
+                      com.Product.id,
+                      com.id,
+                      com.Product.name
+                    )
+                  );
                 }}
-                className='dropdown-item'>
+                className="dropdown-item"
+              >
                 {com.User.name}
               </a>
             </div>
@@ -77,7 +106,11 @@ export default function ProductDetail() {
     );
   };
 
-  const { singleProduct, loading: productsLoading, error: productsError } = useSelector((state) => state.productsReducer);
+  const {
+    singleProduct,
+    loading: productsLoading,
+    error: productsError,
+  } = useSelector((state) => state.productsReducer);
 
   const handleOnChatNonAuction = async (singleProduct) => {
     await dispatch(
@@ -177,17 +210,23 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(getOneProduct(id));
     socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
-    socket.on('getAuctionWinner', (data) => {
+    socket.on('getAuctionWinnerToSelf', () => {
       setWin(true);
-      if (win) {
-        dispatch(asyncAddToCart(data));
-      }
+      dispatch(
+        asyncAddToCart({
+          UserId: localStorage.id,
+          ProductId: singleProduct.id,
+        })
+      );
+    });
+    socket.on('getAuctionWinnerToOther', () => {
+      setWin(true);
     });
     socket.on('getAuctionTime', (time) => {
       setStartTime(time.start);
       setEndTime(time.end);
     });
-  }, [id, win, community.length, auctionStart]);
+  }, [id, win, community.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -227,13 +266,13 @@ export default function ProductDetail() {
   });
 
   return (
-    <div className='box mt-5'>
-      <div className='columns'>
-        <div className='column'>
-          <figure className='image is-4by3 mt-4'>
+    <div className="box mt-5">
+      <div className="columns">
+        <div className="column">
+          <figure className="image is-4by3 mt-4">
             <img
               src={singleProduct.imageUrl}
-              alt='product'
+              alt="product"
               style={{
                 objectFit: 'cover',
                 boxShadow: '0px 0px 4px #AA89D2',
@@ -241,59 +280,77 @@ export default function ProductDetail() {
             />
           </figure>
         </div>
-        <div className='column'>
-          <div className='container is-flex is-flex-direction-column is-justify-content-space-between'>
-            <div className='title is-2'>{singleProduct.name}</div>
+        <div className="column">
+          <div className="container is-flex is-flex-direction-column is-justify-content-space-between">
+            <div className="title is-2">{singleProduct.name}</div>
             <div
-              className='level'
+              className="level"
               style={{
                 marginBottom: '0px',
                 marginTop: '0px',
-              }}>
-              <span className='tag is-small is-link level-left' style={{}}>
+              }}
+            >
+              <span className="tag is-small is-link level-left" style={{}}>
                 <p style={{ textAlign: 'left' }}>{productType}</p>
               </span>
-              <span className='level-right'>
-                <a className='card-footer-item' onClick={() => handleAddToWishlist(singleProduct)}>
-                  <span className='icon is-small'>
-                    <i className='fas fa-heart'></i>
+              <span className="level-right">
+                <a
+                  className="card-footer-item"
+                  onClick={() => handleAddToWishlist(singleProduct)}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-heart"></i>
                   </span>
                 </a>
                 {singleProduct.TypeId === 3 ? (
                   ''
                 ) : (
-                  <a className='card-footer-item'>
-                    <span className='icon is-small'>
-                      <i className='fas fa-cart-arrow-down' onClick={() => handleAddToCart(singleProduct.id)}></i>
+                  <a className="card-footer-item">
+                    <span className="icon is-small">
+                      <i
+                        className="fas fa-cart-arrow-down"
+                        onClick={() => handleAddToCart(singleProduct.id)}
+                      ></i>
                     </span>
                   </a>
                 )}
               </span>
             </div>
-            <div className='subtitle' style={{ marginTop: '10px', marginBottom: '10px' }}>
-              {singleProduct.TypeId === 1 ? <>Rp. {Number(singleProduct.price).toLocaleString('id')},-</> : ''}
+            <div
+              className="subtitle"
+              style={{ marginTop: '10px', marginBottom: '10px' }}
+            >
+              {singleProduct.TypeId === 1 ? (
+                <>Rp. {Number(singleProduct.price).toLocaleString('id')},-</>
+              ) : (
+                ''
+              )}
             </div>
-            <div className='subtitle' style={{ fontSize: '17px' }}>
-              {singleProduct.condition} / 5 <i className='far fa-star'></i>
+            <div className="subtitle" style={{ fontSize: '17px' }}>
+              {singleProduct.condition} / 5 <i className="far fa-star"></i>
             </div>
-            <div className='subtitle'>{singleProduct.location}</div>
-            <div className=''>
-              <h1 className='title is-4'>Description</h1>
+            <div className="subtitle">{singleProduct.location}</div>
+            <div className="">
+              <h1 className="title is-4">Description</h1>
             </div>
-            <div className='content mt-4'>{singleProduct.description}</div>
+            <div className="content mt-4">{singleProduct.description}</div>
             {singleProduct.TypeId === 1 ? (
-              <div className='footer'>
-                <button className='button' onClick={() => handleCheckout(singleProduct.id)}>
+              <div className="footer">
+                <button
+                  className="button"
+                  onClick={() => handleCheckout(singleProduct.id)}
+                >
                   Buy Now
                 </button>
                 <button
-                  className='button'
+                  className="button"
                   style={{ marginLeft: '10px' }}
                   onClick={() => {
                     handleOnChatNonAuction(singleProduct);
-                  }}>
+                  }}
+                >
                   <span style={{ marginRight: '5px' }}>
-                    <i class='fas fa-comment-dots'></i>
+                    <i class="fas fa-comment-dots"></i>
                   </span>
                   Chat The Seller
                 </button>
@@ -303,48 +360,83 @@ export default function ProductDetail() {
                 {singleProduct.TypeId === 2 ? (
                   <div>
                     <div
-                      className='box'
+                      className="box"
                       style={{
                         border: '2px solid #FF8D2D',
-                      }}>
+                      }}
+                    >
                       {!win ? (
                         <>
-                          <div>Current Bid : Rp. {Number(singleProduct.currentBid).toLocaleString('id')}</div>
-                          <div>Highest Bidder Name : {singleProduct.currentUserBidName ? singleProduct.currentUserBidName : 'No one has bid. Be the first to Bid!'}</div>
-                          <div>Auction Start Date : {startTime ? startTime : '-'}</div>
-                          <div>Auction End Date : {endTime ? endTime.toLocaleString() : '-'}</div>
-                          <label className='label' style={{ marginTop: '20px' }}>
+                          <div>
+                            Current Bid : Rp.{' '}
+                            {Number(singleProduct.currentBid).toLocaleString(
+                              'id'
+                            )}
+                          </div>
+                          <div>
+                            Highest Bidder Name :{' '}
+                            {singleProduct.currentUserBidName
+                              ? singleProduct.currentUserBidName
+                              : 'No one has bid. Be the first to Bid!'}
+                          </div>
+                          <div>
+                            Auction Start Date : {startTime ? startTime : '-'}
+                          </div>
+                          <div>
+                            Auction End Date :{' '}
+                            {endTime ? endTime.toLocaleString() : '-'}
+                          </div>
+                          <label
+                            className="label"
+                            style={{ marginTop: '20px' }}
+                          >
                             Your Bid
                           </label>
-                          <div className='control'>
+                          <div className="control">
                             <form
                               onSubmit={async (event) => {
-                                if (Number(event.target.bidInput.value - 10000) >= Number(singleProduct.currentBid)) {
+                                if (
+                                  Number(event.target.bidInput.value - 10000) >=
+                                  Number(singleProduct.currentBid)
+                                ) {
                                   await handleOnBidAuction(event);
-                                  setTimeout(() => {
-                                    socket.emit('auctionWinner', {
-                                      UserId: singleProduct.currentUserBidId,
-                                      ProductId: singleProduct.id,
-                                    });
-                                  }, 10000);
                                   if (!startTime) {
+                                    setTimeout(() => {
+                                      socket.emit('auctionWinnerToOther');
+                                      socket.emit('auctionWinnerToSelf');
+                                    }, 15000);
                                     socket.emit('updateAuctionTime', {
                                       start: new Date().toLocaleString('id'),
-                                      end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleString('id'),
+                                      end: new Date(
+                                        Date.now() + 7 * 24 * 60 * 60 * 1000
+                                      ).toLocaleString('id'),
                                     });
                                   }
                                 } else {
                                   await handleOnBidAuction(event);
                                 }
-                              }}>
-                              <input className='input' type='number' name='bidInput' placeholder='Input Your Bid Here' />
+                              }}
+                            >
+                              <input
+                                className="input"
+                                type="number"
+                                name="bidInput"
+                                placeholder="Input Your Bid Here"
+                              />
                             </form>
                           </div>
-                          <footer className='card-footer' style={{ marginTop: '15px' }}>
-                            <button className='button'>Bid</button>
-                            <button className='button' style={{ marginLeft: '10px' }} onClick={() => handleOnChatAuction(singleProduct)}>
+                          <footer
+                            className="card-footer"
+                            style={{ marginTop: '15px' }}
+                          >
+                            <button className="button">Bid</button>
+                            <button
+                              className="button"
+                              style={{ marginLeft: '10px' }}
+                              onClick={() => handleOnChatAuction(singleProduct)}
+                            >
                               <span style={{ marginRight: '5px' }}>
-                                <i class='fas fa-comment-dots'></i>
+                                <i class="fas fa-comment-dots"></i>
                               </span>
                               Chat The Seller
                             </button>
@@ -352,7 +444,10 @@ export default function ProductDetail() {
                         </>
                       ) : (
                         <>
-                          <div>Winner of this auction is {singleProduct.currentUserBidName}</div>
+                          <div>
+                            Winner of this auction is{' '}
+                            {singleProduct.currentUserBidName}
+                          </div>
                         </>
                       )}
                     </div>
@@ -360,25 +455,42 @@ export default function ProductDetail() {
                 ) : (
                   <>
                     {singleProduct.UserId === +localStorage.id ? (
-                      <span className='tag'>This is your own product</span>
+                      <span className="tag">This is your own product</span>
                     ) : (
                       <>
-                        <footer class='card-footer'>
-                          <button className='button' onClick={handleAddToCommunity}>
+                        <footer class="card-footer">
+                          <button
+                            className="button"
+                            onClick={handleAddToCommunity}
+                          >
                             I Need This
                           </button>
                         </footer>
                         <div>
-                          <button className='button' style={{ marginTop: '10px' }} onClick={() => handleOnChatNonAuction(singleProduct)}>
+                          <button
+                            className="button"
+                            style={{ marginTop: '10px' }}
+                            onClick={() =>
+                              handleOnChatNonAuction(singleProduct)
+                            }
+                          >
                             <span style={{ marginRight: '5px' }}>
-                              <i class='fas fa-comment-dots'></i>
+                              <i class="fas fa-comment-dots"></i>
                             </span>
                             Chat The Owner
                           </button>
                         </div>
                       </>
                     )}
-                    <div className='mt-2'>{!filteredCommunityData.length ? '' : getDropDown(setIsCollapsed, isCollapsed, filteredCommunityData)}</div>
+                    <div className="mt-2">
+                      {!filteredCommunityData.length
+                        ? ''
+                        : getDropDown(
+                            setIsCollapsed,
+                            isCollapsed,
+                            filteredCommunityData
+                          )}
+                    </div>
                   </>
                 )}
               </>
