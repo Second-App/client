@@ -1,5 +1,6 @@
 import axios from '../../axios';
 import { SET_LOGGED_USER, SET_ERROR, GET_PROFILE_BY_ID } from '../types';
+import { toast } from 'react-toastify';
 
 export function userLogin(payload, closeModal, setIsLogin, toast) {
   return async (dispatch) => {
@@ -65,16 +66,25 @@ export function getProfileById(id) {
 export function editProfile(payload, id) {
   return async (dispatch) => {
     try {
+      var bodyFormData = new FormData()
+      Object.keys(payload).map(index => {
+        bodyFormData.append(index, payload[index])
+      })
       const { data } = await axios({
         url: `/users/${Number(id)}`,
-        method: 'put',
-        headers: { access_token: localStorage.access_token },
-        data: payload,
+        headers: { 
+          access_token: localStorage.access_token,
+          "Content-Type": "multipart/form-data" 
+        },
+        data: bodyFormData,
+        method: 'PUT'
       });
-      
       await dispatch(SET_LOGGED_USER(payload));
+      toast.success("Profile updated!")
+      
     } catch (err) {
-      await dispatch(SET_ERROR(err));
+      
+      dispatch(SET_ERROR(err));
     }
   };
 }
