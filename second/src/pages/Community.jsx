@@ -33,10 +33,20 @@ export default function Community() {
   
   return (
     <>
+      <div className='columns is-centered'
+          style={{
+              textAlign: 'center',
+              opacity: 1,
+              borderRadius: '0px',
+              backgroundColor: '',
+              boxShadow: '0px 0px 0px',
+            }}>
+        <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Community+(2).gif" alt=""/>
+      </div>
       <div
         style={{
           position: 'relative',
-          marginTop: '20px',
+          marginTop: '-80px',
           marginBottom: '-180px',
           borderRadius: '20px',
           display: 'flex',
@@ -64,11 +74,11 @@ export default function Community() {
           <div className="column is-half level-rigth">
             <img
               className="image"
-              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/banner/com3Banner.jpg"
+              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Charity+(1).gif"
               alt="banner"
               style={{
+                marginLeft:'100px',
                 borderRadius: '20px',
-                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
@@ -76,7 +86,7 @@ export default function Community() {
             <span
               className="subtitle is-3 box"
               style={{
-                textAlign: 'center',
+                textAlign: 'right',
                 opacity: 0.8,
                 marginTop: '110px',
                 boxShadow: '0px 0px 0px',

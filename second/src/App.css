@@ -1,5 +1,10 @@
 /** @format */
 
+.homeBanner {
+    background-image: url('https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/banner.jpg');
+    object-fit: cover;
+}
+
 .theChat {
     overflow: auto;
     overflow-x: hidden;
@@ -75,6 +80,20 @@
 
 .App-link {
     color: #61dafb;
+}
+
+.second-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@keyframes second-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes App-logo-spin {

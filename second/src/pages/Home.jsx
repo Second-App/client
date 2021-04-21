@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchCategories, fetchProducts } from '../store/actions'
 import { Loading, ProductList } from '../components'
+import Logo from '../second.png'
 
 export default function Home() {
   const { categories, loading, error } = useSelector(
@@ -43,32 +44,47 @@ export default function Home() {
 
   return (
     <>
+      <div className='columns is-centered'
+          style={{
+              textAlign: 'center',
+              opacity: 1,
+              borderRadius: '0px',
+              backgroundColor: '',
+              boxShadow: '0px 0px 0px',
+            }}
+        >
+          <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Delivery.gif"/>
+      </div>
       <div
         style={{
           position: 'relative',
-          marginTop: '20px',
+          marginTop: '-30px',
           marginBottom: '-180px',
           borderRadius: '0px',
           display: 'flex',
           justifyContent : 'center'
         }}
       >
-        <span
-          className="subtitle is-4 box"
-          style={{
-            textAlign: 'center',
-            opacity: 1,
-            marginBottom: '200px',
-            borderRadius: '0px',
-            backgroundColor: '',
-            boxShadow: '0px 0px 0px',
-            borderBottom: '3px solid #7300FC ',
-            paddingBottom: '1px'
-          }}
-        >
-          Get your <b>deal</b> done in a <i> second.</i>
-        </span>
+        <div className='columns is-centered'>
+          <span
+            className="subtitle is-4 box"
+            style={{
+              textAlign: 'center',
+              opacity: 1,
+              marginBottom: '200px',
+              borderRadius: '0px',
+              backgroundColor: '',
+              boxShadow: '0px 0px 0px',
+              borderBottom: '3px solid #7300FC ',
+              paddingBottom: '1px'
+            }}
+          >
+            Get your <b>deal</b> done in a <i> second.</i>
+          </span>
+        </div>
+          
       </div>
+      
       <div className="container">
         <div className="columns is-centered">
           <span>
@@ -135,23 +151,23 @@ export default function Home() {
       </div>
 
       <div className="container mt-5">
-        <div className="columns is-centered">
-          <div className="column is-half level-rigth">
+        <div className="columns">
+          <div className="column is-half">
             <img
               className="image"
-              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m6.jpeg"
+              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Wallet.gif"
               alt="banner"
               style={{
+                marginLeft:'100px',
                 borderRadius: '0px',
-                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
-          <div className="column level-left">
+          <div className="column">
             <span
               className="subtitle is-3 box"
               style={{
-                textAlign: 'center',
+                textAlign: 'right',
                 opacity: 0.8,
                 marginTop: '150px',
                 boxShadow: '0px 0px 0px',
@@ -187,7 +203,7 @@ export default function Home() {
             <span
               className="subtitle is-3 box"
               style={{
-                textAlign: 'center',
+                textAlign: 'left',
                 opacity: 0.8,
                 marginTop: '150px',
                 boxShadow: '0px 0px 0px',
@@ -203,11 +219,11 @@ export default function Home() {
           <div className="column is-half">
             <img
               className="image"
-              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/photoBank/market/m2.jpeg"
+              src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Make+it+rain.gif"
               alt="banner"
               style={{
+                marginLeft:'100px',
                 borderRadius: '0px',
-                boxShadow: '4px 4px 2px #FF8D2D',
               }}
             />
           </div>
