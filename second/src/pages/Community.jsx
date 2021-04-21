@@ -44,18 +44,19 @@ export default function Community() {
         }}
       >
         <span
-          className="title is-4 box"
+          className="subtitle is-4 box"
           style={{
             textAlign: 'center',
             opacity: 1,
             marginBottom: '200px',
+            borderRadius: '0px',
             backgroundColor: '',
             boxShadow: '0px 0px 0px',
             borderBottom: '3px solid #7300FC ',
             paddingBottom: '1px'
           }}
           >
-            Together as a Community.
+            Together  as a <b><i> Community. </i></b> 
         </span>
       </div>
       <div className="container mt-5">
@@ -73,17 +74,18 @@ export default function Community() {
           </div>
           <div className="column level-left">
             <span
-              className="subtitle is-4 box"
+              className="subtitle is-3 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
-                marginTop: '130px',
+                marginTop: '110px',
                 boxShadow: '0px 0px 0px',
+                borderRadius: '0px',
                 borderBottom: '5px solid #FF8D2D',
                 paddingBottom: '5px'
               }}
             >
-              This Community shared the goods for the sake of all, you too can join the movement in a second.
+              This Community shared the goods for the sake of <b>all</b>, you too can join the movement in a <i>second.</i>
             </span>
           </div>
         </div>

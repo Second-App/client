@@ -11,7 +11,7 @@ export default function UpperFooter() {
       justifyContent : 'center'
     }}
     >
-      <span className="title is-4 box"
+      <span className="subtitle is-3 box"
         style={{
           textAlign: 'center',
           opacity: 0.9,
@@ -23,7 +23,7 @@ export default function UpperFooter() {
           boxShadow: '0px 0px 0px',
         }}
       >
-        We are in this "box" together
+        We are in this <b> box </b> <i> together </i>
       </span>
     </div>
   )
