@@ -148,7 +148,7 @@ export default function Home() {
           </div>
           <div className="column level-left">
             <span
-              className="title is-4 box"
+              className="subtitle is-4 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
@@ -183,7 +183,7 @@ export default function Home() {
         <div className="columns is-centered">
           <div className="column">
             <span
-              className="title is-4 box"
+              className="subtitle is-4 box"
               style={{
                 textAlign: 'center',
                 opacity: 0.8,
