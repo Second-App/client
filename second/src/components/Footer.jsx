@@ -3,7 +3,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <div
-      className="container"
+      className=""
       style={{
         minHeight: '250px',
         borderTop: '3px double #7300FC'
