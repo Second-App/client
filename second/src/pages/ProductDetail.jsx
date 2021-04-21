@@ -16,14 +16,15 @@ import {
   sendMessage,
   fetchChatDetail,
   fetchChatsUsers,
-  addCommunity
+  addCommunity,
 } from '../store/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateAuction } from '../store/actions/products';
 
 export default function ProductDetail() {
-  const { community } = useSelector(state => state.communityReducer)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const { community } = useSelector((state) => state.communityReducer);
+  const { auctionStart } = useSelector((state) => state.productsReducer);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const socket = useContext(SocketContext);
   const history = useHistory();
@@ -31,27 +32,32 @@ export default function ProductDetail() {
   const { tokenMidtrans } = useSelector((state) => state.productsReducer);
 
   const [win, setWin] = useState(false);
-  const [foundWinner, setFoundWinner] = useState(false);
-  const [winnerName, setWinnerName] = useState('');
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  // const [startAuction, setStartAuction] = useState(null);
+  // const [foundWinner, setFoundWinner] = useState(false);
+  // const [winnerName, setWinnerName] = useState('');
 
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const handleAddToCommunity = () => {
-    dispatch(addCommunity({
-      ProductId: singleProduct.id
-    }))
+    dispatch(
+      addCommunity({
+        ProductId: singleProduct.id,
+      })
+    );
     // history.push('/community')
-  }
+  };
 
   const handleAddToWishlist = (data) => {
     dispatch(addToWishlist(data));
     toast.success(`${data.name} added to wishlist`);
   };
-  
+
   useEffect(() => {
-    dispatch(fetchCommunity())
-  }, [])
+    dispatch(fetchCommunity());
+  }, []);
 
   const getDropDown = (setCollapsed, isCollapsed, filteredCommunityData) => {
     // console.log(filteredCommunityData, 'ini kucing <<<')
@@ -76,18 +82,28 @@ export default function ProductDetail() {
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           {filteredCommunityData?.map((com) => (
             <div key={com.id} className="dropdown-content">
-              <a onClick={() => {
-                setCollapsed(!isCollapsed)
-                dispatch(changeOwner(com.User.id, com.Product.id,com.id, com.Product.name))
-              }} className="dropdown-item">
+              <a
+                onClick={() => {
+                  setCollapsed(!isCollapsed);
+                  dispatch(
+                    changeOwner(
+                      com.User.id,
+                      com.Product.id,
+                      com.id,
+                      com.Product.name
+                    )
+                  );
+                }}
+                className="dropdown-item"
+              >
                 {com.User.name}
               </a>
             </div>
           ))}
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const {
     singleProduct,
@@ -188,10 +204,17 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(getOneProduct(id));
     socket.on('getAuctionData', (data) => dispatch(getOneProduct(data)));
-    socket.on('getAuctionWinner', () => {
+    socket.on('getAuctionWinner', (data) => {
       setWin(true);
+      if (win) {
+        dispatch(asyncAddToCart(data));
+      }
     });
-  }, [id, win, community.length]);
+    socket.on('getAuctionTime', (time) => {
+      setStartTime(time.start);
+      setEndTime(time.end);
+    });
+  }, [id, win, community.length, auctionStart]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -221,15 +244,15 @@ export default function ProductDetail() {
 
   if (productsError) return <div>error</div>;
   if (productsLoading) return <Loading />;
-  
-  console.log(community, 'hai ini <<<<<<<<< community')
-  console.log(localStorage.id, 'ini cintah <<<<<<<<<')
 
-  const filteredCommunityData = community?.filter(el => {
-    console.log(el, 'ini el<<<<<<<<<<<<<<<')
-    return (el.Product.UserId === +localStorage.id)
-  }) 
-    
+  console.log(community, 'hai ini <<<<<<<<< community');
+  console.log(localStorage.id, 'ini cintah <<<<<<<<<');
+
+  const filteredCommunityData = community?.filter((el) => {
+    console.log(el, 'ini el<<<<<<<<<<<<<<<');
+    return el.Product.UserId === +localStorage.id;
+  });
+
   return (
     <div className="box mt-5">
       <div className="columns">
@@ -285,11 +308,11 @@ export default function ProductDetail() {
               className="subtitle"
               style={{ marginTop: '10px', marginBottom: '10px' }}
             >
-              {
-                singleProduct.TypeId === 1 ? (
+              {singleProduct.TypeId === 1 ? (
                 <>Rp. {Number(singleProduct.price).toLocaleString('id')},-</>
-                ) : ''
-              }
+              ) : (
+                ''
+              )}
             </div>
             <div className="subtitle" style={{ fontSize: '17px' }}>
               {singleProduct.condition} / 5 <i className="far fa-star"></i>
@@ -332,12 +355,24 @@ export default function ProductDetail() {
                     >
                       {!win ? (
                         <>
-                          <div>Current Bid : {singleProduct.currentBid}</div>
+                          <div>
+                            Current Bid : Rp.{' '}
+                            {Number(singleProduct.currentBid).toLocaleString(
+                              'id'
+                            )}
+                          </div>
                           <div>
                             Highest Bidder Name :{' '}
                             {singleProduct.currentUserBidName
                               ? singleProduct.currentUserBidName
-                              : 'No one has given a bid on this product. Be the first to Bid!'}
+                              : 'No one has bid. Be the first to Bid!'}
+                          </div>
+                          <div>
+                            Auction Start Date : {startTime ? startTime : '-'}
+                          </div>
+                          <div>
+                            Auction End Date :{' '}
+                            {endTime ? endTime.toLocaleString() : '-'}
                           </div>
                           <label
                             className="label"
@@ -348,10 +383,28 @@ export default function ProductDetail() {
                           <div className="control">
                             <form
                               onSubmit={async (event) => {
-                                await handleOnBidAuction(event);
-                                setTimeout(() => {
-                                  socket.emit('auctionWinner');
-                                }, 10000);
+                                if (
+                                  Number(event.target.bidInput.value - 10000) >=
+                                  Number(singleProduct.currentBid)
+                                ) {
+                                  await handleOnBidAuction(event);
+                                  setTimeout(() => {
+                                    socket.emit('auctionWinner', {
+                                      UserId: singleProduct.currentUserBidId,
+                                      ProductId: singleProduct.id,
+                                    });
+                                  }, 10000);
+                                  if (!startTime) {
+                                    socket.emit('updateAuctionTime', {
+                                      start: new Date().toLocaleString('id'),
+                                      end: new Date(
+                                        Date.now() + 7 * 24 * 60 * 60 * 1000
+                                      ).toLocaleString('id'),
+                                    });
+                                  }
+                                } else {
+                                  await handleOnBidAuction(event);
+                                }
                               }}
                             >
                               <input
@@ -389,42 +442,44 @@ export default function ProductDetail() {
                       )}
                     </div>
                   </div>
-                  ) : (
+                ) : (
                   <>
-                    {
-                          singleProduct.UserId === +localStorage.id ?  
-                          <span className="tag">
-                            This is your own product  
-                          </span>
-                          :
-                            <>
-                      <footer class="card-footer">
-                        
-                          <button className="button" onClick={handleAddToCommunity}>
+                    {singleProduct.UserId === +localStorage.id ? (
+                      <span className="tag">This is your own product</span>
+                    ) : (
+                      <>
+                        <footer class="card-footer">
+                          <button
+                            className="button"
+                            onClick={handleAddToCommunity}
+                          >
                             I Need This
                           </button>
-                            
-                      </footer>
+                        </footer>
                         <div>
                           <button
                             className="button"
                             style={{ marginTop: '10px' }}
-                            onClick={() => handleOnChatNonAuction(singleProduct)}
+                            onClick={() =>
+                              handleOnChatNonAuction(singleProduct)
+                            }
                           >
                             <span style={{ marginRight: '5px' }}>
                               <i class="fas fa-comment-dots"></i>
                             </span>
-                              
                             Chat The Owner
                           </button>
-                              </div>
-                              </>
-                    }
+                        </div>
+                      </>
+                    )}
                     <div className="mt-2">
-                        {
-                          !filteredCommunityData.length ? '' :
-                          getDropDown(setIsCollapsed, isCollapsed,filteredCommunityData) 
-                        }
+                      {!filteredCommunityData.length
+                        ? ''
+                        : getDropDown(
+                            setIsCollapsed,
+                            isCollapsed,
+                            filteredCommunityData
+                          )}
                     </div>
                   </>
                 )}
