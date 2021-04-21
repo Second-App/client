@@ -40,6 +40,7 @@ export default function Community() {
               borderRadius: '0px',
               backgroundColor: '',
               boxShadow: '0px 0px 0px',
+              marginTop: '20px'
             }}>
         <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Community+(2).gif" alt=""/>
       </div>
@@ -58,7 +59,7 @@ export default function Community() {
           style={{
             textAlign: 'center',
             opacity: 1,
-            marginBottom: '200px',
+            marginBottom: '250px',
             borderRadius: '0px',
             backgroundColor: '',
             boxShadow: '0px 0px 0px',
@@ -111,6 +112,18 @@ export default function Community() {
               isCollapsed={isCollapsed}
               />
         </div>
+      </div>
+      <div className='columns is-centered'
+        style={{
+            textAlign: 'center',
+            opacity: 1,
+            marginTop: '100px',
+            marginBottom: '10px',
+            borderRadius: '0px',
+            backgroundColor: '',
+            boxShadow: '0px 0px 0px'
+      }}>
+        <img src="https://secondh8.s3-ap-southeast-1.amazonaws.com/logo/Community.gif" alt=""/>
       </div>
     </>
   )

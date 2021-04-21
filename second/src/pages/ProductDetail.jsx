@@ -53,7 +53,7 @@ export default function ProductDetail() {
 
   const handleAddToWishlist = (data) => {
     dispatch(addToWishlist(data));
-    toast.success(`${data.name} added to wishlist`);
+    toast.success(`${data.name} Added to wishlist`);
   };
 
   useEffect(() => {
@@ -66,15 +66,18 @@ export default function ProductDetail() {
       <div
         className={'dropdown' + (!isCollapsed ? '' : ' is-active')}
         tabIndex="0"
+        style={{
+          marginBottom: '10px',
+        }}
       >
         <div className="dropdown-trigger">
           <button
-            className="button"
+            className="button is-primary"
             aria-haspopup="true"
             aria-controls="dropdown-menu"
             onClick={() => setCollapsed(!isCollapsed)}
           >
-            <span>Choose one User</span>
+            <span>Choose One User to Give</span>
             <span className="icon is-small">
               <i className="fas fa-angle-down" aria-hidden="true"></i>
             </span>
@@ -177,15 +180,15 @@ export default function ProductDetail() {
             ProductId: productId,
           })
         );
-        toast.success(`your payment successfully accepted`);
+        toast.success(`Your payment successfully accepted`);
         history.push('/carts');
       },
       onPending: function (result) {
         console.log('Payment pending', result);
-        toast.info(`complete your payment..`);
+        toast.info(`Please complete your payment..`);
       },
       onError: function () {
-        toast.error(`your payment declined`);
+        toast.error(`Your payment is declined`);
       },
       onClose: function () {
         /* You may add your own implementation here */
@@ -274,9 +277,17 @@ export default function ProductDetail() {
   });
 
   return (
-    <div className="box mt-5">
+    <div className="box mt-5"
+      style={{
+        boxShadow: '0px 0px 0px',
+        marginBottom: '60px'
+      }}
+    >
       <div className="columns">
-        <div className="column">
+        <div className="column"
+          style={{
+          }}
+        >
           <figure className="image is-4by3 mt-4">
             <img
               src={singleProduct.imageUrl}
@@ -346,23 +357,32 @@ export default function ProductDetail() {
             </div>
             <div className="content mt-4">{singleProduct.description}</div>
             {singleProduct.TypeId === 1 ? (
-              <div className="footer">
+              <div>
                 <button
                   className="button"
                   onClick={() => handleCheckout(singleProduct.id)}
                   disabled={checkIsUserProduct()}
+                  style={{
+                    color: 'white'
+                  }}
                 >
                   Buy Now
                 </button>
                 <button
                   disabled={checkIsUserProduct()}
-                  className="button"
-                  style={{ marginLeft: '10px' }}
+                  className="button is-white"
+                  style={{
+                    marginLeft: '10px',
+                    border: '1px solid #FF8D2D',
+                    color: '#FF8D2D'
+                  }}
                   onClick={() => {
                     handleOnChatNonAuction(singleProduct);
                   }}
                 >
-                  <span style={{ marginRight: '5px' }}>
+                  <span style={{
+                    marginRight: '5px'
+                  }}>
                     <i class="fas fa-comment-dots"></i>
                   </span>
                   Chat The Seller
@@ -380,11 +400,11 @@ export default function ProductDetail() {
                     >
                       {!win ? (
                         <>
-                          <div>
+                          <div className="title is-4">
                             Current Bid : Rp.{' '}
                             {Number(singleProduct.currentBid).toLocaleString(
                               'id'
-                            )}
+                            )},-
                           </div>
                           <div>
                             Highest Bidder Name :{' '}
@@ -442,12 +462,15 @@ export default function ProductDetail() {
                               />
                             </form>
                           </div>
-                          <footer
-                            className="card-footer"
+                          <div
+                            className=""
                             style={{ marginTop: '15px' }}
                           >
                             <button
                               className="button"
+                                style={{
+                                color:'white'
+                              }}  
                               disabled={
                                 Number(singleProduct.UserId) ===
                                 Number(localStorage.id)
@@ -456,8 +479,12 @@ export default function ProductDetail() {
                               Bid
                             </button>
                             <button
-                              className="button"
-                              style={{ marginLeft: '10px' }}
+                              className="button is-white"
+                                style={{
+                                  marginLeft: '10px',
+                                  border: '1px solid #FF8D2D',
+                                  color: '#FF8D2D'
+                                }}
                               disabled={
                                 Number(singleProduct.UserId) ===
                                 Number(localStorage.id)
@@ -469,7 +496,7 @@ export default function ProductDetail() {
                               </span>
                               Chat The Seller
                             </button>
-                          </footer>
+                          </div>
                         </>
                       ) : (
                         <>
@@ -484,42 +511,48 @@ export default function ProductDetail() {
                 ) : (
                   <>
                     {singleProduct.UserId === +localStorage.id ? (
-                      <span className="tag">This is your own product</span>
+                      <span className="tag" style={{backgroundColor: 'white'}}>This is your own product</span>
                     ) : (
                       <>
-                        <footer class="card-footer">
-                          <button
-                            className="button"
-                            onClick={handleAddToCommunity}
-                          >
-                            I Need This
-                          </button>
-                        </footer>
                         <div>
                           <button
                             className="button"
-                            style={{ marginTop: '10px' }}
+                                  onClick={handleAddToCommunity}
+                                  style={{
+                                    color: 'white'
+                                  }}
+                          >
+                                  I Need This
+                          </button>
+                          <button
+                            className="button is-white"
+                                  style={{
+                                    marginLeft: '10px',
+                                    border: '1px solid #FF8D2D',
+                                    color: '#FF8D2D'}}
                             onClick={() =>
                               handleOnChatNonAuction(singleProduct)
                             }
                           >
-                            <span style={{ marginRight: '5px' }}>
+                                  <span style={{
+                                    marginRight: ' 5px '
+                                  }}>
                               <i class="fas fa-comment-dots"></i>
                             </span>
                             Chat The Owner
                           </button>
+                          <div className="mt-4">
+                            {!filteredCommunityData.length
+                              ? ''
+                              : getDropDown(
+                                  setIsCollapsed,
+                                  isCollapsed,
+                                  filteredCommunityData
+                            )}
+                          </div>
                         </div>
                       </>
                     )}
-                    <div className="mt-2">
-                      {!filteredCommunityData.length
-                        ? ''
-                        : getDropDown(
-                            setIsCollapsed,
-                            isCollapsed,
-                            filteredCommunityData
-                          )}
-                    </div>
                   </>
                 )}
               </>

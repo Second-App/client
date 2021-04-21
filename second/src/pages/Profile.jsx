@@ -48,7 +48,6 @@ export default function Profile() {
       <EditProductFrom data={productData} modalEditForm={editProductModal} setModalEditForm={setEditProductModal} />
       <div className='columns'
         style={{
-          border: '2px solid #7300FC',
           boxShadow: '0px 0px 0px',
         }}
       >

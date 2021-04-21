@@ -35,7 +35,7 @@ export default function ProductCard({ data }) {
     if (!checkInWishlist) {
       setWishlist(!checkInWishlist);
       dispatch(addToWishlist(data));
-      // toast.success(`${data.name} added to wishlist`);
+      toast.success(`${data.name} added to wishlist`);
     } else {
       const wishlistData = wishlists.filter(
         (product) => +product.ProductId === +data.id
@@ -180,8 +180,16 @@ export default function ProductCard({ data }) {
                       justifyContent: 'center',
                       marginBottom: '15px',
                     }}
-                  >
-                    <button>Join Auction</button>
+                      >
+                    <Link to={productRoute}>
+                      <button className='button is-white is-small'
+                        style={{
+                          border: '1px solid #FF8D2D'
+                        }}
+                      >
+                        Join Auction
+                      </button>
+                    </Link>      
                   </div>
                 )}
               </>
@@ -199,7 +207,12 @@ export default function ProductCard({ data }) {
                   marginBottom: '15px',
                 }}
               >
-                <button className="" onClick={handleAddToCommunity}>
+                <button onClick={handleAddToCommunity}
+                  className='button is-white is-small'
+                  style={{
+                    border: '1px solid #FF8D2D'
+                  }}
+                >
                   I Need This
                 </button>
               </div>
@@ -210,7 +223,7 @@ export default function ProductCard({ data }) {
           <>
             {+data?.UserId === +localStorage.id ? (
               <footer className="card-footer">
-                <p className="tag">This is your own product</p>
+                <p className="tag" style={{backgroundColor: 'white'}}>This is your own product</p>
               </footer>
             ) : (
               <footer className="card-footer">
@@ -243,7 +256,7 @@ export default function ProductCard({ data }) {
           <>
             {+data?.UserId === +localStorage.id ? (
               <footer className="card-footer">
-                <p className="tag">This is your own product</p>
+                <p className="tag" style={{backgroundColor:'white'}}>This is your own product</p>
               </footer>
             ) : (
               <footer className="card-footer">
