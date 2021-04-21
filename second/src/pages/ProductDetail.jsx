@@ -323,14 +323,7 @@ export default function ProductDetail() {
                       pointerEvents: checkIsUserProduct() ? 'none' : '',
                       cursor: checkIsUserProduct() ? 'default' : '',
                     }}
-                  >
-                    <span className="icon is-small">
-                      <i
-                        className="fas fa-cart-arrow-down"
-                        onClick={() => handleAddToCart(singleProduct.id)}
-                      ></i>
-                    </span>
-                  </a>
+                  ></a>
                 )}
               </span>
             </div>
@@ -442,6 +435,10 @@ export default function ProductDetail() {
                                 type="number"
                                 name="bidInput"
                                 placeholder="Input Your Bid Here"
+                                disabled={
+                                  Number(singleProduct.UserId) ===
+                                  Number(localStorage.id)
+                                }
                               />
                             </form>
                           </div>
@@ -449,10 +446,22 @@ export default function ProductDetail() {
                             className="card-footer"
                             style={{ marginTop: '15px' }}
                           >
-                            <button className="button">Bid</button>
+                            <button
+                              className="button"
+                              disabled={
+                                Number(singleProduct.UserId) ===
+                                Number(localStorage.id)
+                              }
+                            >
+                              Bid
+                            </button>
                             <button
                               className="button"
                               style={{ marginLeft: '10px' }}
+                              disabled={
+                                Number(singleProduct.UserId) ===
+                                Number(localStorage.id)
+                              }
                               onClick={() => handleOnChatAuction(singleProduct)}
                             >
                               <span style={{ marginRight: '5px' }}>
