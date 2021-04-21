@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 export default function ImageCard({ data, handleDeleteWishlist, handleDeleteProduct, handleEditProduct}) {
   const [isHovered, setHover] = useState(false)
+  const history = useHistory()
   
+  function handleImageClick(id) {
+    history.push(`/products/${id}`)  
+  }
+
   return (
     <div className="column is-4 "
     onMouseOver={() => setHover(true)}
     onMouseLeave={() => setHover(false)}
+    onClick={() => handleImageClick(data.id)}
     >
         <figure className="image is-5by3 image-container">
           <img

@@ -71,14 +71,27 @@ export function addProduct(payload, closeModal, toast, clearAllInput) {
 export function editProduct(payload, id) {
   return async (dispatch) => {
     try {
+      var bodyFormData = new FormData();
+      Object.keys(payload).map((index) => {
+        
+        bodyFormData.append(index, payload[index]);
+      });
       const { data } = await axios({
         url: `/products/${Number(id)}`,
-        method: 'put',
-        headers: { access_token: localStorage.access_token },
-        data: payload,
+        headers: { 
+          access_token: localStorage.access_token,
+          "Content-Type": "multipart/form-data" 
+        },
+        data: bodyFormData,
+        method: 'PUT',
       });
-      console.log(payload, id, '<<ini di action');
-    } catch (err) {}
+      // console.log(payload, id, '<<ini di action');
+      await dispatch(fetchProducts())
+      toast.success("Product edited success!")
+    } catch (err) {
+      
+      dispatch(SET_ERROR(err))
+    }
   };
 }
 
