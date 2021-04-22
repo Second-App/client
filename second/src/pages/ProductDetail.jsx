@@ -511,7 +511,18 @@ export default function ProductDetail() {
                 ) : (
                   <>
                     {singleProduct.UserId === +localStorage.id ? (
-                      <span className="tag" style={{backgroundColor: 'white'}}>This is your own product</span>
+                          <>
+                            <span className="tag" style={{ backgroundColor: 'white' }}>This is your own product</span>
+                            <div className="mt-4">
+                              {!filteredCommunityData.length
+                                ? ''
+                                : getDropDown(
+                                    setIsCollapsed,
+                                    isCollapsed,
+                                    filteredCommunityData
+                              )}
+                            </div>
+                          </>
                     ) : (
                       <>
                         <div>
@@ -541,15 +552,6 @@ export default function ProductDetail() {
                             </span>
                             Chat The Owner
                           </button>
-                          <div className="mt-4">
-                            {!filteredCommunityData.length
-                              ? ''
-                              : getDropDown(
-                                  setIsCollapsed,
-                                  isCollapsed,
-                                  filteredCommunityData
-                            )}
-                          </div>
                         </div>
                       </>
                     )}
